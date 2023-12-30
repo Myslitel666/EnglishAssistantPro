@@ -5,6 +5,8 @@ using Models.Entities;
 
 namespace Controllers
 {
+    [Route("api/home")]
+    [ApiController]
     public class HomeController : Controller
     {
         private readonly EnglishAssistentContext _dbContext; // Замените YourDbContext на фактическое имя вашего DbContext
@@ -14,12 +16,11 @@ namespace Controllers
             _dbContext = dbContext;
         }
 
-        public async Task<IActionResult> GetAll()
+        [HttpGet("jargonDictionary")]
+        public async Task<ActionResult<IEnumerable<JargonDictionary>>> GetAll()
         {
-            // Асинхронно получаем все элементы из таблицы JargonDictionary
-            List<JargonDictionary> jargonEntries = await _dbContext.JargonDictionaries.ToListAsync();
-
-            return View(jargonEntries);
+            var jargonEntries = await _dbContext.JargonDictionaries.ToListAsync();
+            return jargonEntries;
         }
     }
 }

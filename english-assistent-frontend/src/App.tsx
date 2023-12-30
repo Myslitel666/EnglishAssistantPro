@@ -1,24 +1,26 @@
-import React from 'react';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { CssBaseline } from '@mui/material';
+import { ColorModeProvider } from './ColorModeContext'; // Импортируйте ColorModeProvider
+import Home from './Components/Pages/Home/Home';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <ColorModeProvider>
+            <CssBaseline />
+            <Router>
+                <Routes>
+                    <Route
+                        path="/"
+                        element={
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <Home />
+                            </div>
+                        }
+                    />
+                </Routes>
+            </Router>
+        </ColorModeProvider>
+    );
 }
 
 export default App;

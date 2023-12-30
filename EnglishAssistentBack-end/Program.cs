@@ -1,5 +1,6 @@
 using Controllers;
 using Context;
+using Models.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,8 +24,3 @@ app.UseAuthorization();
 app.UseCors(MyAllowSpecificOrigins); //Use CORS
 app.MapControllers();
 app.Run();
-
-var englishAssistentContext = new EnglishAssistentContext();
-var homeController = new HomeController(englishAssistentContext);
-var listResult = homeController.GetAll();
-listResult = homeController.GetAll();

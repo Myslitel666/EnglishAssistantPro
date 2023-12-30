@@ -1,0 +1,11 @@
+﻿.product-box {
+    border: 2px solid; /* Устанавливаем толщину обводки в исходное состояние */
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, border-color 1s ease; /* Плавный переход для всех свойств */
+    backface-visibility: hidden; /* Фиксим баг скачков текста */
+}
+
+.product-box:hover {
+    transform: scale(1.1);
+}
