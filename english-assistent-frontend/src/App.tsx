@@ -12,7 +12,7 @@ function App() {
                     <Route
                         path="/"
                         element={
-                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <div>
                                 <Home />
                             </div>
                         }
