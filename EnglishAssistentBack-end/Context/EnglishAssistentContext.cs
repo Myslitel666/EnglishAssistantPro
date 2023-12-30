@@ -35,7 +35,9 @@ public partial class EnglishAssistentContext : DbContext
             entity.Property(e => e.Jargon)
                 .HasMaxLength(256)
                 .IsUnicode(false);
-            entity.Property(e => e.Translate).HasMaxLength(256);
+            entity.Property(e => e.Translate)
+                .HasMaxLength(256)
+                .IsUnicode(false);
         });
 
         OnModelCreatingPartial(modelBuilder);

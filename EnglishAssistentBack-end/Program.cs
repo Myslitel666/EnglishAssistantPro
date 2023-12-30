@@ -1,3 +1,6 @@
+using Controllers;
+using Context;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -20,3 +23,8 @@ app.UseAuthorization();
 app.UseCors(MyAllowSpecificOrigins); //Use CORS
 app.MapControllers();
 app.Run();
+
+var englishAssistentContext = new EnglishAssistentContext();
+var homeController = new HomeController(englishAssistentContext);
+var listResult = homeController.GetAll();
+listResult = homeController.GetAll();

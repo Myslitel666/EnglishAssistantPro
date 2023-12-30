@@ -9,7 +9,7 @@ public partial class JargonDictionary
 
     public string? Jargon { get; set; }
 
-    public byte[]? Translate { get; set; }
+    public string? Translate { get; set; }
 
     public string? ExampleOfUse { get; set; }
 }
