@@ -1,5 +1,6 @@
 ﻿import React, { createContext, useContext, useMemo, useState, ReactNode } from 'react';
 import { ThemeProvider, createTheme, Theme } from '@mui/material';
+import '../src/Font.css'
 
 interface ColorModeContextProps {
     toggleColorMode: () => void;
@@ -31,7 +32,7 @@ export const ColorModeProvider: React.FC<ColorModeProviderProps> = ({ children }
         () =>
             createTheme({
                 typography: {
-                    fontFamily: 'Merienda, cursive'
+                    fontFamily: 'MyFont, sans-serif'
                 },
                 palette: {
                     mode: 'dark', // âñåãäà ôèêñèðîâàííûé ðåæèì dark

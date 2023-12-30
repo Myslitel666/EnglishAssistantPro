@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import '../../../Font.css'
 
 //MyComponents Import
 import Header from '../../Common/Header/Header';
