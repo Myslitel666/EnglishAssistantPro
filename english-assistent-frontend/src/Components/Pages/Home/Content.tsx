@@ -1,4 +1,9 @@
+//MUI Import
 import Box from '@mui/material/Box';
+
+//MyCompoent Import
+import LeftHalfScreen from '../Home/LeftHalfScreen'
+import RightHalfScreen from '../Home/RightHalfScreen'
 
 const Content: React.FC = () =>
 { 
@@ -7,10 +12,12 @@ const Content: React.FC = () =>
             <Box bgcolor='#460000' width='50%'
                 minHeight='100vh' style={{ float: 'left' }}
             >
-
+                <LeftHalfScreen/>
             </Box>
             <Box bgcolor='#4E003D' width='50%'
-                minHeight='100vh' style={{ float: 'left', }}>
+                minHeight='100vh' style={{ float: 'left', }}
+            >
+                <RightHalfScreen />
             </Box>
         </>
     );
