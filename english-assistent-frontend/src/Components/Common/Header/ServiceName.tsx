@@ -21,7 +21,7 @@ const ServiceName: React.FC = () => {
 
     return (
         <Typography
-            fontSize = '30'
+            fontSize = '4vh'
             color={theme.palette.primary.main}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
