@@ -17,7 +17,11 @@ const Header: React.FC = () => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar>
-                <Toolbar style={{ backgroundColor: '#1E1E1E' }}>
+                <Toolbar style={{
+                    backgroundColor: '#1E1E1E', paddingLeft: 0,
+                    paddingTop: 0, paddingBottom: 0,
+                    height: '70px'
+                }}>
                     <Logo />
                     <ServiceName />
                 </Toolbar>

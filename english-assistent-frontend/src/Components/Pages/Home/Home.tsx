@@ -8,11 +8,11 @@ const Home: React.FC = () => {
     return (
         <div>
             <Header />
-            <Box bgcolor='red' width='50%'
+            <Box bgcolor='#FF1A1A' width='50%'
                 minHeight='100vh' style={{ float: 'left' }}
             >
             </Box>
-            <Box bgcolor='green' width='50%'
+            <Box bgcolor='#FA14FF' width='50%'
                 minHeight='100vh' style={{ float: 'left', }}>
             </Box>
         </div>
