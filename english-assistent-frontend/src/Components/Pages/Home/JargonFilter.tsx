@@ -18,7 +18,7 @@ const JargonFilter: React.FC = () => {
                 alignItems='justify-end' display='flex'
                 justifyContent='flex-end'
             >
-                <Stack spacing={5} marginRight='1.5vh'
+                <Stack spacing={5} marginRight='1vh'
                     width = '100%'
                     sx={{ float: 'left' }}
                 >
@@ -28,7 +28,7 @@ const JargonFilter: React.FC = () => {
                     //variant="contained"
                     color="primary"
 
-                    style={{ marginTop: 'auto', fontSize: '2.5vh', width: '9vh', height: '4.5vh'}}
+                    style={{ marginTop: 'auto', fontSize: '2.5vh', width: '15vh', height: '4.5vh'}}
                 >
                     Filter
                 </MyButton>

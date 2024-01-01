@@ -48,23 +48,23 @@ export const ColorModeProvider: React.FC<ColorModeProviderProps> = ({ children }
                         default: '#060606'
                     },
                 },
-                components: {
-                    MuiInputBase: {
-                        styleOverrides: {
-                            input: {
-                                fontSize: '2.3vh', // Adjust the font size here
-                            },
-                        },
-                    },
-                    MuiInputLabel: {
-                        styleOverrides: {
-                            root: {
-                                fontSize: '2.3vh', // Размер надписи
-                            },
-                        },
-                    },
+                //components: {
+                //    MuiInputBase: {
+                //        styleOverrides: {
+                //            input: {
+                //                fontSize: '2.3vh', // Adjust the font size here
+                //            },
+                //        },
+                //    },
+                //    MuiInputLabel: {
+                //        styleOverrides: {
+                //            root: {
+                //                fontSize: '2.3vh', // Размер надписи
+                //            },
+                //        },
+                //    },
 
-                },
+                //},
 
             }),
         [MyTheme]
