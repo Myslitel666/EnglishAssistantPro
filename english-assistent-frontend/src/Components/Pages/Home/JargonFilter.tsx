@@ -48,7 +48,10 @@ function MovieSelect() {
             renderInput={(params) => (
                 <TextField {...params} label="Choose a movie" variant="standard"
                     className="jargonFilter"
-                    sx={{ '.css-160pt67-MuiInputBase-root-MuiInput-root': { fontSize: '1.2rem' } }}
+                    sx={{
+                        '.css-160pt67-MuiInputBase-root-MuiInput-root': { fontSize: '1.2rem' },
+                        '.css-nr6ovm-MuiFormLabel-root-MuiInputLabel-root': { fontSize: '1rem' }
+                    }}
                 />
 
             )}

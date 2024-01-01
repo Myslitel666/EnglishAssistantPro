@@ -38,9 +38,8 @@ const RightHalfScreen: React.FC = () => {
             </MyButton>
             <FormControlLabel
                 sx={{
-                    '.css-1ejercq-MuiTypography-root': { fontSize: '1.5rem', 'font-weight:': 250 },
+                    '.css-1ejercq-MuiTypography-root': { fontSize: '1.5rem', fontWeight: 250 },
                     '.css-i4bv87-MuiSvgIcon-root': { width: '2rem', height: '2rem' }
-                    
                 }}
 
                 control={
