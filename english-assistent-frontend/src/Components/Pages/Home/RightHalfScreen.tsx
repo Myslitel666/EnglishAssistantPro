@@ -37,7 +37,12 @@ const RightHalfScreen: React.FC = () => {
                 Translate
             </MyButton>
             <FormControlLabel
-                sx={{ '.css-1ejercq-MuiTypography-root': { fontSize: '1.5rem' } }}
+                sx={{
+                    '.css-1ejercq-MuiTypography-root': { fontSize: '1.5rem', 'font-weight:': 250 },
+                    '.css-i4bv87-MuiSvgIcon-root': { width: '2rem', height: '2rem' }
+                    
+                }}
+
                 control={
                     <MyCheckbox defaultChecked />}
                 label="Translate and save" />
