@@ -9,8 +9,8 @@ const Content: React.FC = () =>
 { 
     return (
         <>
-            <Box width='50%'
-                minHeight='100vh' style={{ float: 'left', }}
+            <Box width='50%' maxHeight='100vh'
+                style={{ float: 'left', }}
             >
                 <LeftHalfScreen/>
             </Box>

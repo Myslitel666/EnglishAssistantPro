@@ -10,22 +10,25 @@ import Button from '@mui/material/Button'
 import MyButton from '../../Common/MyButton'
 
 const JargonFilter: React.FC = () => {
+
     return (
         <>
             <Box marginTop='10vh' paddingTop='0.5vh'
-                paddingLeft='2.4vh' paddingRight='2.4vh'
-                minHeight='7vh' bgcolor='#252525'
-                alignItems='justify-end' display = 'flex'
+                paddingLeft='1.5vh' paddingRight='1.5vh'
+                alignItems='justify-end' display='flex'
+                justifyContent='flex-end'
             >
-                <Stack spacing={5}
-                    sx={{ width: '75%', float: 'left' }}>
-                        <MovieSelect />
+                <Stack spacing={5} marginRight='1.5vh'
+                    width = '100%'
+                    sx={{ float: 'left' }}
+                >
+                    <MovieSelect />
                 </Stack>
                 <MyButton
-                    variant="contained"
+                    //variant="contained"
                     color="primary"
 
-                    style={{ marginTop: 'auto', fontSize: '2vh'}}
+                    style={{ marginTop: 'auto', fontSize: '2.5vh', width: '9vh', height: '4.5vh'}}
                 >
                     Filter
                 </MyButton>
@@ -35,6 +38,7 @@ const JargonFilter: React.FC = () => {
 }
 
 function MovieSelect() {
+
     return (
         <Autocomplete
             options={top100Films}
@@ -42,9 +46,12 @@ function MovieSelect() {
             id="movie-customized-option-demo"
             disableCloseOnSelect
             renderInput={(params) => (
-                <TextField {...params} label="Choose a movie" variant="standard" />
+                <TextField {...params} label="Choose a movie" variant="standard"
+                    className="jargonFilter"
+                />
+
             )}
-        />
+            />
     );
 }
 

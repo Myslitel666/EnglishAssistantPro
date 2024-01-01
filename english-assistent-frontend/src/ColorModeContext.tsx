@@ -35,7 +35,7 @@ export const ColorModeProvider: React.FC<ColorModeProviderProps> = ({ children }
                     fontFamily: 'MyFont, sans-serif'
                 },
                 palette: {
-                    mode: 'dark', // âñåãäà ôèêñèðîâàííûé ðåæèì dark
+                    mode: 'dark',
                     primary: {
                         main: MyTheme === 'red' ? '#FF1A1A' : '#FF19F8',
                         dark: MyTheme === 'red' ? '#FF19F8' : '#FF1A1A',
@@ -48,6 +48,24 @@ export const ColorModeProvider: React.FC<ColorModeProviderProps> = ({ children }
                         default: '#060606'
                     },
                 },
+                components: {
+                    MuiInputBase: {
+                        styleOverrides: {
+                            input: {
+                                fontSize: '2.3vh', // Adjust the font size here
+                            },
+                        },
+                    },
+                    MuiInputLabel: {
+                        styleOverrides: {
+                            root: {
+                                fontSize: '2.3vh', // Размер надписи
+                            },
+                        },
+                    },
+
+                },
+
             }),
         [MyTheme]
     );

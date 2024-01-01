@@ -37,20 +37,17 @@ const rows = [
     { id: 7, jargon: 'Clifford', translate: 'Ferrara', exampleOfUse: '44' },
     { id: 8, jargon: 'Frances', translate: 'Rossini', exampleOfUse: '36' },
     { id: 9, jargon: 'Roxie', translate: 'Harvey', exampleOfUse: '65' },
+    { id: 10, jargon: 'Roxie', translate: 'Harvey', exampleOfUse: '65' },
 ];
 
 export default function DictionaryDataGrid() {
     const theme = useTheme();
 
     return (
-        <Box sx={{
-            height: '80.5vh', width: '100%',
-            padding: '2.4vh', paddingTop: '2.8vh',
-        }}>
+        <Box sx={{ padding: '1.5vh', height:'82.5vh', width: '100%', }}>
             <DataGrid
                 rows={rows}
                 columns={columns}
-
                 sx={{
                     "& .custom-header": {
                         color: `${ theme.palette.primary.main }`,
@@ -61,7 +58,7 @@ export default function DictionaryDataGrid() {
                         transition: 'color 1s ease'
                     },
                 }}
-            />
+                />
         </Box>
     );
 }
