@@ -47,8 +47,13 @@ function MovieSelect() {
                 <TextField {...params} label="Choose a movie" variant="standard"
                     className="jargonFilter"
                     sx={{
-                        '.css-160pt67-MuiInputBase-root-MuiInput-root': { fontSize: '1.2rem' },
-                        '.css-nr6ovm-MuiFormLabel-root-MuiInputLabel-root': { fontSize: '1rem' }
+                        //red theme
+                        '.css-160pt67-MuiInputBase-root-MuiInput-root': { fontSize: '1.2rem' }, //input
+                        '.css-nr6ovm-MuiFormLabel-root-MuiInputLabel-root': { fontSize: '1rem' }, //label
+                        //purple theme
+                        '.css-6sa04w-MuiInputBase-root-MuiInput-root': { fontSize: '1.2rem' }, //input
+                        '.css-ma5oht-MuiFormLabel-root-MuiInputLabel-root': { fontSize: '1rem' }, //label
+
                     }}
                 />
 

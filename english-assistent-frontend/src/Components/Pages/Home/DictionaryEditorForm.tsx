@@ -95,7 +95,13 @@ const DictionaryEditorForm: React.FC = () => {
 
                 sx={{
                     width: '100%',
+                    //red theme
                     '.css-130ozhh-MuiInputBase-root-MuiOutlinedInput-root': {
+                        padding: '0.7rem',
+                        fontSize: '1rem'
+                    },
+                    //purple theme
+                    '.css-1rd94on-MuiInputBase-root-MuiOutlinedInput-root': {
                         padding: '0.7rem',
                         fontSize: '1rem'
                     }
