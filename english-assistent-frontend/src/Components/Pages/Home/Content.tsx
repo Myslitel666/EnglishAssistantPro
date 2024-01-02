@@ -20,7 +20,7 @@ const Content: React.FC = () =>
                 <LeftHalfScreen/>
             </Box>
             <Box padding='1rem' width='50%'
-                minHeight='100vh' paddingTop='11.2vh'
+                paddingTop='11.2vh'
                 sx={{
                     float: 'left',
                     '@media screen and (max-width: 800px)': {

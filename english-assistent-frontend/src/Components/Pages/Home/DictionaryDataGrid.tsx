@@ -1,7 +1,20 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { useTheme } from '@mui/material';
+import axios from 'axios';
+
+//const [data, setData] = useState([]);
+
+const fetchData = async () => {
+    try {
+        const response = await axios.get('ВАШ_API_ЭНДПОИНТ'); // Замените на ваш API-эндпоинт
+        return response.data; // Предполагаем, что данные приходят в формате массива объектов
+    } catch (error) {
+        console.error('Ошибка при получении данных:', error);
+        throw error;
+    }
+};
 
 const columns: GridColDef[] = [
     { field: 'id', headerName: 'Id', width: 45 },

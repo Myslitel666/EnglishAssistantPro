@@ -21,12 +21,24 @@ const DictionaryEditorForm: React.FC = () => {
                 >
                 <Typography
                     fontSize = '1.6rem'
-                    marginBottom = '1.2rem'
+                    marginBottom='1.2rem'
+                    sx = {{
+                        '@media screen and (max-width: 600px)': {
+                            fontSize: '1.1rem',
+                            marginTop: '0.3rem',
+                            marginBottom: '2rem'
+                        }
+                    }}
                 >
                     Jargon:
                 </Typography>
                 <Typography
                     fontSize = '1.6rem'
+                    sx = {{
+                        '@media screen and (max-width: 600px)': {
+                            fontSize: '1.1rem',
+                        }
+                    }}
                 >
                     Translate:
                 </Typography>
@@ -41,24 +53,40 @@ const DictionaryEditorForm: React.FC = () => {
 
                     sx={{
                         float: 'left',
-                        width: '62%'
+                        width: '62%',
+                        '@media screen and (max-width: 600px)': {
+                            width: '56%'
+                        }
                     }}
                 >
                     <MyInputBase 
                         style={{
                             height: '2.5rem',
-                            marginBottom: '0.7rem',
+                            marginBottom: '0.4rem',
                             float: 'left',
                             width: '100%'
                         }}
                     />
                 </Box>
-                <Box display='flex' sx={{ float: 'left' }} width='38%'>
+                    <Box
+                        display='flex'
+                        width='38%'
+                        sx={{
+                            float: 'left',
+                            '@media screen and (max-width: 600px)': {
+                                width: '44%'
+                            }
+                        }}
+                    >
                     <Typography
                         fontSize = '1.5rem'
                         sx={{
                             float: 'left',
-                            marginRight: '0.7rem'
+                            marginRight: '0.7rem',
+                            '@media screen and (max-width: 600px)': {
+                                fontSize: '1.1rem',
+                                marginTop: '0.3rem'
+                            }
                         }}
                     >
                         Id:
@@ -85,14 +113,17 @@ const DictionaryEditorForm: React.FC = () => {
                     display: 'flex',
                     justifyContent: 'center',
                     marginTop: '0.5rem',
-                    marginBottom: '0.5rem'
+                    marginBottom: '0.5rem',
+                    '@media screen and (max-width: 600px)': {
+                        fontSize: '1.1rem',
+                    }
                 }}
             >
                 Example of use
             </Typography>
             <TextField
                 multiline
-                rows={3.7}
+                rows={4}
 
                 sx={{
                     width: '100%',
