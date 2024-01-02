@@ -2,11 +2,11 @@
 import Link, { LinkProps } from '@mui/material/Link';
 import { useTheme } from '@mui/material';
 
-interface MyButtonProps extends LinkProps {
+interface MyLinkProps extends LinkProps {
     // Дополнительные свойства, если необходимо
 }
 
-const MyButton: React.FC<MyButtonProps> = (props) => {
+const MyLink: React.FC<MyLinkProps> = (props) => {
     const [isHovered, setIsHovered] = useState(false);
 
     const handleMouseEnter = () => {
@@ -37,4 +37,4 @@ const MyButton: React.FC<MyButtonProps> = (props) => {
     );
 };
 
-export default MyButton;
+export default MyLink;

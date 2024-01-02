@@ -116,7 +116,6 @@ const DictionaryEditorForm: React.FC = () => {
                 <MyButton
                     variant="contained"
                     style={{
-                        maxWidth: "15rem",
                         float: 'left',
                         width: '100%',
                         marginRight: '8px',
@@ -128,11 +127,10 @@ const DictionaryEditorForm: React.FC = () => {
                 <MyButton
                     variant="contained"
                     style={{
-                        maxWidth: "15rem",
                         float: 'left',
                         width: '100%',
                         marginRight: '8px',
-                        fontSize: '1.2rem'
+                        fontSize: '1.2rem',
                     }}
                 >
                     Add
@@ -140,7 +138,6 @@ const DictionaryEditorForm: React.FC = () => {
                 <MyButton
                     variant="contained"
                     style={{
-                        maxWidth: "15rem",
                         float: 'left',
                         width: '100%',
                         fontSize: '1.2rem'

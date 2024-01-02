@@ -28,7 +28,10 @@ const ServiceName: React.FC = () => {
             sx={{
                 cursor: 'pointer',
                 color: isHovered ? `${primaryDarkColor}` : `${primaryMainColor}`,
-                transition: 'color 1s ease'
+                transition: 'color 1s ease',
+                '@media screen and (max-width: 600px)': {
+                    fontSize: '30px'
+                }
             }}
         >
             EnglishAssistent Pro
