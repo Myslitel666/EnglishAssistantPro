@@ -1,10 +1,11 @@
 //MUI Import
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import TextField from '@mui/material/TextField'
 
 //MyComponents Import
 import MyInputBase from '../../Common/MyInputBase';
-import MyButton from '../../Common/MyTypography';
+import MyButton from '../../Common/MyButton';
 
 const DictionaryEditorForm: React.FC = () => {
     return (
@@ -77,7 +78,67 @@ const DictionaryEditorForm: React.FC = () => {
                 />
                 </Box>
             </Box>
-                
+            <Typography
+                fontSize = '1.5rem'
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    marginTop: '0.4rem',
+                    marginBottom: '0.4rem'
+                }}
+            >
+                Example of use
+            </Typography>
+            <TextField
+                multiline
+                rows={3}
+
+                sx={{
+                    width: '100%',
+                    '.css-130ozhh-MuiInputBase-root-MuiOutlinedInput-root': {
+                        padding: '0.7rem',
+                        fontSize: '1rem'
+                    }
+                }}
+            />
+            <Box paddingTop='0.9rem'
+                display="flex"
+                justifyContent = 'space-between'
+            >
+
+                <MyButton
+                    variant="contained"
+                    style={{
+                        maxWidth: "13.5rem",
+                        float: 'left',
+                        width: '100%',
+                        marginRight: '8px'
+                    }}
+                >
+                    Modify
+                </MyButton>
+                <MyButton
+                    variant="contained"
+                    style={{
+                        maxWidth: "13.5rem",
+                        float: 'left',
+                        width: '100%',
+                        marginRight: '8px'
+                    }}
+                >
+                    Add
+                </MyButton>
+                <MyButton
+                    variant="contained"
+                    style={{
+                        maxWidth: "13.5rem",
+                        float: 'left',
+                        width: '100%',
+                    }}
+                >
+                    Delete
+                </MyButton>
+            </Box>
         </>
     )
 }

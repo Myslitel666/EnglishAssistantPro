@@ -25,9 +25,7 @@ const JargonFilter: React.FC = () => {
                     <MovieSelect />
                 </Stack>
                 <MyButton
-                    //variant="contained"
                     color="primary"
-
                     style={{ marginTop: 'auto', fontSize: '2.5vh', width: '8rem', height: '2.5rem'}}
                 >
                     Filter
