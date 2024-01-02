@@ -3,30 +3,32 @@ import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { useTheme } from '@mui/material';
 import axios from 'axios';
-//import '../Home/DictionaryDataGrid.css'
+import '../Home/DictionaryDataGrid.css'
 
 const columns: GridColDef[] = [
     { field: 'id', headerName: 'Id', width: 45 },
     {
         field: 'jargon',
         headerName: 'Jargon',
-        width: 120,
+        width: 130,
         editable: true,
         headerClassName: 'custom-header', //Класс заголовка для стилей
-        cellClassName: 'custom-cell', //Класс ячеек для стилей
+        cellClassName: 'custom-cell wrap-cell', //Класс ячеек для стилей
     },
     {
         field: 'translate',
         headerName: 'Translate',
-        width: 120,
+        width: 130,
         editable: true,
+        cellClassName: 'wrap-cell',
     },
     {
         field: 'exampleOfUse',
         headerName: 'Example of use',
-        width: 270,
+        width: 250,
         editable: true,
         flex: 1,
+        cellClassName: 'wrap-cell',
 
     },
 ];
@@ -62,7 +64,7 @@ export default function DictionaryDataGrid() {
             <DataGrid
                 rows={data}
                 columns={columns}
-                getRowHeight={() => 'auto'}    
+                getRowHeight={() => 90}    
                 sx={{
                     "& .custom-header": {
                         color: `${ theme.palette.primary.main }`,
