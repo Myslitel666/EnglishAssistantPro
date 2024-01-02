@@ -20,7 +20,7 @@ const Header: React.FC = () => {
                 <Toolbar style={{
                     backgroundColor: '#1E1E1E', paddingLeft: 0,
                     paddingTop: 0, paddingBottom: 0,
-                    height: '10vh', minHeight: '0'
+                    height: '4.1rem', minHeight: '0'
                 }}>
                     <Logo />
                     <ServiceName />

@@ -13,7 +13,7 @@ const JargonFilter: React.FC = () => {
 
     return (
         <>
-            <Box marginTop='10vh' paddingTop='0.5vh'
+            <Box marginTop='4rem' paddingTop='0.5vh'
                 paddingLeft='1.5vh' paddingRight='1.5vh'
                 alignItems='justify-end' display='flex'
                 justifyContent='flex-end'
@@ -26,7 +26,7 @@ const JargonFilter: React.FC = () => {
                 </Stack>
                 <MyButton
                     color="primary"
-                    style={{ marginTop: 'auto', fontSize: '2.5vh', width: '8rem', height: '2.5rem'}}
+                    style={{ marginTop: 'auto', fontSize: '1.5rem', width: '8rem', height: '2.5rem'}}
                 >
                     Filter
                 </MyButton>
@@ -48,11 +48,11 @@ function MovieSelect() {
                     className="jargonFilter"
                     sx={{
                         //red theme
-                        '.css-160pt67-MuiInputBase-root-MuiInput-root': { fontSize: '1.2rem' }, //input
-                        '.css-nr6ovm-MuiFormLabel-root-MuiInputLabel-root': { fontSize: '1rem' }, //label
+                        '.css-160pt67-MuiInputBase-root-MuiInput-root': { fontSize: '1.3rem' }, //input
+                        '.css-nr6ovm-MuiFormLabel-root-MuiInputLabel-root': { fontSize: '1.1rem' }, //label
                         //purple theme
-                        '.css-6sa04w-MuiInputBase-root-MuiInput-root': { fontSize: '1.2rem' }, //input
-                        '.css-ma5oht-MuiFormLabel-root-MuiInputLabel-root': { fontSize: '1rem' }, //label
+                        '.css-6sa04w-MuiInputBase-root-MuiInput-root': { fontSize: '1.3rem' }, //input
+                        '.css-ma5oht-MuiFormLabel-root-MuiInputLabel-root': { fontSize: '1.1rem' }, //label
 
                     }}
                 />

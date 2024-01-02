@@ -12,7 +12,7 @@ const DictionaryEditorForm: React.FC = () => {
         <>
             <Box display = 'flex'>
                 <Box alignItems = 'center'
-                    marginRight = '0.6rem'
+                    marginRight = '0.7rem'
 
                     sx={{
                         textAlign: 'right',
@@ -20,13 +20,13 @@ const DictionaryEditorForm: React.FC = () => {
                     }}
                 >
                 <Typography
-                    fontSize = '1.5rem'
-                    marginBottom = '1.5rem'
+                    fontSize = '1.6rem'
+                    marginBottom = '1.2rem'
                 >
                     Jargon:
                 </Typography>
                 <Typography
-                    fontSize = '1.5rem'
+                    fontSize = '1.6rem'
                 >
                     Translate:
                 </Typography>
@@ -34,9 +34,10 @@ const DictionaryEditorForm: React.FC = () => {
             <Box alignItems = 'center'
                 sx={{ float: 'left' }}
             >
-                <Box paddingRight = '0.6rem'
+                <Box paddingRight = '0.7rem'
                     display = 'flex'
-                    paddingBottom = '0.6rem'
+                    paddingBottom = '0.7rem'
+                    paddingTop = '0.1rem'
 
                     sx={{
                         float: 'left',
@@ -46,7 +47,7 @@ const DictionaryEditorForm: React.FC = () => {
                     <MyInputBase 
                         style={{
                             height: '2.5rem',
-                            marginBottom: '0.6rem',
+                            marginBottom: '0.7rem',
                             float: 'left',
                             width: '100%'
                         }}
@@ -57,7 +58,7 @@ const DictionaryEditorForm: React.FC = () => {
                         fontSize = '1.5rem'
                         sx={{
                             float: 'left',
-                            marginRight: '0.6rem'
+                            marginRight: '0.7rem'
                         }}
                     >
                         Id:
@@ -83,15 +84,15 @@ const DictionaryEditorForm: React.FC = () => {
                 sx={{
                     display: 'flex',
                     justifyContent: 'center',
-                    marginTop: '0.4rem',
-                    marginBottom: '0.4rem'
+                    marginTop: '0.5rem',
+                    marginBottom: '0.5rem'
                 }}
             >
                 Example of use
             </Typography>
             <TextField
                 multiline
-                rows={3}
+                rows={3.7}
 
                 sx={{
                     width: '100%',
@@ -107,7 +108,7 @@ const DictionaryEditorForm: React.FC = () => {
                     }
                 }}
             />
-            <Box paddingTop='0.9rem'
+            <Box paddingTop='0.7rem'
                 display="flex"
                 justifyContent = 'space-between'
             >
@@ -115,10 +116,11 @@ const DictionaryEditorForm: React.FC = () => {
                 <MyButton
                     variant="contained"
                     style={{
-                        maxWidth: "13.5rem",
+                        maxWidth: "15rem",
                         float: 'left',
                         width: '100%',
-                        marginRight: '8px'
+                        marginRight: '8px',
+                        fontSize: '1.2rem'
                     }}
                 >
                     Modify
@@ -126,10 +128,11 @@ const DictionaryEditorForm: React.FC = () => {
                 <MyButton
                     variant="contained"
                     style={{
-                        maxWidth: "13.5rem",
+                        maxWidth: "15rem",
                         float: 'left',
                         width: '100%',
-                        marginRight: '8px'
+                        marginRight: '8px',
+                        fontSize: '1.2rem'
                     }}
                 >
                     Add
@@ -137,9 +140,10 @@ const DictionaryEditorForm: React.FC = () => {
                 <MyButton
                     variant="contained"
                     style={{
-                        maxWidth: "13.5rem",
+                        maxWidth: "15rem",
                         float: 'left',
                         width: '100%',
+                        fontSize: '1.2rem'
                     }}
                 >
                     Delete

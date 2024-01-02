@@ -16,8 +16,8 @@ const RightHalfScreen: React.FC = () => {
             />
             <MyInputBase
                 style={{
-                    marginTop: '1vh', width: '100%',
-                    height: '3rem', fontSize: '1.3rem'
+                    marginTop: '0.4rem', width: '100%',
+                    height: '3.2rem', fontSize: '1.3rem'
                 }}
             />
             <MyButton
@@ -27,7 +27,7 @@ const RightHalfScreen: React.FC = () => {
                     width: '100%',
                     marginTop: '1.6vh',
                     fontSize: '1.3rem',
-                    height: '3rem',
+                    height: '3.1rem',
                     borderBottom: 'none'
                 }}
             >
@@ -35,7 +35,7 @@ const RightHalfScreen: React.FC = () => {
             </MyButton>
             <FormControlLabel
                 sx={{
-                    '.css-1ejercq-MuiTypography-root': { fontSize: '1.5rem', fontWeight: 250 },
+                    '.css-1ejercq-MuiTypography-root': { fontSize: '1.6rem', fontWeight: 250 },
                     '.css-i4bv87-MuiSvgIcon-root': { width: '2rem', height: '2rem' },
                     width: '100%'
                 }}

@@ -2,8 +2,8 @@
     position: relative;
     display: flex;
     align-items: center;
-    width: 8vh;
-    height: 8vh;
+    width: 3.6rem;
+    height: 3.6rem;
     cursor: pointer;
     transition: transform 1s ease;
     margin-left: 13px;
