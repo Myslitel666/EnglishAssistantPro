@@ -44,7 +44,7 @@ export default function DictionaryDataGrid() {
     const theme = useTheme();
 
     return (
-        <Box sx={{ padding: '1.5vh', height:'82.5vh', width: '100%', }}>
+        <Box sx={{ padding: '1.5vh', height:'81.5vh', width: '100%', }}>
             <DataGrid
                 rows={rows}
                 columns={columns}

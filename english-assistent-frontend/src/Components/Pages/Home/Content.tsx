@@ -14,7 +14,7 @@ const Content: React.FC = () =>
             >
                 <LeftHalfScreen/>
             </Box>
-            <Box padding='1.2vh' width='50%'
+            <Box padding='1rem' width='50%'
                 minHeight='100vh' paddingTop='11.2vh'
                 style={{ float: 'left', }}
             >

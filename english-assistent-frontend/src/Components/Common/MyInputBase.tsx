@@ -17,6 +17,7 @@ const MyInputBase: React.FC<MyInputProps> = (props) => {
                 transition: 'background-color 1s ease, color 1s ease, border-color 1s ease',
                 border: `1px solid ${theme.palette.action.disabled}`,
                 borderRadius: '4px',
+                padding: '1.2vh',
                 '&.Mui-focused': {
                     borderColor: `${theme.palette.primary.main}`, // Ваши стили при фокусировке
                 },

@@ -28,7 +28,7 @@ const JargonFilter: React.FC = () => {
                     //variant="contained"
                     color="primary"
 
-                    style={{ marginTop: 'auto', fontSize: '2.5vh', width: '15vh', height: '4.5vh'}}
+                    style={{ marginTop: 'auto', fontSize: '2.5vh', width: '8rem', height: '2.5rem'}}
                 >
                     Filter
                 </MyButton>
