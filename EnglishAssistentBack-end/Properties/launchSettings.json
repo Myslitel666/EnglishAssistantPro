@@ -14,7 +14,7 @@
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "http://${MY_APP_HTTP_URL}:5115",
+      "applicationUrl": "http://${IP_ADDRESS}:5115",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -23,8 +23,8 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": false,
-      "launchUrl": "swagger",
-      "applicationUrl": "https://${MY_APP_HTTP_URL}:7220;http://${MY_APP_HTTP_URL}:5115",
+      "launchUrl": "",
+      "applicationUrl": "http://${IP_ADDRESS}:7220;http://${IP_ADDRESS}:5115",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

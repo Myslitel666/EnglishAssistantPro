@@ -9,18 +9,19 @@ namespace Controllers
     [ApiController]
     public class HomeController : Controller
     {
-        private readonly EnglishAssistentContext _dbContext; // Замените YourDbContext на фактическое имя вашего DbContext
+        private EnglishAssistentContext _dbContext; // Замените YourDbContext на фактическое имя вашего DbContext
 
-        public HomeController(EnglishAssistentContext dbContext)
+        public HomeController()
         {
-            _dbContext = dbContext;
+            _dbContext = new EnglishAssistentContext();
         }
 
         [HttpGet("jargonDictionary")]
-        public async Task<ActionResult<IEnumerable<JargonDictionary>>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var jargonEntries = await _dbContext.JargonDictionaries.ToListAsync();
-            return jargonEntries;
+            var jargonEntries = await _dbContext.JargonDictionaries
+            .ToListAsync();
+            return Ok(jargonEntries);
         }
     }
 }
