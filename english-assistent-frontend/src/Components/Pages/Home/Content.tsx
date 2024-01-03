@@ -9,21 +9,21 @@ const Content: React.FC = () =>
 { 
     return (
         <>
-            <Box width='50%' maxHeight='100vh'
+            <Box width='60%' maxHeight='100vh'
                 sx={{
                     float: 'left',
-                    '@media screen and (max-width: 800px)': {
+                    '@media screen and (max-width: 1000px)': {
                         float: 'none', width: '100%'
                     }
                 }}
             >
                 <LeftHalfScreen/>
             </Box>
-            <Box padding='1rem' width='50%'
+            <Box padding='1rem' width='40%'
                 paddingTop='11.2vh'
                 sx={{
                     float: 'left',
-                    '@media screen and (max-width: 800px)': {
+                    '@media screen and (max-width: 1000px)': {
                         width: '100%',
                         paddingTop: '0.4rem'
                     }

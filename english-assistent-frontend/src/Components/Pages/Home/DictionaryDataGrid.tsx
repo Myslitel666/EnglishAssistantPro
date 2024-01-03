@@ -10,7 +10,7 @@ const columns: GridColDef[] = [
     {
         field: 'jargon',
         headerName: 'Jargon',
-        width: 130,
+        width: 150,
         editable: true,
         headerClassName: 'custom-header', //Класс заголовка для стилей
         cellClassName: 'custom-cell wrap-cell', //Класс ячеек для стилей
@@ -18,7 +18,7 @@ const columns: GridColDef[] = [
     {
         field: 'translate',
         headerName: 'Translate',
-        width: 130,
+        width: 150,
         editable: true,
         cellClassName: 'wrap-cell',
     },
@@ -26,9 +26,11 @@ const columns: GridColDef[] = [
         field: 'exampleOfUse',
         headerName: 'Example of use',
         width: 250,
+        resizable: true,
         editable: true,
         flex: 1,
-        cellClassName: 'wrap-cell',
+        cellClassName: 'wrap-cell example-of-use',
+
 
     },
 ];
