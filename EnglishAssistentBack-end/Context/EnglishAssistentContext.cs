@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using EnglishAssistentBackend.Models.Entities;
 using Microsoft.EntityFrameworkCore;
-using Models.Entities;
 
-namespace Context;
+namespace EnglishAssistentBackend.Context;
 
 public partial class EnglishAssistentContext : DbContext
 {
@@ -26,12 +26,9 @@ public partial class EnglishAssistentContext : DbContext
     {
         modelBuilder.Entity<JargonDictionary>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("JargonDictionary");
+            entity.ToTable("JargonDictionary");
 
             entity.Property(e => e.ExampleOfUse).HasColumnType("text");
-            entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.Jargon)
                 .HasMaxLength(256)
                 .IsUnicode(false);

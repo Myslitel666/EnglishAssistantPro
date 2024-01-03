@@ -1,7 +1,3 @@
-using Controllers;
-using Context;
-using Models.Entities;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

@@ -1,3 +1,6 @@
+﻿//React Import
+import React, { useState } from 'react';
+
 //MUI Import
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -8,6 +11,35 @@ import MyInputBase from '../../Common/MyInputBase';
 import MyButton from '../../Common/MyButton';
 
 const DictionaryEditorForm: React.FC = () => {
+    const [jargon, setJargon] = useState(''); 
+    const [translate, setTranslate] = useState(''); 
+    const [exampleOfUse, setExampleOfUse] = useState(''); 
+    const apiUrl = process.env.REACT_APP_API_URL as string;
+
+    async function fetchData() {
+        try {
+            const response = await fetch(`${apiUrl}/api/home/setJargonDictionary`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    jargon: jargon,
+                    translate: translate,
+                    exampleOfUse: exampleOfUse
+                }),
+            });
+
+            //const result = await response.json();
+        } catch (error) {
+            console.error('Ошибка при отправке данных:', error);
+        }
+    };
+
+    const handleAddButtonClick = () => {
+        fetchData(); // Вызываем функцию отправки данных при нажатии на кнопку
+    };
+
     return (
         <>
             <Box display = 'flex'>
@@ -60,6 +92,7 @@ const DictionaryEditorForm: React.FC = () => {
                     }}
                 >
                     <MyInputBase 
+                        onChange={(e) => setJargon(e.target.value)}
                         style={{
                             height: '2.5rem',
                             marginBottom: '0.4rem',
@@ -101,6 +134,7 @@ const DictionaryEditorForm: React.FC = () => {
                 </Box>
                 <MyInputBase
                     fullWidth
+                    onChange={(e) => setTranslate(e.target.value)}
                     style={{
                         height: '2.5rem',
                     }} 
@@ -124,7 +158,7 @@ const DictionaryEditorForm: React.FC = () => {
             <TextField
                 multiline
                 rows={4}
-
+                onChange={(e) => setExampleOfUse(e.target.value)}
                 sx={{
                     width: '100%',
                     //red theme
@@ -157,6 +191,7 @@ const DictionaryEditorForm: React.FC = () => {
                 </MyButton>
                 <MyButton
                     variant="contained"
+                    onClick={handleAddButtonClick}
                     style={{
                         float: 'left',
                         width: '100%',

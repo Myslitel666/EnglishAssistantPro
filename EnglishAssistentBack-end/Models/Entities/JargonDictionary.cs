@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Models.Entities;
+namespace EnglishAssistentBackend.Models.Entities;
 
 public partial class JargonDictionary
 {

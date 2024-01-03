@@ -26,7 +26,6 @@ const columns: GridColDef[] = [
         field: 'exampleOfUse',
         headerName: 'Example of use',
         width: 250,
-        resizable: true,
         editable: true,
         flex: 1,
         cellClassName: 'wrap-cell example-of-use',
@@ -51,7 +50,7 @@ export default function DictionaryDataGrid() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`${apiUrl}/api/home/jargonDictionary`);
+                const response = await axios.get(`${apiUrl}/api/home/getJargonDictionary`);
                 setData(response.data);
             } catch (error) {
                 console.error('Error fetching popular products:', error);
