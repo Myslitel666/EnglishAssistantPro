@@ -20,6 +20,7 @@ namespace Controllers
         public async Task<IActionResult> GetAll()
         {
             var jargonEntries = await _dbContext.JargonDictionaries
+            .OrderBy(entry => entry.Jargon) //Сортировка по колонке jargon
             .ToListAsync();
             return Ok(jargonEntries);
         }
