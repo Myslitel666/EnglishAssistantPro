@@ -34,13 +34,9 @@ const columns: GridColDef[] = [
     },
 ];
 
-const rows = [
-    { id: 1, jargon: 'Snow', translate: 'Jon', exampleOfUse: '14' },
-];
-
 export default function DictionaryDataGrid() {
     const theme = useTheme();
-    const [data, setData] = useState<{
+    const [rows, setRows] = useState<{
         id: number; jargon: string;
         translate: string; exampleOfUse: string;
     }[]>([]);
@@ -51,7 +47,7 @@ export default function DictionaryDataGrid() {
         const fetchData = async () => {
             try {
                 const response = await axios.get(`${apiUrl}/api/home/getJargonDictionary`);
-                setData(response.data);
+                setRows(response.data);
             } catch (error) {
                 console.error('Error fetching popular products:', error);
             }
@@ -63,7 +59,7 @@ export default function DictionaryDataGrid() {
     return (
         <Box sx={{ padding: '1.5vh', height:'82.6vh', width: '100%', }}>
             <DataGrid
-                rows={data}
+                rows={rows}
                 columns={columns}
                 getRowHeight={() => 90}    
                 sx={{

@@ -14,11 +14,12 @@ const DictionaryEditorForm: React.FC = () => {
     const [jargon, setJargon] = useState(''); 
     const [translate, setTranslate] = useState(''); 
     const [exampleOfUse, setExampleOfUse] = useState(''); 
+    const [id, setId] = useState(-1); 
     const apiUrl = process.env.REACT_APP_API_URL as string;
 
-    async function fetchData() {
+    async function sendData() {
         try {
-            const response = await fetch(`${apiUrl}/api/home/setJargonDictionary`, {
+            await fetch(`${apiUrl}/api/home/setJargonDictionary`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -36,8 +37,56 @@ const DictionaryEditorForm: React.FC = () => {
         }
     };
 
+    async function modifyData() {
+        try {
+            await fetch(`${apiUrl}/api/home/modifyJargonDictionary`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: id,
+                    jargon: jargon,
+                    translate: translate,
+                    exampleOfUse: exampleOfUse
+                }),
+            });
+
+            //const result = await response.json();
+        } catch (error) {
+            console.error('Ошибка при отправке данных:', error);
+        }
+    };
+
+    async function deleteData() {
+        try {
+            await fetch(`${apiUrl}/api/home/deleteJargonDictionary`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: id,
+                    jargon: jargon,
+                    translate: translate,
+                    exampleOfUse: exampleOfUse
+                }),
+            });
+
+            //const result = await response.json();
+        } catch (error) {
+            console.error('Ошибка при отправке данных:', error);
+        }
+    };
+
     const handleAddButtonClick = () => {
-        fetchData(); // Вызываем функцию отправки данных при нажатии на кнопку
+        sendData(); 
+    };
+    const handleModifyButtonClick = () => {
+        modifyData(); 
+    };
+    const handleDeleteButtonClick = () => {
+        deleteData(); 
     };
 
     return (
@@ -126,6 +175,7 @@ const DictionaryEditorForm: React.FC = () => {
                     </Typography>
                     <MyInputBase
                         fullWidth
+                        onChange={(e) => setId(parseInt(e.target.value))}
                         style={{
                             float: 'left',
                             height: '2.5rem',
@@ -180,6 +230,7 @@ const DictionaryEditorForm: React.FC = () => {
 
                 <MyButton
                     variant="contained"
+                    onClick={handleModifyButtonClick}
                     style={{
                         float: 'left',
                         width: '100%',
@@ -203,6 +254,7 @@ const DictionaryEditorForm: React.FC = () => {
                 </MyButton>
                 <MyButton
                     variant="contained"
+                    onClick={handleDeleteButtonClick}
                     style={{
                         float: 'left',
                         width: '100%',

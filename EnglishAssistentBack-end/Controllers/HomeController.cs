@@ -29,12 +29,42 @@ namespace Controllers
         [HttpPost("setJargonDictionary")]
         public async Task<IActionResult> SendJargon([FromBody] JargonDictionaryDto jargonDictionaryDto)
         {
-            JargonDictionary jargonDictionary = new JargonDictionary { 
+            var jargonDictionary = new JargonDictionary { 
                 Jargon = jargonDictionaryDto.Jargon, 
                 Translate = jargonDictionaryDto.Translate,
                 ExampleOfUse = jargonDictionaryDto.ExampleOfUse,
             };
-            _dbContext.JargonDictionaries.Add(jargonDictionary);
+            _dbContext.JargonDictionaries.AddAsync(jargonDictionary);
+            await _dbContext.SaveChangesAsync();
+            return Ok();
+        }
+
+        [HttpPost("modifyJargonDictionary")]
+        public async Task<IActionResult> ModifyJargon([FromBody] JargonDictionaryDto jargonDictionaryDto)
+        {
+            //Get instance by Id
+            int OldId = jargonDictionaryDto.Id;
+            var jargonDictionary = await _dbContext.JargonDictionaries.FindAsync(OldId);
+            //Modify the values of JargonDictionary attributes
+            jargonDictionary.Jargon = jargonDictionaryDto.Jargon;
+            jargonDictionary.Translate = jargonDictionaryDto.Translate;
+            jargonDictionary.ExampleOfUse = jargonDictionaryDto.ExampleOfUse;
+            _dbContext.JargonDictionaries.Update(jargonDictionary);
+            await _dbContext.SaveChangesAsync();
+            return Ok();
+        }
+
+        [HttpPost("deleteJargonDictionary")]
+        public async Task<IActionResult> DeleteJargon([FromBody] JargonDictionaryDto jargonDictionaryDto)
+        {
+            var jargonDictionary = new JargonDictionary
+            {
+                Id = jargonDictionaryDto.Id,
+                Jargon = jargonDictionaryDto.Jargon,
+                Translate = jargonDictionaryDto.Translate,
+                ExampleOfUse = jargonDictionaryDto.ExampleOfUse,
+            };
+            _dbContext.JargonDictionaries.Remove(jargonDictionary);
             await _dbContext.SaveChangesAsync();
             return Ok();
         }
