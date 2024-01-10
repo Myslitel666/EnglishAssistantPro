@@ -10,7 +10,7 @@ import DictionaryEditorForm from '../../Pages/Home/DictionaryEditorForm'
 const RightHalfScreen: React.FC = () => {
     return (
         <>
-            <img src='images/background.png'
+            <img src='images/background-light-green.png'
                 alt="background"
                 style={{ width: '100%', }}
             />
@@ -28,7 +28,8 @@ const RightHalfScreen: React.FC = () => {
                     marginTop: '1.6vh',
                     fontSize: '1.3rem',
                     height: '3.1rem',
-                    borderBottom: 'none'
+                    borderColor: 'black',
+                    borderBottomColor: 'black'
                 }}
             >
                 Translate

@@ -10,17 +10,26 @@ import MyButton from '../MyButton';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Box from '@mui/material/Box';
+import { useTheme } from '@mui/material/styles';
 
 const Header: React.FC = () => {
     const { toggleColorMode } = useColorMode();
+    const theme = useTheme();
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar>
+            <AppBar
+                elevation={0}
+                sx={{
+                    backgroundColor: `${theme.palette.action.disabledBackground}`
+                }}
+            >
                 <Toolbar style={{
-                    backgroundColor: '#1E1E1E', paddingLeft: 0,
-                    paddingTop: 0, paddingBottom: 0,
-                    height: '4.1rem', minHeight: '0'
+                    paddingLeft: 0,
+                    paddingTop: 0,
+                    paddingBottom: 0,
+                    height: '4.1rem',
+                    minHeight: '0',
                     }}
                 >
 

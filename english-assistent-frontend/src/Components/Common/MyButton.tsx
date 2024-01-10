@@ -9,8 +9,13 @@ const MyButton: React.FC<MyButtonProps> = (props) => {
     return (
         <Button
             {...props}
+            disableElevation
             sx={{
-                transition: 'background-color 1s ease, color 1s ease, border-color 1s ease'
+                transition: 'background-color 1s ease, color 1s ease, border-color 1s ease',
+                border: 1,
+                '&:hover': {
+                    border: 1,
+                }
                 //...props.sx // Позволяет вам передавать другие стили через props
             }}
         />

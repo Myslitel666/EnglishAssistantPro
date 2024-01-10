@@ -22,10 +22,10 @@ interface ColorModeProviderProps {
 }
 
 export const ColorModeProvider: React.FC<ColorModeProviderProps> = ({ children }) => {
-    const [MyTheme, setMyTheme] = useState<'red' | 'purple'>('red');
+    const [MyTheme, setMyTheme] = useState<'yellow' | 'red'>('yellow');
 
     const toggleColorMode = () => {
-        setMyTheme(prevMode => (prevMode === 'red' ? 'purple' : 'red'));
+        setMyTheme(prevMode => (prevMode === 'yellow' ? 'red' : 'yellow'));
     };
 
     const theme = useMemo(
@@ -35,37 +35,22 @@ export const ColorModeProvider: React.FC<ColorModeProviderProps> = ({ children }
                     fontFamily: 'MyFont, sans-serif'
                 },
                 palette: {
-                    mode: 'dark',
+                    mode: MyTheme === 'yellow' ? 'light' : 'dark',
                     primary: {
-                        main: MyTheme === 'red' ? '#FF1A1A' : '#FF19F8',
-                        dark: MyTheme === 'red' ? '#FF19F8' : '#FF1A1A',
+                        main: MyTheme === 'yellow' ? '#0fba81' : '#ba0f0f',
+                        dark: MyTheme === 'red' ? '#0fba81' : '#ba0f0f',
                     },
                     text: {
-                        primary: '#FFFFFF', // Устанавливаем цвет основного текста в темной теме
-                        secondary: '#CCCCCC', // Устанавливаем цвет второстепенного текста в темной теме (например, для подзаголовков и т. д.)
+                        primary: MyTheme === 'yellow' ? '#000000' : '#FFFFFF',
+                        //secondary: '#FFFFFF', // Устанавливаем цвет второстепенного текста в темной теме (например, для подзаголовков и т. д.)
                     },
                     background: {
-                        default: '#060606'
+                        default: MyTheme === 'yellow' ? '#FFFFFF' : '#060606',
                     },
+                    action: {
+                        disabledBackground: MyTheme === 'yellow' ? '#FFFFFF' : '#252525',
+                    }
                 },
-                //components: {
-                //    MuiInputBase: {
-                //        styleOverrides: {
-                //            input: {
-                //                fontSize: '2.3vh', // Adjust the font size here
-                //            },
-                //        },
-                //    },
-                //    MuiInputLabel: {
-                //        styleOverrides: {
-                //            root: {
-                //                fontSize: '2.3vh', // Размер надписи
-                //            },
-                //        },
-                //    },
-
-                //},
-
             }),
         [MyTheme]
     );

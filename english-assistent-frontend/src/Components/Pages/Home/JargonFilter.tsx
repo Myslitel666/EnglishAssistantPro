@@ -24,12 +24,13 @@ const JargonFilter: React.FC = () => {
                 >
                     <MovieSelect />
                 </Stack>
-                <MyButton
+                <Button
                     color="primary"
-                    style={{ marginTop: 'auto', fontSize: '1.5rem', width: '8rem', height: '2.5rem'}}
+                    style={{ marginTop: 'auto', fontSize: '1.5rem', width: '8rem', height: '2.5rem' }}
+                    sx={{ transition: 'background-color 1s ease, color 1s ease, border-color 1s ease' }}
                 >
                     Filter
-                </MyButton>
+                </Button>
             </Box>
         </>
     )

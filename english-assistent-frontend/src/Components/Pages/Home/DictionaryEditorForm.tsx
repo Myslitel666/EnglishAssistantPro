@@ -235,7 +235,8 @@ const DictionaryEditorForm: React.FC = () => {
                         float: 'left',
                         width: '100%',
                         marginRight: '8px',
-                        fontSize: '1.2rem'
+                        fontSize: '1.2rem',
+                        borderColor: 'black'
                     }}
                 >
                     Modify
@@ -248,6 +249,7 @@ const DictionaryEditorForm: React.FC = () => {
                         width: '100%',
                         marginRight: '8px',
                         fontSize: '1.2rem',
+                        borderColor: 'black'
                     }}
                 >
                     Add
@@ -258,7 +260,8 @@ const DictionaryEditorForm: React.FC = () => {
                     style={{
                         float: 'left',
                         width: '100%',
-                        fontSize: '1.2rem'
+                        fontSize: '1.2rem',
+                        borderColor: 'black'
                     }}
                 >
                     Delete
