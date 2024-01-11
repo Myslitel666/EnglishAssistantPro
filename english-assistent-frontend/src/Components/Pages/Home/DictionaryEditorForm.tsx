@@ -91,7 +91,10 @@ const DictionaryEditorForm: React.FC = () => {
 
     return (
         <>
-            <Box display = 'flex'>
+            <Box
+                display='flex'
+                marginTop='1.2rem'
+            >
                 <Box alignItems = 'center'
                     marginRight = '0.7rem'
 
@@ -101,8 +104,8 @@ const DictionaryEditorForm: React.FC = () => {
                     }}
                 >
                 <Typography
-                    fontSize = '1.6rem'
-                    marginBottom='1.2rem'
+                    fontSize = '1.3rem'
+                    marginBottom = '1.5rem'
                     sx = {{
                         '@media screen and (max-width: 600px)': {
                             fontSize: '1.1rem',
@@ -114,7 +117,7 @@ const DictionaryEditorForm: React.FC = () => {
                     Jargon:
                 </Typography>
                 <Typography
-                    fontSize = '1.6rem'
+                    fontSize = '1.3rem'
                     sx = {{
                         '@media screen and (max-width: 600px)': {
                             fontSize: '1.1rem',
@@ -130,7 +133,6 @@ const DictionaryEditorForm: React.FC = () => {
                 <Box paddingRight = '0.7rem'
                     display = 'flex'
                     paddingBottom = '0.7rem'
-                    paddingTop = '0.1rem'
 
                     sx={{
                         float: 'left',
@@ -143,25 +145,25 @@ const DictionaryEditorForm: React.FC = () => {
                     <MyInputBase 
                         onChange={(e) => setJargon(e.target.value)}
                         style={{
-                            height: '2.5rem',
+                            height: '2.3rem',
                             marginBottom: '0.4rem',
                             float: 'left',
                             width: '100%'
                         }}
                     />
                 </Box>
-                    <Box
-                        display='flex'
-                        width='38%'
-                        sx={{
-                            float: 'left',
-                            '@media screen and (max-width: 600px)': {
-                                width: '44%'
-                            }
-                        }}
-                    >
+                <Box
+                    display='flex'
+                    width='38%'
+                    sx={{
+                        float: 'left',
+                        '@media screen and (max-width: 600px)': {
+                            width: '44%'
+                        }
+                    }}
+                >
                     <Typography
-                        fontSize = '1.5rem'
+                        fontSize = '1.3rem'
                         sx={{
                             float: 'left',
                             marginRight: '0.7rem',
@@ -178,21 +180,21 @@ const DictionaryEditorForm: React.FC = () => {
                         onChange={(e) => setId(parseInt(e.target.value))}
                         style={{
                             float: 'left',
-                            height: '2.5rem',
+                            height: '2.3rem',
+                        }} 
+                    />
+                    </Box>
+                    <MyInputBase
+                        fullWidth
+                        onChange={(e) => setTranslate(e.target.value)}
+                        style={{
+                            height: '2.3rem',
                         }} 
                     />
                 </Box>
-                <MyInputBase
-                    fullWidth
-                    onChange={(e) => setTranslate(e.target.value)}
-                    style={{
-                        height: '2.5rem',
-                    }} 
-                />
-                </Box>
             </Box>
             <Typography
-                fontSize = '1.5rem'
+                fontSize = '1.3rem'
                 sx={{
                     display: 'flex',
                     justifyContent: 'center',
