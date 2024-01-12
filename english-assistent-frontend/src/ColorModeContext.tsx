@@ -1,4 +1,4 @@
-﻿import React, { createContext, useContext, useMemo, useState, ReactNode } from 'react';
+﻿import React, { createContext, useContext, useMemo, useState, ReactNode, useEffect } from 'react';
 import { ThemeProvider, createTheme, Theme } from '@mui/material';
 import '../src/Font.css';
 
@@ -24,15 +24,27 @@ interface ColorModeProviderProps {
 }
 
 export const ColorModeProvider: React.FC<ColorModeProviderProps> = ({ children }) => {
-    const [themeMode, setThemeMode] = useState<'light' | 'dark'>('light');
-    const [primaryColor, setPrimaryColor] = useState<string>('#0fba81');
+    const [themeMode, setThemeModeState] = useState<'light' | 'dark'>(() => {
+        const storedTheme = localStorage.getItem('themeMode');
+        return (storedTheme as 'light' | 'dark') || 'light';
+    });
+
+    const [primaryColor, setPrimaryColorState] = useState<string>(() => {
+        const storedColor = localStorage.getItem('primaryColor');
+        return storedColor || '#0fba81';
+    });
 
     const toggleColorMode = () => {
-        setThemeMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+        setThemeModeState((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
     };
 
-    const setTheme = (mode: 'light' | 'dark') => {
-        setThemeMode(mode);
+    const setThemeMode = (mode: 'light' | 'dark') => {
+        setThemeModeState(mode);
+    };
+
+    const setPrimaryColor = (color: string) => {
+        localStorage.setItem('primaryColor', color);
+        setPrimaryColorState(color);
     };
 
     const theme = useMemo(
@@ -60,8 +72,12 @@ export const ColorModeProvider: React.FC<ColorModeProviderProps> = ({ children }
         [themeMode, primaryColor]
     );
 
+    useEffect(() => {
+        localStorage.setItem('themeMode', themeMode);
+    }, [themeMode]);
+
     const contextValue = useMemo(() => {
-        return { toggleColorMode, setThemeMode: setTheme, theme, setPrimaryColor };
+        return { toggleColorMode, setThemeMode, theme, setPrimaryColor };
     }, [themeMode, primaryColor]);
 
     return (
