@@ -42,6 +42,12 @@ export const ColorModeProvider: React.FC<ColorModeProviderProps> = ({ children }
 
     const setThemeMode = (mode: 'light' | 'dark') => {
         setThemeModeState(mode);
+
+        if (themeMode === 'light' && primaryColor === '#0fba81') {
+            setPrimaryColor('#2aff1a');
+        } else if (themeMode === 'dark' && primaryColor === '#2aff1a') {
+            setPrimaryColor('#0fba81');
+        }
     };
 
     const setPrimaryColor = (color: string) => {

@@ -1,22 +1,37 @@
+import { useState, useEffect } from 'react';
+
 //MUI Import
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Button from '@mui/material/Button';
-import { useColorMode } from '../../../ColorModeContext';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
+//My Components Import
+import { useColorLabel } from '../../../UseColorLabel';
+import { useColorMode, ColorModeContextProps } from '../../../ColorModeContext';
+
 export default function CustomizationModalContent() {
-    const { toggleColorMode, setPrimaryColor, setThemeMode } = useColorMode();
+    const { setPrimaryColor, setThemeMode } = useColorMode();
+    const { getColorFromLabel, getLabelFromColor } = useColorLabel('green');
+    const { themeMode }: ColorModeContextProps = useColorMode();
 
     const handleModeThemeToggle = (theme: 'light' | 'dark') => {
         setThemeMode(theme);
     };
 
-    const handlePrimaryColorToggle = (color: string) => {
-        setPrimaryColor(color);
+    const handlePrimaryColorToggle = (labelColor: string) => {
+        const currentColor = getColorFromLabel(labelColor);
+        setPrimaryColor(currentColor);
     };
+
+    //обновляем оттенок primary color при изменении темы
+    useEffect(() => {
+        const labelColor = getLabelFromColor();
+        const primaryColorWithTheme = getColorFromLabel(labelColor);
+        setPrimaryColor(primaryColorWithTheme);
+    }, [themeMode]);
 
     return (
         <>
@@ -61,7 +76,7 @@ export default function CustomizationModalContent() {
                     float: 'center'
                 }}
             >
-                <Button onClick={() => handlePrimaryColorToggle('#e81111')}>
+                <Button onClick={() => handlePrimaryColorToggle('red')}>
                     <FiberManualRecordIcon
                         id = 'red'
                         sx={{
@@ -83,9 +98,9 @@ export default function CustomizationModalContent() {
                         }}
                     />
                 </Button>
-                <Button onClick={() => handlePrimaryColorToggle('#0fba81')}>
+                <Button onClick={() => handlePrimaryColorToggle('green')}>
                     <FiberManualRecordIcon
-                        id='yellow'
+                        id='green'
                         sx={{
                             fontSize: '3.2rem',
                             padding: '0.3rem',
