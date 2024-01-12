@@ -1,10 +1,12 @@
 ﻿import React, { createContext, useContext, useMemo, useState, ReactNode } from 'react';
 import { ThemeProvider, createTheme, Theme } from '@mui/material';
-import '../src/Font.css'
+import '../src/Font.css';
 
 interface ColorModeContextProps {
     toggleColorMode: () => void;
+    setThemeMode: (mode: 'light' | 'dark') => void;
     theme: Theme;
+    setPrimaryColor: (color: string) => void;
 }
 
 const ColorModeContext = createContext<ColorModeContextProps | undefined>(undefined);
@@ -22,48 +24,49 @@ interface ColorModeProviderProps {
 }
 
 export const ColorModeProvider: React.FC<ColorModeProviderProps> = ({ children }) => {
-    const [MyTheme, setMyTheme] = useState<'yellow' | 'red'>('yellow');
+    const [themeMode, setThemeMode] = useState<'light' | 'dark'>('light');
+    const [primaryColor, setPrimaryColor] = useState<string>('#0fba81');
 
     const toggleColorMode = () => {
-        setMyTheme(prevMode => (prevMode === 'yellow' ? 'red' : 'yellow'));
+        setThemeMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+    };
+
+    const setTheme = (mode: 'light' | 'dark') => {
+        setThemeMode(mode);
     };
 
     const theme = useMemo(
         () =>
             createTheme({
                 typography: {
-                    fontFamily: 'MyFont, sans-serif'
+                    fontFamily: 'MyFont, sans-serif',
                 },
                 palette: {
-                    mode: MyTheme === 'yellow' ? 'light' : 'dark',
+                    mode: themeMode,
                     primary: {
-                        main: MyTheme === 'yellow' ? '#0fba81' : '#ba0f0f',
-                        dark: MyTheme === 'red' ? '#0fba81' : '#ba0f0f',
+                        main: primaryColor,
                     },
                     text: {
-                        primary: MyTheme === 'yellow' ? '#000000' : '#FFFFFF',
-                        //secondary: '#FFFFFF', // Устанавливаем цвет второстепенного текста в темной теме (например, для подзаголовков и т. д.)
+                        primary: themeMode === 'light' ? '#000000' : '#FFFFFF',
                     },
                     background: {
-                        default: MyTheme === 'yellow' ? '#FFFFFF' : '#060606',
+                        default: themeMode === 'light' ? '#FFFFFF' : '#060606',
                     },
                     action: {
-                        disabledBackground: MyTheme === 'yellow' ? '#FFFFFF' : '#252525',
-                    }
+                        disabledBackground: themeMode === 'light' ? '#FFFFFF' : '#252525',
+                    },
                 },
             }),
-        [MyTheme]
+        [themeMode, primaryColor]
     );
 
     const contextValue = useMemo(() => {
-        return { toggleColorMode, theme };
-    }, [MyTheme]);
+        return { toggleColorMode, setThemeMode: setTheme, theme, setPrimaryColor };
+    }, [themeMode, primaryColor]);
 
     return (
         <ColorModeContext.Provider value={contextValue}>
-            <ThemeProvider theme={theme}>
-                {children}
-            </ThemeProvider>
+            <ThemeProvider theme={theme}>{children}</ThemeProvider>
         </ColorModeContext.Provider>
     );
 };

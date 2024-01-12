@@ -4,7 +4,7 @@
 import Logo from '../Header/Logo';
 import ServiceName from './ServiceName';
 import { useColorMode } from '../../../ColorModeContext';
-import MyButton from '../MyButton';
+import CustomizationModal from '../CustomizationModal/CustomizationModal'
 
 //MUI Import
 import AppBar from '@mui/material/AppBar';
@@ -35,6 +35,14 @@ const Header: React.FC = () => {
 
                     <Logo />
                     <ServiceName />
+                    <Box
+                        display='flex'
+                        sx={{
+                            marginLeft: 'auto',
+                        }}
+                    >
+                        <CustomizationModal />
+                    </Box>
                 </Toolbar>
             </AppBar>
         </Box>
