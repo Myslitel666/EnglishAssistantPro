@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
-import { useTheme } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { useColorMode } from '../../../ColorModeContext';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
@@ -69,7 +68,7 @@ export default function CustomizationModalContent() {
                             fontSize: '3.2rem',
                             padding: '0.3rem',
                             borderRadius: '4px',
-                            color: '#da2021',
+                            color: '#e81111',
                         }}
                     />
                 </Button>
@@ -86,6 +85,7 @@ export default function CustomizationModalContent() {
                 </Button>
                 <Button onClick={() => handlePrimaryColorToggle('#0fba81')}>
                     <FiberManualRecordIcon
+                        id='yellow'
                         sx={{
                             fontSize: '3.2rem',
                             padding: '0.3rem',
