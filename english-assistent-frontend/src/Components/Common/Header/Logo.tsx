@@ -13,8 +13,32 @@ const Logo = () => {
         // localStorage.getItem('themeMode') и localStorage.getItem('primaryColor')
         if (themeMode === 'light' && getLabelFromColor() === 'green') {
             return '/images/logo-light-green.png';
+        } else if (themeMode === 'dark' && getLabelFromColor() === 'green') {
+            return '/images/logo-dark-green.png';
+        } else if (themeMode === 'light' && getLabelFromColor() === 'red') {
+            return '/images/logo-light-red.png';
         } else if (themeMode === 'dark' && getLabelFromColor() === 'red') {
             return '/images/logo-dark-red.png';
+        } else if (themeMode === 'light' && getLabelFromColor() === 'purple') {
+            return '/images/logo-light-purple.png';
+        } else if (themeMode === 'dark' && getLabelFromColor() === 'purple') {
+            return '/images/logo-dark-purple.png';
+        } else if (themeMode === 'light' && getLabelFromColor() === 'blue') {
+            return '/images/logo-light-blue.png';
+        } else if (themeMode === 'dark' && getLabelFromColor() === 'blue') {
+            return '/images/logo-dark-blue.png';
+        } else if (themeMode === 'light' && getLabelFromColor() === 'orange') {
+            return '/images/logo-light-orange.png';
+        } else if (themeMode === 'dark' && getLabelFromColor() === 'orange') {
+            return '/images/logo-dark-orange.png';
+        } else if (themeMode === 'light' && getLabelFromColor() === 'violet') {
+            return '/images/logo-light-violet.png';
+        } else if (themeMode === 'dark' && getLabelFromColor() === 'violet') {
+            return '/images/logo-dark-violet.png';
+        } else if (themeMode === 'light' && getLabelFromColor() === 'light green') {
+            return '/images/logo-light-light-green.png';
+        } else if (themeMode === 'dark' && getLabelFromColor() === 'light green') {
+            return '/images/logo-dark-light-green.png';
         } else {
             // Вернуть значение по умолчанию или для других условий
             return '/images/default-logo.png';

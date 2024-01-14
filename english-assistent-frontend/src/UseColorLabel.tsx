@@ -9,9 +9,9 @@ export const useColorLabel = (initialLabel: string) => {
         if (themeMode === 'dark' && label === 'green') {
             return '#30e034';
         } else if (themeMode === 'light' && label === 'green') {
-            return '#159421';
+            return '#19c429';
         } else if (themeMode === 'dark' && label === 'red') {
-            return '#f31919';
+            return '#ff1111';
         } else if (themeMode === 'light' && label === 'red') {
             return '#cb0c0c';
         } else if (themeMode === 'dark' && label === 'purple') {
@@ -42,9 +42,9 @@ export const useColorLabel = (initialLabel: string) => {
 
     //Получение метки по текущему цвету
     const getLabelFromColor = (): string => {
-        if (primaryColor === '#30e034' || primaryColor === '#159421') {
+        if (primaryColor === '#30e034' || primaryColor === '#19c429') {
             return 'green';
-        } else if (primaryColor === '#f31919' || primaryColor === '#cb0c0c') {
+        } else if (primaryColor === '#ff1111' || primaryColor === '#cb0c0c') {
             return 'red';
         } else if (primaryColor === '#ef3eff' || primaryColor === '#b10ac0') {
             return 'purple';
