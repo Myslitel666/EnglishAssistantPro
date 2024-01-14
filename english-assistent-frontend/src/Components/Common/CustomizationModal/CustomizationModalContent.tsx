@@ -87,7 +87,7 @@ export default function CustomizationModalContent() {
                         }}
                     />
                 </Button>
-                <Button onClick={() => handlePrimaryColorToggle('#e511e8')}>
+                <Button onClick={() => handlePrimaryColorToggle('purple')}>
                     <FiberManualRecordIcon
                         id='purple'
                         sx={{
@@ -109,7 +109,7 @@ export default function CustomizationModalContent() {
                         }}
                     />
                 </Button>
-                <Button onClick={() => handlePrimaryColorToggle('#0ea5e9')}>
+                <Button onClick={() => handlePrimaryColorToggle('blue')}>
                     <FiberManualRecordIcon
                         id = 'blue'
                         sx={{
@@ -120,7 +120,7 @@ export default function CustomizationModalContent() {
                         }}
                     />
                 </Button>
-                <Button onClick={() => handlePrimaryColorToggle('#eab308')}>
+                <Button onClick={() => handlePrimaryColorToggle('orange')}>
                     <FiberManualRecordIcon
                         id='orange'
                         sx={{
@@ -131,7 +131,7 @@ export default function CustomizationModalContent() {
                         }}
                     />
                 </Button>
-                <Button onClick={() => handlePrimaryColorToggle('#4f46e5')}>
+                <Button onClick={() => handlePrimaryColorToggle('violet')}>
                     <FiberManualRecordIcon
                         id='violet'
                         sx={{
@@ -142,9 +142,9 @@ export default function CustomizationModalContent() {
                         }}
                     />
                 </Button>
-                <Button onClick={() => handlePrimaryColorToggle('#84cc16')}>
+                <Button onClick={() => handlePrimaryColorToggle('light green')}>
                     <FiberManualRecordIcon
-                        id='light green'
+                        id='vvv'
                         sx={{
                             fontSize: '3.2rem',
                             padding: '0.3rem',
