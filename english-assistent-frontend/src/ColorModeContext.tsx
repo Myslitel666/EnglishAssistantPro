@@ -70,7 +70,7 @@ export const ColorModeProvider: React.FC<ColorModeProviderProps> = ({ children }
                         primary: themeMode === 'light' ? '#000000' : '#FFFFFF',
                     },
                     background: {
-                        default: themeMode === 'light' ? '#FFFFFF' : '#060606',
+                        default: themeMode === 'light' ? '#FFFFFF' : '#101010',
                     },
                     action: {
                         disabledBackground: themeMode === 'light' ? '#FFFFFF' : '#252525',

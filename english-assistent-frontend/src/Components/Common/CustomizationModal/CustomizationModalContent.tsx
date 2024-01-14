@@ -105,7 +105,7 @@ export default function CustomizationModalContent() {
                             fontSize: '3.2rem',
                             padding: '0.3rem',
                             borderRadius: '4px',
-                            color: '#0fba81',
+                            color: '#13c216',
                         }}
                     />
                 </Button>
