@@ -1,12 +1,15 @@
 ﻿import React, { useState, useEffect } from 'react';
 import './Logo.css';
 import { useColorMode, ColorModeContextProps } from '../../../ColorModeContext';
-//My Components Import
+// My Components Import
 import { useColorLabel } from '../../../UseColorLabel';
 
 const Logo = () => {
     const { getColorFromLabel, getLabelFromColor } = useColorLabel('green');
     const { themeMode }: ColorModeContextProps = useColorMode();
+
+    const [oldLogoPath, setOldLogoPath] = useState('logo-light-green.png');
+    const [newLogoPath, setNewLogoPath] = useState('logo-light-green.png');
 
     const getLogoImage = () => {
         // Определите условия для выбора изображения в зависимости от значений
@@ -45,11 +48,16 @@ const Logo = () => {
         }
     };
 
-    // useEffect срабатывает при изменении themeMode и primaryColor
     useEffect(() => {
-        const logoImage = getLogoImage();
-        // Здесь вы можете выполнить любые дополнительные действия с изображением
-        console.log('Logo Image:', logoImage);
+        setOldLogoPath(newLogoPath);
+        setNewLogoPath(getLogoImage()); // Получаем новый путь
+
+        if (oldLogoPath !== newLogoPath) {
+            console.log('Old Logo Image:', oldLogoPath);
+            console.log('New Logo Image:', newLogoPath);
+        }
+
+        //setLogoPath(newLogoPath); // Обновляем состояние с новым путем
     }, [themeMode, getLabelFromColor]);
 
     return (
