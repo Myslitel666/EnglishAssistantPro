@@ -1,21 +1,18 @@
 ﻿import React, { useState, useEffect } from 'react';
 import './Logo.css';
 import { useColorMode, ColorModeContextProps } from '../../../ColorModeContext';
-// My Components Import
 import { useColorLabel } from '../../../UseColorLabel';
-import { NewLineKind } from 'typescript';
 
 const Logo = () => {
-    const { getColorFromLabel, getLabelFromColor } = useColorLabel('green');
+    const { getLabelFromColor } = useColorLabel('green');
     const { themeMode }: ColorModeContextProps = useColorMode();
+    let defaultLogoPath = '';
+    if (themeMode === 'light') defaultLogoPath = '/images/logo-light-green.png';
+    else defaultLogoPath = '/images/logo-dark-red.png';
 
-    //let defaultPathLogo = '';
-    //if (themeMode === 'light') defaultPathLogo = '/images/logo-light-green.png';
-    //else defaultPathLogo = '/images/logo-dark-red.png';
-
-    const [oldLogoPath, setOldLogoPath] = useState('/images/logo-light-green.png');
-    const [newLogoPath, setNewLogoPath] = useState('/images/logo-light-green.png');
-    const [isThemeChanged, setIsThemeChange] = useState(true);
+    const [oldLogoPath, setOldLogoPath] = useState(defaultLogoPath);
+    const [newLogoPath, setNewLogoPath] = useState(defaultLogoPath);
+    const [isThemeChanged, setIsThemeChanged] = useState(true);
 
     const getLogoImage = () => {
         // Определите условия для выбора изображения в зависимости от значений
@@ -55,26 +52,33 @@ const Logo = () => {
     };
 
     useEffect(() => {
-        if (newLogoPath !== getLogoImage()) {
-            setOldLogoPath(newLogoPath);
-            setNewLogoPath(getLogoImage());
-            setIsThemeChange(!isThemeChanged)
-            console.log('Old Logo Image:', oldLogoPath);
-            console.log('New Logo Image:', newLogoPath);
-        }
+        const currentLogoPath = getLogoImage();
 
-        //setLogoPath(newLogoPath); // Обновляем состояние с новым путем
+        const delayedUpdate = () => {
+            const delay = 1; // задержка в миллисекундах
+
+            setTimeout(() => {
+                if (newLogoPath !== currentLogoPath) {
+                    setOldLogoPath(newLogoPath);
+                    setNewLogoPath(currentLogoPath);
+                    setIsThemeChanged(!isThemeChanged);
+                    console.log(isThemeChanged);
+                }
+            }, delay);
+        };
+
+        delayedUpdate();
     }, [themeMode, getLabelFromColor]);
 
     return (
-        <div className={`logo`}
-            style={{ cursor: 'pointer',  }}
-        >
-            <img className={`image ${isThemeChanged ? '' : 'hidden'}`}
+        <div className={`logo`} style={{ cursor: 'pointer' }}>
+            <img
+                className={`image ${isThemeChanged ? '' : 'hidden'}`}
                 src={`${isThemeChanged ? oldLogoPath : newLogoPath}`}
                 alt="Store Icon"
             />
-            <img className={`image ${isThemeChanged ? 'hidden' : ''}`}
+            <img
+                className={`image ${isThemeChanged ? 'hidden' : ''}`}
                 src={`${isThemeChanged ? newLogoPath : oldLogoPath}`}
                 alt="Store Icon"
             />
