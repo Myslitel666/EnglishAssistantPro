@@ -29,7 +29,7 @@ const ServiceName: React.FC = () => {
                 cursor: 'pointer',
                 color: isHovered ? `${primaryDarkColor}` : `${primaryMainColor}`,
                 transition: 'color 1s ease',
-                marginLeft: '13px',
+                marginLeft: '5px',
                 '@media screen and (max-width: 600px)': {
                     fontSize: '30px'
                 }

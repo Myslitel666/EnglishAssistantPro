@@ -8,8 +8,8 @@ const Logo = () => {
     const { getColorFromLabel, getLabelFromColor } = useColorLabel('green');
     const { themeMode }: ColorModeContextProps = useColorMode();
 
-    const [oldLogoPath, setOldLogoPath] = useState('logo-light-green.png');
-    const [newLogoPath, setNewLogoPath] = useState('logo-light-green.png');
+    const [oldLogoPath, setOldLogoPath] = useState('/images/logo-light-green.png');
+    const [newLogoPath, setNewLogoPath] = useState('/images/logo-light-green.png');
 
     const getLogoImage = () => {
         // Определите условия для выбора изображения в зависимости от значений
@@ -44,7 +44,7 @@ const Logo = () => {
             return '/images/logo-dark-light-green.png';
         } else {
             // Вернуть значение по умолчанию или для других условий
-            return '/images/default-logo.png';
+            return '/images/logo-light-green.png';
         }
     };
 

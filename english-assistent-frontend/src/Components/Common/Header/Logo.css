@@ -2,8 +2,8 @@
     position: relative;
     display: flex;
     align-items: center;
-    width: 3.6rem;
-    height: 3.6rem;
+    width: 54px;
+    height: 54px;
     cursor: pointer;
     transition: transform 1s ease;
     margin-left: 5px;
@@ -33,5 +33,5 @@
 }
 
 .logo:hover {
-    transform: scale(1.2);
+    transform: scale(1.15);
 }
