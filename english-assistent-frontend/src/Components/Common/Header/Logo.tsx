@@ -4,8 +4,9 @@ import { useColorMode, ColorModeContextProps } from '../../../ColorModeContext';
 import { useColorLabel } from '../../../UseColorLabel';
 
 const Logo = () => {
-    const { getLabelFromColor } = useColorLabel('green');
+    const { getColorFromLabel, getLabelFromColor } = useColorLabel('green');
     const { themeMode }: ColorModeContextProps = useColorMode();
+    const { setPrimaryColor } = useColorMode();
     let defaultLogoPath = '';
     if (themeMode === 'light') defaultLogoPath = '/images/logo-light-green.png';
     else defaultLogoPath = '/images/logo-dark-red.png';
@@ -13,6 +14,22 @@ const Logo = () => {
     const [oldLogoPath, setOldLogoPath] = useState(defaultLogoPath);
     const [newLogoPath, setNewLogoPath] = useState(defaultLogoPath);
     const [isThemeChanged, setIsThemeChanged] = useState(true);
+
+    const handleClick = () => {
+        if (themeMode === 'dark' && getLabelFromColor() !== 'red') {
+            const currentColor = getColorFromLabel('red');
+            setPrimaryColor(currentColor);
+        } else if (themeMode === 'dark' && getLabelFromColor() === 'red') {
+            const currentColor = getColorFromLabel('purple');
+            setPrimaryColor(currentColor);
+        } else if (themeMode === 'light' && getLabelFromColor() !== 'green') {
+            const currentColor = getColorFromLabel('green');
+            setPrimaryColor(currentColor);
+        } else if (themeMode === 'light' && getLabelFromColor() === 'green') {
+            const currentColor = getColorFromLabel('blue');
+            setPrimaryColor(currentColor);
+        }
+    }
 
     const getLogoImage = () => {
         // Определите условия для выбора изображения в зависимости от значений
@@ -71,17 +88,18 @@ const Logo = () => {
     }, [themeMode, getLabelFromColor]);
 
     return (
-        <div className={`logo`} style={{ cursor: 'pointer' }}>
-            <img
-                className={`image ${isThemeChanged ? '' : 'hidden'}`}
-                src={`${isThemeChanged ? oldLogoPath : newLogoPath}`}
-                alt="Store Icon"
-            />
-            <img
-                className={`image ${isThemeChanged ? 'hidden' : ''}`}
-                src={`${isThemeChanged ? newLogoPath : oldLogoPath}`}
-                alt="Store Icon"
-            />
+        <div onClick={handleClick}
+            className={`logo`} style={{ cursor: 'pointer' }}>
+                <img
+                    className={`image ${isThemeChanged ? '' : 'hidden'}`}
+                    src={`${isThemeChanged ? oldLogoPath : newLogoPath}`}
+                    alt="Store Icon"
+                />
+                <img
+                    className={`image ${isThemeChanged ? 'hidden' : ''}`}
+                    src={`${isThemeChanged ? newLogoPath : oldLogoPath}`}
+                    alt="Store Icon"
+                />
         </div>
     );
 };
