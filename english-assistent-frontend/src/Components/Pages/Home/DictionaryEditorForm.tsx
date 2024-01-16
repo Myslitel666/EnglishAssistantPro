@@ -128,7 +128,8 @@ const DictionaryEditorForm: React.FC = () => {
                 </Typography>
             </Box>
             <Box alignItems = 'center'
-                sx={{ float: 'left' }}
+                    sx={{ float: 'left', width: '100%' }}
+
             >
                 <Box paddingRight = '0.7rem'
                     display = 'flex'
@@ -209,20 +210,13 @@ const DictionaryEditorForm: React.FC = () => {
             </Typography>
             <TextField
                 multiline
-                rows={4}
+                rows={ 4 }
                 onChange={(e) => setExampleOfUse(e.target.value)}
                 sx={{
                     width: '100%',
-                    //red theme
-                    '.css-130ozhh-MuiInputBase-root-MuiOutlinedInput-root': {
-                        padding: '0.7rem',
-                        fontSize: '1rem'
+                    '@media screen and (max-height: 500px)': {
+                        //rows: '2'
                     },
-                    //purple theme
-                    '.css-1rd94on-MuiInputBase-root-MuiOutlinedInput-root': {
-                        padding: '0.7rem',
-                        fontSize: '1rem'
-                    }
                 }}
             />
             <Box paddingTop='0.7rem'
