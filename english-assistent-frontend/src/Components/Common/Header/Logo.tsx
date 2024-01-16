@@ -94,11 +94,13 @@ const Logo = () => {
                     className={`image ${isThemeChanged ? '' : 'hidden'}`}
                     src={`${isThemeChanged ? oldLogoPath : newLogoPath}`}
                     alt="Store Icon"
+                    style={{ width: '100%'}}
                 />
                 <img
                     className={`image ${isThemeChanged ? 'hidden' : ''}`}
                     src={`${isThemeChanged ? newLogoPath : oldLogoPath}`}
                     alt="Store Icon"
+                    style={{ width: '100%' }}
                 />
         </div>
     );
