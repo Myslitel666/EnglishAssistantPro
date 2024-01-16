@@ -57,7 +57,18 @@ export default function DictionaryDataGrid() {
     }, []);
 
     return (
-        <Box sx={{ padding: '1.5vh', height:'82.6vh', width: '100%', }}>
+        <Box sx={{
+            padding: '1.5vh',
+            height: '38.5rem',
+            width: '100%',
+            '@media screen and (max-width: 1400px)': {
+                height: '37.6rem',
+            },
+            '@media screen and (max-width: 1200px)': {
+                height: '37rem',
+            },
+
+        }}>
             <DataGrid
                 rows={rows}
                 columns={columns}

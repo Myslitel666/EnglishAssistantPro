@@ -29,7 +29,7 @@ const RightHalfScreen: React.FC = () => {
 
                     style={{
                         width: '100%',
-                        marginTop: '1.6vh',
+                        marginTop: '1rem',
                         fontSize: '1.3rem',
                         height: '3.1rem',
                         borderColor: 'black',

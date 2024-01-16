@@ -78,10 +78,10 @@ const BackgroundImage: React.FC = () => {
                 width: '100%',
                 position: 'relative',
                 '@media screen and (max-width: 1400px)': {
-                    height: '6.2rem',
+                    height: '6.6rem',
                 },
                 '@media screen and (max-width: 1200px)': {
-                    height: '5.3rem',
+                    height: '6rem',
                 },
                 '@media screen and (max-width: 1000px)': {
                     height: '11.5rem',
@@ -101,6 +101,8 @@ const BackgroundImage: React.FC = () => {
                 style={{
                     maxWidth: '100%',
                     height: '100%',
+                    display: 'block',
+                    objectFit: 'cover'
                 }}
             />
             <img
@@ -110,6 +112,8 @@ const BackgroundImage: React.FC = () => {
                 style={{
                     maxWidth: '100%',
                     height: '100%',
+                    display: 'block',
+                    objectFit: 'cover'
                 }}
             />
         </Box>
