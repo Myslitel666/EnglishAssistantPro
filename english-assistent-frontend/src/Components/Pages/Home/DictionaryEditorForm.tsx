@@ -14,31 +14,51 @@ const DictionaryEditorForm: React.FC = () => {
     const [jargon, setJargon] = useState(''); 
     const [translate, setTranslate] = useState(''); 
     const [exampleOfUse, setExampleOfUse] = useState(''); 
-    const [id, setId] = useState(-1); 
+    const [id, setId] = useState(NaN); 
     const apiUrl = process.env.REACT_APP_API_URL as string;
+    const [feedbackMessage, setFeedbackMessage] = useState('');
+    const [isError, setIsError] = useState(false);
 
     async function sendData() {
-        try {
+        if (jargon === '')
+        {
+            setIsError(true);
+            setFeedbackMessage('Заполните поле "Jargon"')
+        }
+        else if (translate === '') {
+            setIsError(true);
+            setFeedbackMessage('Заполните поле "Translate"')
+        }
+        else
+        {
             await fetch(`${apiUrl}/api/home/setJargonDictionary`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    jargon: jargon,
+                    jargon2: jargon,
                     translate: translate,
                     exampleOfUse: exampleOfUse
                 }),
             });
-
-            //const result = await response.json();
-        } catch (error) {
-            console.error('Ошибка при отправке данных:', error);
         }
     };
 
     async function modifyData() {
-        try {
+        if (isNaN(id)) {
+            setIsError(true);
+            setFeedbackMessage('Заполните поле "Id"')
+        }
+        else if (jargon === '') {
+            setIsError(true);
+            setFeedbackMessage('Заполните поле "Jargon"')
+        }
+        else if (translate === '') {
+            setIsError(true);
+            setFeedbackMessage('Заполните поле "Translate"')
+        }
+        else {
             await fetch(`${apiUrl}/api/home/modifyJargonDictionary`, {
                 method: 'POST',
                 headers: {
@@ -51,15 +71,15 @@ const DictionaryEditorForm: React.FC = () => {
                     exampleOfUse: exampleOfUse
                 }),
             });
-
-            //const result = await response.json();
-        } catch (error) {
-            console.error('Ошибка при отправке данных:', error);
         }
     };
 
     async function deleteData() {
-        try {
+        if (isNaN(id)) {
+            setIsError(true);
+            setFeedbackMessage('Заполните поле "Id"')
+        }
+        else {
             await fetch(`${apiUrl}/api/home/deleteJargonDictionary`, {
                 method: 'POST',
                 headers: {
@@ -72,10 +92,6 @@ const DictionaryEditorForm: React.FC = () => {
                     exampleOfUse: exampleOfUse
                 }),
             });
-
-            //const result = await response.json();
-        } catch (error) {
-            console.error('Ошибка при отправке данных:', error);
         }
     };
 
@@ -91,9 +107,20 @@ const DictionaryEditorForm: React.FC = () => {
 
     return (
         <>
+            <Box sx={{
+                height: '1.72rem'
+            }}>
+                <Typography sx={{
+                    marginTop: '-0.6rem',
+                    color: isError ? 'red' : 'green',
+                }}
+                >
+                    { feedbackMessage }
+                </Typography>
+
+            </Box>
             <Box
                 display='flex'
-                marginTop='1.2rem'
             >
                 <Box alignItems = 'center'
                     marginRight = '0.7rem'
@@ -103,87 +130,87 @@ const DictionaryEditorForm: React.FC = () => {
                         float: 'left'
                     }}
                 >
-                <Typography
-                    fontSize = '1.3rem'
-                    marginBottom = '1.5rem'
-                    sx = {{
-                        '@media screen and (max-width: 600px)': {
-                            fontSize: '1.1rem',
-                            marginTop: '0.3rem',
-                            marginBottom: '2rem'
-                        }
-                    }}
-                >
-                    Jargon:
-                </Typography>
-                <Typography
-                    fontSize = '1.3rem'
-                    sx = {{
-                        '@media screen and (max-width: 600px)': {
-                            fontSize: '1.1rem',
-                        }
-                    }}
-                >
-                    Translate:
-                </Typography>
-            </Box>
-            <Box alignItems = 'center'
-                    sx={{ float: 'left', width: '100%' }}
-
-            >
-                <Box paddingRight = '0.7rem'
-                    display = 'flex'
-                    paddingBottom = '0.7rem'
-
-                    sx={{
-                        float: 'left',
-                        width: '62%',
-                        '@media screen and (max-width: 600px)': {
-                            width: '56%'
-                        }
-                    }}
-                >
-                    <MyInputBase 
-                        onChange={(e) => setJargon(e.target.value)}
-                        style={{
-                            height: '2.3rem',
-                            marginBottom: '0.4rem',
-                            float: 'left',
-                            width: '100%'
-                        }}
-                    />
-                </Box>
-                <Box
-                    display='flex'
-                    width='38%'
-                    sx={{
-                        float: 'left',
-                        '@media screen and (max-width: 600px)': {
-                            width: '44%'
-                        }
-                    }}
-                >
                     <Typography
                         fontSize = '1.3rem'
-                        sx={{
-                            float: 'left',
-                            marginRight: '0.7rem',
+                        marginBottom = '1.5rem'
+                        sx = {{
                             '@media screen and (max-width: 600px)': {
                                 fontSize: '1.1rem',
-                                marginTop: '0.3rem'
+                                marginTop: '0.3rem',
+                                marginBottom: '2rem'
                             }
                         }}
                     >
-                        Id:
+                        Jargon:
                     </Typography>
-                    <MyInputBase
-                        fullWidth
-                        onChange={(e) => setId(parseInt(e.target.value))}
-                        style={{
+                    <Typography
+                        fontSize = '1.3rem'
+                        sx = {{
+                            '@media screen and (max-width: 600px)': {
+                                fontSize: '1.1rem',
+                            }
+                        }}
+                    >
+                        Translate:
+                    </Typography>
+                </Box>
+                <Box alignItems = 'center'
+                        sx={{ float: 'left', width: '100%' }}
+
+                >
+                    <Box paddingRight = '0.7rem'
+                        display = 'flex'
+                        paddingBottom = '0.7rem'
+
+                        sx={{
                             float: 'left',
-                            height: '2.3rem',
-                        }} 
-                    />
+                            width: '62%',
+                            '@media screen and (max-width: 600px)': {
+                                width: '56%'
+                            }
+                        }}
+                    >
+                        <MyInputBase 
+                            onChange={(e) => setJargon(e.target.value)}
+                            style={{
+                                height: '2.3rem',
+                                marginBottom: '0.4rem',
+                                float: 'left',
+                                width: '100%'
+                            }}
+                        />
+                    </Box>
+                    <Box
+                        display='flex'
+                        width='38%'
+                        sx={{
+                            float: 'left',
+                            '@media screen and (max-width: 600px)': {
+                                width: '44%'
+                            }
+                        }}
+                    >
+                        <Typography
+                            fontSize = '1.3rem'
+                            sx={{
+                                float: 'left',
+                                marginRight: '0.7rem',
+                                '@media screen and (max-width: 600px)': {
+                                    fontSize: '1.1rem',
+                                    marginTop: '0.3rem'
+                                }
+                            }}
+                        >
+                            Id:
+                        </Typography>
+                        <MyInputBase
+                            fullWidth
+                            onChange={(e) => setId(parseInt(e.target.value))}
+                            style={{
+                                float: 'left',
+                                height: '2.3rem',
+                            }} 
+                        />
                     </Box>
                     <MyInputBase
                         fullWidth
