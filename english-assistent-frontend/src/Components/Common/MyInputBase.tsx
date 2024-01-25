@@ -2,7 +2,8 @@ import InputBase, { InputBaseProps } from '@mui/material/InputBase';
 import { useTheme } from '@mui/material';
 
 interface MyInputProps extends InputBaseProps {
-    // Дополнительные свойства, если необходимо
+    maxLength?: number;
+    isMultiline?: boolean;
 }
 
 const MyInputBase: React.FC<MyInputProps> = (props) => {
@@ -13,6 +14,10 @@ const MyInputBase: React.FC<MyInputProps> = (props) => {
         <InputBase
             {...props}
             className="inputBase"
+            inputProps={{
+                maxLength: props.maxLength,
+                multiline: props.isMultiline
+            }}
             sx={{
                 transition: 'background-color 1s ease, color 1s ease, border-color 1s ease',
                 border: `1px solid ${theme.palette.action.disabled}`,

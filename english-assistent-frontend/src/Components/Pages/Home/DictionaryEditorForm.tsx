@@ -182,11 +182,12 @@ const DictionaryEditorForm: React.FC = () => {
                     >
                         <MyInputBase 
                             onChange={(e) => setJargon(e.target.value)}
+                            maxLength={ 50 }
                             style={{
                                 height: '2.3rem',
                                 marginBottom: '0.4rem',
                                 float: 'left',
-                                width: '100%'
+                                width: '100%',
                             }}
                         />
                     </Box>
@@ -216,6 +217,7 @@ const DictionaryEditorForm: React.FC = () => {
                         <MyInputBase
                             fullWidth
                             onChange={(e) => setId(parseInt(e.target.value))}
+                            maxLength={6}
                             style={{
                                 float: 'left',
                                 height: '2.3rem',
@@ -225,6 +227,7 @@ const DictionaryEditorForm: React.FC = () => {
                     <MyInputBase
                         fullWidth
                         onChange={(e) => setTranslate(e.target.value)}
+                        maxLength={50}
                         style={{
                             height: '2.3rem',
                         }} 
@@ -245,15 +248,13 @@ const DictionaryEditorForm: React.FC = () => {
             >
                 Example of use
             </Typography>
-            <TextField
+            <MyInputBase
                 multiline
-                rows={ 4 }
+                rows={4}
                 onChange={(e) => setExampleOfUse(e.target.value)}
-                sx={{
-                    width: '100%',
-                    '@media screen and (max-height: 500px)': {
-                        //rows: '2'
-                    },
+                maxLength={250}
+                style={{
+                    width: '100%'
                 }}
             />
             <Box paddingTop='0.7rem'
