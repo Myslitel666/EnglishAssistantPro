@@ -31,7 +31,7 @@ const ServiceName: React.FC = () => {
                 transition: 'color 1s ease',
                 marginLeft: '5px',
                 '@media screen and (max-width: 600px)': {
-                    fontSize: '30px'
+                    fontSize: '25px'
                 }
             }}
         >

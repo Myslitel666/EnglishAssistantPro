@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+п»їimport { useState, useEffect } from 'react';
 
 //MUI Import
 import Box from '@mui/material/Box';
@@ -26,7 +26,7 @@ export default function CustomizationModalContent() {
         setPrimaryColor(currentColor);
     };
 
-    //обновляем оттенок primary color при изменении темы
+    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ primary color пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
     useEffect(() => {
         const labelColor = getLabelFromColor();
         const primaryColorWithTheme = getColorFromLabel(labelColor);
@@ -71,88 +71,95 @@ export default function CustomizationModalContent() {
             </Typography>
             <Box
                 display='flex'
-                justifyContent="center"
+                //justifyContent="center"
                 sx={{
-                    float: 'center'
+                    //float: 'center'
                 }}
             >
-                <Button onClick={() => handlePrimaryColorToggle('red')}>
-                    <FiberManualRecordIcon
-                        id = 'red'
-                        sx={{
-                            fontSize: '3.2rem',
-                            padding: '0.3rem',
-                            borderRadius: '4px',
-                            color: '#e81111',
-                        }}
-                    />
-                </Button>
-                <Button onClick={() => handlePrimaryColorToggle('purple')}>
-                    <FiberManualRecordIcon
-                        id='purple'
-                        sx={{
-                            fontSize: '3.2rem',
-                            padding: '0.3rem',
-                            borderRadius: '4px',
-                            color: '#e11aff',
-                        }}
-                    />
-                </Button>
-                <Button onClick={() => handlePrimaryColorToggle('green')}>
-                    <FiberManualRecordIcon
-                        id='green'
-                        sx={{
-                            fontSize: '3.2rem',
-                            padding: '0.3rem',
-                            borderRadius: '4px',
-                            color: '#13c216',
-                        }}
-                    />
-                </Button>
-                <Button onClick={() => handlePrimaryColorToggle('blue')}>
-                    <FiberManualRecordIcon
-                        id = 'blue'
-                        sx={{
-                            fontSize: '3.2rem',
-                            padding: '0.3rem',
-                            borderRadius: '4px',
-                            color: '#0ea5e9',
-                        }}
-                    />
-                </Button>
-                <Button onClick={() => handlePrimaryColorToggle('orange')}>
-                    <FiberManualRecordIcon
-                        id='orange'
-                        sx={{
-                            fontSize: '3.2rem',
-                            padding: '0.3rem',
-                            borderRadius: '4px',
-                            color: '#eab308',
-                        }}
-                    />
-                </Button>
-                <Button onClick={() => handlePrimaryColorToggle('violet')}>
-                    <FiberManualRecordIcon
-                        id='violet'
-                        sx={{
-                            fontSize: '3.2rem',
-                            padding: '0.3rem',
-                            borderRadius: '4px',
-                            color: '#4f46e5',
-                        }}
-                    />
-                </Button>
-                <Button onClick={() => handlePrimaryColorToggle('light green')}>
-                    <FiberManualRecordIcon
-                        id='vvv'
-                        sx={{
-                            fontSize: '3.2rem',
-                            padding: '0.3rem',
-                            borderRadius: '4px',
-                            color: '#84cc16',
-                        }}
-                    />
-                </Button>
+                <Box
+                >
+                    <Button onClick={() => handlePrimaryColorToggle('red')}>
+                        <FiberManualRecordIcon
+                            id='red'
+                            sx={{
+                                fontSize: '3.2rem',
+                                padding: '0.3rem',
+                                borderRadius: '4px',
+                                color: '#e81111',
+                            }}
+                        />
+                    </Button>
+                    <Button onClick={() => handlePrimaryColorToggle('purple')}>
+                        <FiberManualRecordIcon
+                            id='purple'
+                            sx={{
+                                fontSize: '3.2rem',
+                                padding: '0.3rem',
+                                borderRadius: '4px',
+                                color: '#e11aff',
+                            }}
+                        />
+                    </Button>
+                    <Button onClick={() => handlePrimaryColorToggle('green')}>
+                        <FiberManualRecordIcon
+                            id='green'
+                            sx={{
+                                fontSize: '3.2rem',
+                                padding: '0.3rem',
+                                borderRadius: '4px',
+                                color: '#13c216',
+                            }}
+                        />
+                    </Button>
+                    <Button onClick={() => handlePrimaryColorToggle('blue')}>
+                        <FiberManualRecordIcon
+                            id='blue'
+                            sx={{
+                                fontSize: '3.2rem',
+                                padding: '0.3rem',
+                                borderRadius: '4px',
+                                color: '#0ea5e9',
+                            }}
+                        />
+                        </Button>
+                </Box>
+                <Box>
+                    <Button onClick={() => handlePrimaryColorToggle('orange')}>
+                        <FiberManualRecordIcon
+                            id='orange'
+                            sx={{
+                                fontSize: '3.2rem',
+                                padding: '0.3rem',
+                                borderRadius: '4px',
+                                color: '#eab308',
+                            }}
+                        />
+                    </Button>
+                    <Button onClick={() => handlePrimaryColorToggle('violet')}>
+                        <FiberManualRecordIcon
+                            id='violet'
+                            sx={{
+                                fontSize: '3.2rem',
+                                padding: '0.3rem',
+                                borderRadius: '4px',
+                                color: '#4f46e5',
+                            }}
+                        />
+                    </Button>
+                </Box>
+                <Box>
+                    <Button onClick={() => handlePrimaryColorToggle('light green')}>
+                        <FiberManualRecordIcon
+                            id='vvv'
+                            sx={{
+                                fontSize: '3.2rem',
+                                padding: '0.3rem',
+                                borderRadius: '4px',
+                                color: '#84cc16',
+                            }}
+                        />
+                    </Button>
+                </Box>
             </Box>
         </>
     )

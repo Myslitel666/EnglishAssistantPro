@@ -118,10 +118,10 @@ const DictionaryEditorForm: React.FC = () => {
     return (
         <>
             <Box sx={{
-                minHeight: '1.72rem'
+                minHeight: '2rem'
             }}>
                 <Typography sx={{
-                    marginTop: '-0.6rem',
+                    marginTop: '-0.2rem',
                     color: isError ? 'red' : 'green',
                 }}
                 >
