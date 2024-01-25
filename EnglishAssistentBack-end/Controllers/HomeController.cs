@@ -3,6 +3,7 @@ using EnglishAssistentBackend.Context;
 using Microsoft.EntityFrameworkCore;
 using EnglishAssistentBackend.Models.Entities;
 using EnglishAssistentBackend.DTOs;
+using System.Security.Cryptography;
 
 namespace Controllers
 {
@@ -75,6 +76,7 @@ namespace Controllers
         {
             //Извлекаем слово из словаря по id
             //(в случае отсутствия слова с данным id в словаре получим null)
+
             var existingWord = await _dbContext.JargonDictionaries
             .FirstOrDefaultAsync(j => j.Id == jargonDictionaryDto.Id);
 
@@ -84,7 +86,7 @@ namespace Controllers
                 return Ok(new
                 {
                     IsError = true,
-                    FeedbackMessage = "✗The words with such an ID do not exist"
+                    FeedbackMessage = "✗The word with such an ID do not exist"
                 });
             }
 
@@ -97,6 +99,7 @@ namespace Controllers
                 jargonDictionary.Jargon = jargonDictionaryDto.Jargon;
                 jargonDictionary.Translate = jargonDictionaryDto.Translate;
                 jargonDictionary.ExampleOfUse = jargonDictionaryDto.ExampleOfUse;
+                _dbContext.Entry(existingWord).State = EntityState.Detached; //Отменяем отслеживание элемента по id
                 _dbContext.JargonDictionaries.Update(jargonDictionary);
                 await _dbContext.SaveChangesAsync();
                 return Ok(
@@ -130,7 +133,7 @@ namespace Controllers
                 return Ok(new
                 {
                     IsError = true,
-                    FeedbackMessage = "✗The words with such an ID do not exist"
+                    FeedbackMessage = "✗The word with such an ID do not exist"
                 });
             }
 
@@ -143,8 +146,11 @@ namespace Controllers
                     Translate = jargonDictionaryDto.Translate,
                     ExampleOfUse = jargonDictionaryDto.ExampleOfUse,
                 };
+                _dbContext.Entry(existingWord).State = EntityState.Detached; //Отменяем отслеживание элемента по id
                 _dbContext.JargonDictionaries.Remove(jargonDictionary);
                 await _dbContext.SaveChangesAsync();
+                _dbContext.Entry(existingWord).State = EntityState.Detached;
+
                 return Ok(
                 new
                 {
