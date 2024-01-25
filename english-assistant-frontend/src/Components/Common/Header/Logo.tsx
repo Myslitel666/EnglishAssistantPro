@@ -79,7 +79,6 @@ const Logo = () => {
                     setOldLogoPath(newLogoPath);
                     setNewLogoPath(currentLogoPath);
                     setIsThemeChanged(!isThemeChanged);
-                    console.log(isThemeChanged);
                 }
             }, delay);
         };

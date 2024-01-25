@@ -58,7 +58,7 @@ export const useColorLabel = (initialLabel: string) => {
             return 'light green';
         } else {
             // Вернуть значение по умолчанию или для других условий
-            return 'red';
+            return 'green';
         }
     };
 

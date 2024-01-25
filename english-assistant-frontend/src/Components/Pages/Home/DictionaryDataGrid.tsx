@@ -98,6 +98,9 @@ export default function DictionaryDataGrid() {
                     '@media screen and (max-width: 1200px)': {
                         height: '35rem',
                     },
+                    '@media screen and (max-width: 1000px)': {
+                        height: '36.2rem',
+                    },
                     "& .custom-header": {
                         color: `${ theme.palette.primary.main }`,
                         transition: 'color 1s ease'

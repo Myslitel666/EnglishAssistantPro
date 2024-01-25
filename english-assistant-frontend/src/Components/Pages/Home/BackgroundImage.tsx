@@ -100,6 +100,7 @@ const BackgroundImage: React.FC = () => {
                 alt="background"
                 style={{
                     maxWidth: '100%',
+                    minWidth: '100%',
                     height: '100%',
                     display: 'block',
                     objectFit: 'cover'
@@ -111,6 +112,7 @@ const BackgroundImage: React.FC = () => {
                 alt="background"
                 style={{
                     maxWidth: '100%',
+                    minWidth: '100%',
                     height: '100%',
                     display: 'block',
                     objectFit: 'cover'

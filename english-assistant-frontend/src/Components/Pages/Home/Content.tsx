@@ -29,7 +29,7 @@ const Content: React.FC = () =>
                     '@media screen and (max-width: 1000px)': {
                         marginLeft: 0,
                         width: '100%',
-                        paddingTop: '0.4rem'
+                        paddingTop: '0rem'
                     }
                 }}
             >
