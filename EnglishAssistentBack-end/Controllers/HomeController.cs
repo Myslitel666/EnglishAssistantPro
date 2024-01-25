@@ -10,7 +10,7 @@ namespace Controllers
     [ApiController]
     public class HomeController : Controller
     {
-        private EnglishAssistentContext _dbContext; // Замените YourDbContext на фактическое имя вашего DbContext
+        private EnglishAssistentContext _dbContext;
 
         public HomeController()
         {
@@ -36,7 +36,11 @@ namespace Controllers
             };
             _dbContext.JargonDictionaries.AddAsync(jargonDictionary);
             await _dbContext.SaveChangesAsync();
-            return Ok();
+            return Ok(
+                new { 
+                    IsError = false,
+                    FeedbackMessage = "✓The word has been successfully added"
+                });
         }
 
         [HttpPost("modifyJargonDictionary")]
@@ -51,7 +55,12 @@ namespace Controllers
             jargonDictionary.ExampleOfUse = jargonDictionaryDto.ExampleOfUse;
             _dbContext.JargonDictionaries.Update(jargonDictionary);
             await _dbContext.SaveChangesAsync();
-            return Ok();
+            return Ok(
+            new
+            {
+                IsError = false,
+                FeedbackMessage = "✓The word has been successfully modified"
+            });
         }
 
         [HttpPost("deleteJargonDictionary")]
@@ -66,7 +75,12 @@ namespace Controllers
             };
             _dbContext.JargonDictionaries.Remove(jargonDictionary);
             await _dbContext.SaveChangesAsync();
-            return Ok();
+            return Ok(
+            new
+            {
+                IsError = false,
+                FeedbackMessage = "✓The word has been successfully deleted"
+            });
         }
     }
 }

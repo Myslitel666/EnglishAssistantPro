@@ -19,19 +19,31 @@ const DictionaryEditorForm: React.FC = () => {
     const [feedbackMessage, setFeedbackMessage] = useState('');
     const [isError, setIsError] = useState(false);
 
+    const updateFeedbackMessage = (isError: boolean, message: string) => {
+        setIsError(isError);
+        setFeedbackMessage(message);
+    };
+
+    const handleResponse = async (response: Response) => {
+        if (response.ok) {
+            const data = await response.json();
+            updateFeedbackMessage(data.isError, data.feedbackMessage);
+        } else {
+            // Обработка ошибок при неудачном ответе
+        }
+    };
+
     async function sendData() {
         if (jargon === '')
         {
-            setIsError(true);
-            setFeedbackMessage('Заполните поле "Jargon"')
+            updateFeedbackMessage(true, 'Enter the "Jargon"');
         }
         else if (translate === '') {
-            setIsError(true);
-            setFeedbackMessage('Заполните поле "Translate"')
+            updateFeedbackMessage(true, 'Enter the "Translate"');
         }
         else
         {
-            await fetch(`${apiUrl}/api/home/setJargonDictionary`, {
+            const response = await fetch(`${apiUrl}/api/home/setJargonDictionary`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -42,24 +54,23 @@ const DictionaryEditorForm: React.FC = () => {
                     exampleOfUse: exampleOfUse
                 }),
             });
+
+            handleResponse(response);
         }
     };
 
     async function modifyData() {
         if (isNaN(id)) {
-            setIsError(true);
-            setFeedbackMessage('Заполните поле "Id"')
+            updateFeedbackMessage(true, 'Enter the "Id"');
         }
         else if (jargon === '') {
-            setIsError(true);
-            setFeedbackMessage('Заполните поле "Jargon"')
+            updateFeedbackMessage(true, 'Enter the "Jargon"');
         }
         else if (translate === '') {
-            setIsError(true);
-            setFeedbackMessage('Заполните поле "Translate"')
+            updateFeedbackMessage(true, 'Enter the "Translate"');
         }
         else {
-            await fetch(`${apiUrl}/api/home/modifyJargonDictionary`, {
+            const response = await fetch(`${apiUrl}/api/home/modifyJargonDictionary`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -71,16 +82,17 @@ const DictionaryEditorForm: React.FC = () => {
                     exampleOfUse: exampleOfUse
                 }),
             });
+
+            handleResponse(response);
         }
     };
 
     async function deleteData() {
         if (isNaN(id)) {
-            setIsError(true);
-            setFeedbackMessage('Заполните поле "Id"')
+            updateFeedbackMessage(true, 'Enter the "Id"');
         }
         else {
-            await fetch(`${apiUrl}/api/home/deleteJargonDictionary`, {
+            const response = await fetch(`${apiUrl}/api/home/deleteJargonDictionary`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -92,6 +104,8 @@ const DictionaryEditorForm: React.FC = () => {
                     exampleOfUse: exampleOfUse
                 }),
             });
+
+            handleResponse(response);
         }
     };
 
