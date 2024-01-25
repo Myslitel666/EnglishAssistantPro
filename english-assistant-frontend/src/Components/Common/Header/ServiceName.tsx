@@ -35,7 +35,7 @@ const ServiceName: React.FC = () => {
                 }
             }}
         >
-            EnglishAssistent Pro
+            EnglishAssistant Pro
         </Typography>
     );
 };
