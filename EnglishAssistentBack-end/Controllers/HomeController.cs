@@ -29,58 +29,137 @@ namespace Controllers
         [HttpPost("setJargonDictionary")]
         public async Task<IActionResult> SendJargon([FromBody] JargonDictionaryDto jargonDictionaryDto)
         {
-            var jargonDictionary = new JargonDictionary { 
-                Jargon = jargonDictionaryDto.Jargon, 
-                Translate = jargonDictionaryDto.Translate,
-                ExampleOfUse = jargonDictionaryDto.ExampleOfUse,
-            };
-            _dbContext.JargonDictionaries.AddAsync(jargonDictionary);
-            await _dbContext.SaveChangesAsync();
-            return Ok(
-                new { 
-                    IsError = false,
-                    FeedbackMessage = "✓The word has been successfully added"
+            //Извлекаем слово из словаря (в случае его отсутствия получим null)
+            var existingWord = await _dbContext.JargonDictionaries
+            .FirstOrDefaultAsync(j => j.Jargon == jargonDictionaryDto.Jargon);
+
+            //Если слово уже присутствует в словаре
+            if (existingWord != null)
+            {
+                return Ok(new
+                {
+                    IsError = true,
+                    FeedbackMessage = "✗The word already exists in the dictionary"
                 });
+            }
+
+            try
+            {
+                var jargonDictionary = new JargonDictionary
+                {
+                    Jargon = jargonDictionaryDto.Jargon,
+                    Translate = jargonDictionaryDto.Translate,
+                    ExampleOfUse = jargonDictionaryDto.ExampleOfUse,
+                };
+                _dbContext.JargonDictionaries.AddAsync(jargonDictionary);
+                await _dbContext.SaveChangesAsync();
+                return Ok(
+                    new
+                    {
+                        IsError = false,
+                        FeedbackMessage = "✓The word has been successfully added"
+                    });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    IsError = true,
+                    FeedbackMessage = $"✗Failed to add the word. Error: {ex.Message}"
+                });
+            }
         }
 
         [HttpPost("modifyJargonDictionary")]
         public async Task<IActionResult> ModifyJargon([FromBody] JargonDictionaryDto jargonDictionaryDto)
         {
-            //Get instance by Id
-            int OldId = jargonDictionaryDto.Id;
-            var jargonDictionary = await _dbContext.JargonDictionaries.FindAsync(OldId);
-            //Modify the values of JargonDictionary attributes
-            jargonDictionary.Jargon = jargonDictionaryDto.Jargon;
-            jargonDictionary.Translate = jargonDictionaryDto.Translate;
-            jargonDictionary.ExampleOfUse = jargonDictionaryDto.ExampleOfUse;
-            _dbContext.JargonDictionaries.Update(jargonDictionary);
-            await _dbContext.SaveChangesAsync();
-            return Ok(
-            new
+            //Извлекаем слово из словаря по id
+            //(в случае отсутствия слова с данным id в словаре получим null)
+            var existingWord = await _dbContext.JargonDictionaries
+            .FirstOrDefaultAsync(j => j.Id == jargonDictionaryDto.Id);
+
+            //Если слова с таким id нет в словаре
+            if (existingWord == null)
             {
-                IsError = false,
-                FeedbackMessage = "✓The word has been successfully modified"
-            });
+                return Ok(new
+                {
+                    IsError = true,
+                    FeedbackMessage = "✗The words with such an ID do not exist"
+                });
+            }
+
+            try
+            {
+                //Get instance by Id
+                int OldId = jargonDictionaryDto.Id;
+                var jargonDictionary = await _dbContext.JargonDictionaries.FindAsync(OldId);
+                //Modify the values of JargonDictionary attributes
+                jargonDictionary.Jargon = jargonDictionaryDto.Jargon;
+                jargonDictionary.Translate = jargonDictionaryDto.Translate;
+                jargonDictionary.ExampleOfUse = jargonDictionaryDto.ExampleOfUse;
+                _dbContext.JargonDictionaries.Update(jargonDictionary);
+                await _dbContext.SaveChangesAsync();
+                return Ok(
+                new
+                {
+                    IsError = false,
+                    FeedbackMessage = "✓The word has been successfully modified"
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    IsError = true,
+                    FeedbackMessage = $"✗Failed to modify the word. Error: {ex.Message}"
+                });
+            }
         }
 
         [HttpPost("deleteJargonDictionary")]
         public async Task<IActionResult> DeleteJargon([FromBody] JargonDictionaryDto jargonDictionaryDto)
         {
-            var jargonDictionary = new JargonDictionary
+            //Извлекаем слово из словаря по id
+            //(в случае отсутствия слова с данным id в словаре получим null)
+            var existingWord = await _dbContext.JargonDictionaries
+            .FirstOrDefaultAsync(j => j.Id == jargonDictionaryDto.Id);
+
+            //Если слова с таким id нет в словаре
+            if (existingWord == null)
             {
-                Id = jargonDictionaryDto.Id,
-                Jargon = jargonDictionaryDto.Jargon,
-                Translate = jargonDictionaryDto.Translate,
-                ExampleOfUse = jargonDictionaryDto.ExampleOfUse,
-            };
-            _dbContext.JargonDictionaries.Remove(jargonDictionary);
-            await _dbContext.SaveChangesAsync();
-            return Ok(
-            new
+                return Ok(new
+                {
+                    IsError = true,
+                    FeedbackMessage = "✗The words with such an ID do not exist"
+                });
+            }
+
+            try
             {
-                IsError = false,
-                FeedbackMessage = "✓The word has been successfully deleted"
-            });
+                var jargonDictionary = new JargonDictionary
+                {
+                    Id = jargonDictionaryDto.Id,
+                    Jargon = jargonDictionaryDto.Jargon,
+                    Translate = jargonDictionaryDto.Translate,
+                    ExampleOfUse = jargonDictionaryDto.ExampleOfUse,
+                };
+                _dbContext.JargonDictionaries.Remove(jargonDictionary);
+                await _dbContext.SaveChangesAsync();
+                return Ok(
+                new
+                {
+                    IsError = false,
+                    FeedbackMessage = "✓The word has been successfully deleted"
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    IsError = true,
+                    FeedbackMessage = $"✗Failed to delete the word. Error: {ex.Message}"
+                });
+            }
         }
     }
 }

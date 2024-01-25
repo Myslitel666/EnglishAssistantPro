@@ -25,12 +25,8 @@ const DictionaryEditorForm: React.FC = () => {
     };
 
     const handleResponse = async (response: Response) => {
-        if (response.ok) {
-            const data = await response.json();
-            updateFeedbackMessage(data.isError, data.feedbackMessage);
-        } else {
-            // Обработка ошибок при неудачном ответе
-        }
+        const data = await response.json();
+        updateFeedbackMessage(data.isError, data.feedbackMessage);
     };
 
     async function sendData() {
@@ -122,7 +118,7 @@ const DictionaryEditorForm: React.FC = () => {
     return (
         <>
             <Box sx={{
-                height: '1.72rem'
+                minHeight: '1.72rem'
             }}>
                 <Typography sx={{
                     marginTop: '-0.6rem',
