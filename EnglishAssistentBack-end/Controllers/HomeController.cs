@@ -74,10 +74,25 @@ namespace Controllers
         [HttpPost("modifyJargonDictionary")]
         public async Task<IActionResult> ModifyJargon([FromBody] JargonDictionaryDto jargonDictionaryDto)
         {
+            //Извлекаем слово из словаря по значению
+            //(в случае его отсутствия получим null)
+            var existingWord = await _dbContext.JargonDictionaries
+            .FirstOrDefaultAsync(j => j.Jargon == jargonDictionaryDto.Jargon);
+
+            //Если слово уже присутствует в словаре
+            if (existingWord != null)
+            {
+                return Ok(new
+                {
+                    IsError = true,
+                    FeedbackMessage = $"✗The word '{jargonDictionaryDto.Jargon}' already exists in the dictionary"
+                });
+            }
+
             //Извлекаем слово из словаря по id
             //(в случае отсутствия слова с данным id в словаре получим null)
 
-            var existingWord = await _dbContext.JargonDictionaries
+            existingWord = await _dbContext.JargonDictionaries
             .FirstOrDefaultAsync(j => j.Id == jargonDictionaryDto.Id);
 
             //Если слова с таким id нет в словаре
