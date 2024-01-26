@@ -11,11 +11,11 @@ namespace Controllers
     [ApiController]
     public class HomeController : Controller
     {
-        private EnglishAssistentContext _dbContext;
+        private EnglishAssistantContext _dbContext;
 
         public HomeController()
         {
-            _dbContext = new EnglishAssistentContext();
+            _dbContext = new EnglishAssistantContext();
         }
 
         [HttpGet("getJargonDictionary")]

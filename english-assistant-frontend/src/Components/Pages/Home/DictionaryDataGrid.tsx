@@ -40,7 +40,7 @@ const columnsMobile: GridColDef[] = [
         headerName: 'Jargon',
         width: 125,
         headerClassName: 'custom-header', //Класс заголовка для стилей
-        cellClassName: 'custom-cell wrap-cell', //Класс ячеек для стилей
+        cellClassName: 'custom-cell', //Класс ячеек для стилей
     },
     {
         field: 'translate',
@@ -90,7 +90,7 @@ export default function DictionaryDataGrid() {
             <DataGrid
                 rows={rows}
                 columns={columns}
-                getRowHeight={() => 90}    
+                getRowHeight={() => 90}  
                 sx={{
                     '@media screen and (max-width: 1400px)': {
                         height: '35.5rem',
@@ -108,9 +108,6 @@ export default function DictionaryDataGrid() {
                     "& .custom-cell": {
                         color: `${theme.palette.primary.main}`,
                         transition: 'color 1s ease'
-                    },
-                    "& .wrap-cell": {
-                        transition: 'color 0.5s ease'
                     },
                 }}
                 />
