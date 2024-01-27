@@ -4,17 +4,20 @@ import React, { useState } from 'react';
 //MUI Import
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import TextField from '@mui/material/TextField'
 
 //MyComponents Import
+import { useHomeContext } from '../Home/HomeContext'
 import MyInputBase from '../../Common/MyInputBase';
 import MyButton from '../../Common/MyButton';
 
 const DictionaryEditorForm: React.FC = () => {
-    const [jargon, setJargon] = useState(''); 
-    const [translate, setTranslate] = useState(''); 
-    const [exampleOfUse, setExampleOfUse] = useState(''); 
-    const [id, setId] = useState(NaN); 
+    //Работа с контекстом домашней страницы
+    const { jargonState, translateState, idState, exampleOfUseState } = useHomeContext();
+    const [jargon, setJargon] = jargonState;
+    const [translate, setTranslate] = translateState;
+    const [id, setId] = idState;
+    const [exampleOfUse, setExampleOfUse] = exampleOfUseState;
+
     const apiUrl = process.env.REACT_APP_API_URL as string;
     const [feedbackMessage, setFeedbackMessage] = useState('');
     const [isError, setIsError] = useState(false);
@@ -56,7 +59,7 @@ const DictionaryEditorForm: React.FC = () => {
     };
 
     async function modifyData() {
-        if (isNaN(id)) {
+        if (id === '') {
             updateFeedbackMessage(true, 'Enter the "Id"');
         }
         else if (jargon === '') {
@@ -84,7 +87,7 @@ const DictionaryEditorForm: React.FC = () => {
     };
 
     async function deleteData() {
-        if (isNaN(id)) {
+        if (id === '') {
             updateFeedbackMessage(true, 'Enter the "Id"');
         }
         else {
@@ -127,7 +130,6 @@ const DictionaryEditorForm: React.FC = () => {
                 >
                     { feedbackMessage }
                 </Typography>
-
             </Box>
             <Box
                 display='flex'
@@ -182,6 +184,7 @@ const DictionaryEditorForm: React.FC = () => {
                     >
                         <MyInputBase 
                             onChange={(e) => setJargon(e.target.value)}
+                            value={jargon}
                             maxLength={ 50 }
                             style={{
                                 height: '2.3rem',
@@ -216,7 +219,8 @@ const DictionaryEditorForm: React.FC = () => {
                         </Typography>
                         <MyInputBase
                             fullWidth
-                            onChange={(e) => setId(parseInt(e.target.value))}
+                            value={id}
+                            onChange={(e) => setId(e.target.value)}
                             maxLength={6}
                             style={{
                                 float: 'left',
@@ -228,6 +232,7 @@ const DictionaryEditorForm: React.FC = () => {
                         fullWidth
                         onChange={(e) => setTranslate(e.target.value)}
                         maxLength={50}
+                        value={translate}
                         style={{
                             height: '2.3rem',
                         }} 
@@ -251,6 +256,7 @@ const DictionaryEditorForm: React.FC = () => {
             <MyInputBase
                 multiline
                 rows={4}
+                value={exampleOfUse}
                 onChange={(e) => setExampleOfUse(e.target.value)}
                 maxLength={250}
                 style={{

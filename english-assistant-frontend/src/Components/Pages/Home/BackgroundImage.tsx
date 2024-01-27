@@ -63,7 +63,6 @@ const BackgroundImage: React.FC = () => {
                     setOldLogoPath(newLogoPath);
                     setNewLogoPath(currentLogoPath);
                     setIsThemeChanged(!isThemeChanged);
-                    console.log(isThemeChanged);
                 }
             }, delay);
         };

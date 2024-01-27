@@ -1,9 +1,12 @@
 ﻿import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRowSelectionModel } from '@mui/x-data-grid';
 import { useTheme } from '@mui/material';
 import { useMediaQuery } from 'react-responsive';
 import axios from 'axios';
+
+//My components import
+import { useHomeContext } from '../Home/HomeContext'
 import '../Home/DictionaryDataGrid.css'
 
 const columnsDesktop: GridColDef[] = [
@@ -57,11 +60,19 @@ const columnsMobile: GridColDef[] = [
 ];
 
 export default function DictionaryDataGrid() {
+    //Работа с контекстом домашней страницы
+    const { jargonState, translateState, idState, exampleOfUseState } = useHomeContext();
+    const [jargon, setJargon] = jargonState;
+    const [translate, setTranslate] = translateState;
+    const [id, setId] = idState;
+    const [exampleOfUse, setExampleOfUse] = exampleOfUseState;
+
     const theme = useTheme();
     const [rows, setRows] = useState<{
-        id: number; jargon: string;
+        id: string; jargon: string;
         translate: string; exampleOfUse: string;
     }[]>([]);
+
     const isDesktop = useMediaQuery({ minWidth: 600 });
     const columns = isDesktop ? columnsDesktop : columnsMobile;
 
@@ -90,7 +101,18 @@ export default function DictionaryDataGrid() {
             <DataGrid
                 rows={rows}
                 columns={columns}
-                getRowHeight={() => 90}  
+                rowHeight={90}
+                onRowSelectionModelChange={(newSelectionModel) => {
+                    if (newSelectionModel.length > 0) {
+                        const selectedRow = rows.find(row => row.id === newSelectionModel[0]);
+                        if (selectedRow) {
+                            setJargon(selectedRow.jargon);
+                            setTranslate(selectedRow.translate);
+                            setId(selectedRow.id);
+                            setExampleOfUse(selectedRow.exampleOfUse);
+                        }
+                    }
+                }}
                 sx={{
                     '@media screen and (max-width: 1400px)': {
                         height: '35.5rem',

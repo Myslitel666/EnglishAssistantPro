@@ -3,13 +3,15 @@
 //MyComponents Import
 import Header from '../../Common/Header/Header';
 import Content from '../Home/Content';
+import { HomeProvider } from '../Home/HomeContext'
 
 const Home: React.FC = () => {
     return (
-        <div>
+
+        <HomeProvider>
             <Header />
             <Content/>
-        </div>
+        </HomeProvider>
     );
 };
 
