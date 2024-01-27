@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Autocomplete, { autocompleteClasses } from '@mui/material/Autocomplete';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
-import { createTheme, useTheme, ThemeProvider, Theme } from '@mui/material/styles';
+import RefreshIcon from '@mui/icons-material/Refresh';
 import Button from '@mui/material/Button'
 
 //MyComponents Import
@@ -13,10 +13,9 @@ const JargonFilter: React.FC = () => {
 
     return (
         <>
-            <Box marginTop='4rem' paddingTop='0.5vh'
-                paddingLeft='1.5vh' paddingRight='1.5vh'
-                alignItems='justify-end' display='flex'
-                justifyContent='flex-end'
+            <Box marginTop='4.2rem' paddingLeft='0.5rem'
+                paddingRight='1.5vh' alignItems='justify-end'
+                display='flex' justifyContent='flex-end'
             >
                 <Stack spacing={5} marginRight='1vh'
                     width = '100%'
@@ -45,19 +44,7 @@ function MovieSelect() {
             id="movie-customized-option-demo"
             disableCloseOnSelect
             renderInput={(params) => (
-                <TextField {...params} label="Choose a movie" variant="standard"
-                    className="jargonFilter"
-                    sx={{
-                        //red theme
-                        '.css-160pt67-MuiInputBase-root-MuiInput-root': { fontSize: '1.3rem' }, //input
-                        '.css-nr6ovm-MuiFormLabel-root-MuiInputLabel-root': { fontSize: '1.1rem' }, //label
-                        //purple theme
-                        '.css-6sa04w-MuiInputBase-root-MuiInput-root': { fontSize: '1.3rem' }, //input
-                        '.css-ma5oht-MuiFormLabel-root-MuiInputLabel-root': { fontSize: '1.1rem' }, //label
-
-                    }}
-                />
-
+                <TextField {...params} label="Choose a movie" variant="standard"/>
             )}
             />
     );

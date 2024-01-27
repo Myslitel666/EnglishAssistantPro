@@ -7,8 +7,8 @@ export interface ColorModeContextProps {
     setThemeMode: (mode: 'light' | 'dark') => void;
     theme: Theme;
     setPrimaryColor: (color: string) => void;
-    themeMode: 'light' | 'dark'; // Добавили это свойство
-    primaryColor: string; // И это свойство
+    themeMode: 'light' | 'dark';
+    primaryColor: string;
 }
 
 const ColorModeContext = createContext<ColorModeContextProps | undefined>(undefined);

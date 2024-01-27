@@ -26,7 +26,6 @@ export default function CustomizationModalContent() {
         setPrimaryColor(currentColor);
     };
 
-    //��������� ������� primary color ��� ��������� ����
     useEffect(() => {
         const labelColor = getLabelFromColor();
         const primaryColorWithTheme = getColorFromLabel(labelColor);

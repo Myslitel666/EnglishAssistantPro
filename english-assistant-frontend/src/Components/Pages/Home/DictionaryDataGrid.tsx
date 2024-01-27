@@ -1,9 +1,8 @@
-﻿import React, { useState, useEffect } from 'react';
+﻿import { useEffect } from 'react';
 import Box from '@mui/material/Box';
-import { DataGrid, GridColDef, GridRowSelectionModel } from '@mui/x-data-grid';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { useTheme } from '@mui/material';
 import { useMediaQuery } from 'react-responsive';
-import axios from 'axios';
 
 //My components import
 import { useHomeContext } from '../Home/HomeContext'
@@ -61,40 +60,26 @@ const columnsMobile: GridColDef[] = [
 
 export default function DictionaryDataGrid() {
     //Работа с контекстом домашней страницы
-    const { jargonState, translateState, idState, exampleOfUseState } = useHomeContext();
+    const { rowsState, jargonState, translateState, idState, exampleOfUseState, fetchJargon } = useHomeContext();
     const [jargon, setJargon] = jargonState;
     const [translate, setTranslate] = translateState;
     const [id, setId] = idState;
     const [exampleOfUse, setExampleOfUse] = exampleOfUseState;
 
     const theme = useTheme();
-    const [rows, setRows] = useState<{
-        id: string; jargon: string;
-        translate: string; exampleOfUse: string;
-    }[]>([]);
+    const [rows, setRows] = rowsState
 
     const isDesktop = useMediaQuery({ minWidth: 600 });
     const columns = isDesktop ? columnsDesktop : columnsMobile;
 
-    const apiUrl = process.env.REACT_APP_API_URL as string;
-
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(`${apiUrl}/api/home/getJargonDictionary`);
-                setRows(response.data);
-            } catch (error) {
-                console.error('Error fetching popular products:', error);
-            }
-        };
-
-        fetchData();
+        fetchJargon()
     }, []);
 
     return (
         <Box sx={{
             padding: '1rem',
-            marginTop: '0.3rem',
+            marginTop: '0.1rem',
             height: '38.5rem',
             width: '100%',
         }}>
