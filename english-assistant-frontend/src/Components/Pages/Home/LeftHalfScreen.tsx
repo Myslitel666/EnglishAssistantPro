@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+
 //MUI Import
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Box'
@@ -10,22 +12,31 @@ import JargonFilter from '../Home/JargonFilter'
 
 const LeftHalfScreen: React.FC = () => {
     //–абота с контекстом домашней страницы
-    const { rowsState, fetchJargon } = useHomeContext();
-    const [rows, setRows] = rowsState;
+    const { fetchJargon } = useHomeContext();
+
+    const [rotation, setRotation] = useState(0);
+
+    const handleClickRefreshIcon = () => {
+        fetchJargon();
+        setRotation(rotation + 360);
+    }
+
     return (
         <>
             <Box
                 sx={{
-                float: 'left'
+                    float: 'left',
+                    cursor: 'pointer',
             }}>
                 <RefreshIcon
-                    onClick={() => fetchJargon()}
+                    onClick={() => handleClickRefreshIcon()}
                     sx={{
                         marginTop: '5.2rem',
                         marginLeft: '1rem',
                         fontSize: '1.85rem',
-                        cursor: 'pointer',
-                        color: 'primary.main'
+                        color: 'primary.main',
+                        transform: `rotate(${rotation}deg)`,
+                        transition: 'transform 0.6s ease',
                     }}
                 />
                 </Box>
