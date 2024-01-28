@@ -36,7 +36,7 @@ export const useColorLabel = (initialLabel: string) => {
             return '#92c30f';
         } else {
             // Вернуть значение по умолчанию или для других условий
-            return '#de1d2a';
+            return '#15b40d';
         }
     };
 

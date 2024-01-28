@@ -33,7 +33,7 @@ export const ColorModeProvider: React.FC<ColorModeProviderProps> = ({ children }
 
     const [primaryColor, setPrimaryColorState] = useState<string>(() => {
         const storedColor = localStorage.getItem('primaryColor');
-        return storedColor || '#0fba81';
+        return storedColor || '#15b40d';
     });
 
     const toggleColorMode = () => {

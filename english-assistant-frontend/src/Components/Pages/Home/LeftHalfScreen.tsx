@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 //MUI Import
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Box'
+import Tooltip from '@mui/material/Tooltip';
 import RefreshIcon from '@mui/icons-material/Refresh';
 
 //My components import
@@ -25,22 +25,29 @@ const LeftHalfScreen: React.FC = () => {
         <>
             <Box
                 sx={{
-                    float: 'left',
+                    marginTop: '4.2rem',
                     cursor: 'pointer',
-            }}>
-                <RefreshIcon
-                    onClick={() => handleClickRefreshIcon()}
-                    sx={{
-                        marginTop: '5.2rem',
-                        marginLeft: '1rem',
-                        fontSize: '1.85rem',
-                        color: 'primary.main',
-                        transform: `rotate(${rotation}deg)`,
-                        transition: 'transform 0.6s ease',
-                    }}
-                />
+                }}
+            >
+                <Box sx={{ display: 'flex', float: 'left' }}>
+                    <Tooltip title="Refresh">
+                        <RefreshIcon
+                            onClick={() => handleClickRefreshIcon()}
+                            sx={{
+                                marginTop: '1rem',
+                                marginLeft: '1rem',
+                                fontSize: '1.85rem',
+                                color: 'primary.main',
+                                transform: `rotate(${rotation}deg)`,
+                                transition: 'transform 0.6s ease',
+                            }}
+                        />
+                    </Tooltip>
                 </Box>
-            <JargonFilter />
+                <Box display='flex' sx={{ } }>
+                    <JargonFilter />
+                </Box>
+            </Box>
             <DictionaryDataGrid />
         </>
     )

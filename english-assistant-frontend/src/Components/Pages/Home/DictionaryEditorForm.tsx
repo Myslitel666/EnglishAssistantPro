@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 //MUI Import
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import FormatPaintIcon from '@mui/icons-material/FormatPaint';
+import Tooltip from '@mui/material/Tooltip';
 
 //MyComponents Import
 import { useHomeContext } from '../Home/HomeContext'
@@ -117,19 +119,45 @@ const DictionaryEditorForm: React.FC = () => {
     const handleDeleteButtonClick = () => {
         deleteData(); 
     };
+    const handleClearButtonClick = () => {
+        updateFeedbackMessage(false, '');
+        setJargon('');
+        setTranslate('');
+        setId('');
+        setExampleOfUse('');
+    };
 
     return (
         <>
             <Box sx={{
-                minHeight: '2rem'
-            }}>
-                <Typography sx={{
-                    marginTop: '-0.2rem',
-                    color: isError ? 'red' : 'green',
-                }}
+                minHeight: '2rem',
+                justifyContent: 'space-between', 
+            }}
+                display='flex'
+            >
+                <Box>
+                    <Typography sx={{
+                        marginTop: '-0.2rem',
+                        color: isError ? 'red' : 'green',
+                    }}
+                    >
+                        { feedbackMessage }
+                    </Typography>
+                </Box>
+                <Box
+                    onClick={() => { handleClearButtonClick() } }
+                    sx={{
+                        cursor: 'pointer'
+                    }}
                 >
-                    { feedbackMessage }
-                </Typography>
+                    <Tooltip title="Clear">
+                        <FormatPaintIcon sx={{
+                                display: 'flex',
+                                fontSize: '1.5rem',
+                            }}
+                        />
+                    </Tooltip>
+                </Box>
             </Box>
             <Box
                 display='flex'

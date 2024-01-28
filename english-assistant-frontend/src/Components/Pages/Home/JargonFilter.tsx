@@ -13,8 +13,8 @@ const JargonFilter: React.FC = () => {
 
     return (
         <>
-            <Box marginTop='4.2rem' paddingLeft='0.5rem'
-                paddingRight='1.5vh' alignItems='justify-end'
+            <Box width='100%' paddingLeft='0.5rem'
+                paddingRight='0.5rem' alignItems='justify-end'
                 display='flex' justifyContent='flex-end'
             >
                 <Stack spacing={5} marginRight='1vh'
