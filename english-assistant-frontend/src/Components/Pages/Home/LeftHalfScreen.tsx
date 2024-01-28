@@ -39,7 +39,7 @@ const LeftHalfScreen: React.FC = () => {
                                 fontSize: '1.85rem',
                                 color: 'primary.main',
                                 transform: `rotate(${rotation}deg)`,
-                                transition: 'transform 0.6s ease',
+                                transition: 'transform 0.6s ease, color 1s ease',
                             }}
                         />
                     </Tooltip>

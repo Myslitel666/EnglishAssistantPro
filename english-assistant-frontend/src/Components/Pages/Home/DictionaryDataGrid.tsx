@@ -9,7 +9,13 @@ import { useHomeContext } from '../Home/HomeContext'
 import '../Home/DictionaryDataGrid.css'
 
 const columnsDesktop: GridColDef[] = [
-    { field: 'id', headerName: 'Id', width: 45 },
+    {
+        field: 'id',
+        headerName: 'Id',
+        width: 45,
+        cellClassName: 'wrap-cell',
+
+    },
     {
         field: 'jargon',
         headerName: 'Jargon',
@@ -36,7 +42,11 @@ const columnsDesktop: GridColDef[] = [
 ];
 
 const columnsMobile: GridColDef[] = [
-    { field: 'id', headerName: 'Id', width: 45 },
+    {
+        field: 'id',
+        headerName: 'Id',
+        width: 45,
+    },
     {
         field: 'jargon',
         headerName: 'Jargon',
@@ -48,13 +58,11 @@ const columnsMobile: GridColDef[] = [
         field: 'translate',
         headerName: 'Translate',
         width: 145,
-        cellClassName: 'wrap-cell',
     },
     {
         field: 'exampleOfUse',
         headerName: 'Example of use',
         width: 270,
-        cellClassName: 'wrap-cell',
     },
 ];
 
@@ -67,7 +75,7 @@ export default function DictionaryDataGrid() {
     const [exampleOfUse, setExampleOfUse] = exampleOfUseState;
 
     const theme = useTheme();
-    const [rows, setRows] = rowsState
+    const [rows, setRows] = rowsState;
 
     const isDesktop = useMediaQuery({ minWidth: 600 });
     const columns = isDesktop ? columnsDesktop : columnsMobile;
@@ -114,7 +122,11 @@ export default function DictionaryDataGrid() {
                     },
                     "& .custom-cell": {
                         color: `${theme.palette.primary.main}`,
-                        transition: 'color 1s ease'
+                        transition: 'color 1s ease',
+                        cursor: 'pointer'
+                    },
+                    "& .wrap-cell": {
+                        cursor: 'pointer'
                     },
                 }}
                 />
