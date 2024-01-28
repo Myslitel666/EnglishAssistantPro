@@ -18,12 +18,8 @@ type Row = {
 const JargonFilter: React.FC = () => {
     const { rowsState, backupRowsState } = useHomeContext();
     const [rows, setRows] = rowsState;
+    const [backupRows, setBackupRows] = backupRowsState;
     const [inputValue, setInputValue] = React.useState('');
-    const [backupRows, setBackupRows] = React.useState<Row[]>([]);
-
-    React.useEffect(() => {
-        if (backupRows.length === 0) setBackupRows([...rows]);
-    }, [rows]);
 
     const [filteredJargons, setFilteredJargons] = React.useState(['']);
     // После обновления filteredRows

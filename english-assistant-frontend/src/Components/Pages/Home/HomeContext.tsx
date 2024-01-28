@@ -39,10 +39,8 @@ export const HomeProvider: React.FC<HomeProviderProps> = ({ children }) => {
     const [id, setId] = useState('');
     const [exampleOfUse, setExampleOfUse] = useState('');
 
-    const [rows, setRows] = useState<{
-        id: string; jargon: string;
-        translate: string; exampleOfUse: string;
-    }[]>([]);
+    const [rows, setRows] = useState<Row[]>([]);
+    const [backupRows, setBackupRows] = useState<Row[]>([]);
 
     const apiUrl = process.env.REACT_APP_API_URL as string;
 
@@ -50,6 +48,7 @@ export const HomeProvider: React.FC<HomeProviderProps> = ({ children }) => {
         try {
             const response = await axios.get(`${apiUrl}/api/home/getJargonDictionary`);
             setRows(response.data);
+            setBackupRows(response.data);
         } catch (error) {
             console.error('Error fetching popular products:', error);
         }
@@ -61,7 +60,7 @@ export const HomeProvider: React.FC<HomeProviderProps> = ({ children }) => {
         idState: [id, setId],
         exampleOfUseState: [exampleOfUse, setExampleOfUse],
         rowsState: [rows, setRows],
-        backupRowsState: [rows, setRows],
+        backupRowsState: [backupRows, setBackupRows],
         fetchJargon: fetchJargon
     };
 
