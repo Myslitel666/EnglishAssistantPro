@@ -16,26 +16,26 @@ type Row = {
 };
 
 const JargonFilter: React.FC = () => {
-    const { rowsState, jargonState } = useHomeContext();
+    const { rowsState, backupRowsState } = useHomeContext();
     const [rows, setRows] = rowsState;
     const [inputValue, setInputValue] = React.useState('');
-    const [filteredRows, setFilteredRows] = React.useState<Row[]>([]);
+    const [backupRows, setBackupRows] = React.useState<Row[]>([]);
 
     React.useEffect(() => {
-        if (filteredRows.length === 0) setFilteredRows(rows);
-    }, []);
+        if (backupRows.length === 0) setBackupRows([...rows]);
+    }, [rows]);
 
     const [filteredJargons, setFilteredJargons] = React.useState(['']);
-    // После загрузки filteredRows
+    // После обновления filteredRows
     React.useEffect(() => {
-        const filteredJargon = filteredRows
+        const filteredJargon = backupRows
             .filter((row) => row.jargon.includes(inputValue))
             .map((row) => row.jargon);
         setFilteredJargons(filteredJargon);
-    }, [filteredRows, inputValue]);
+    }, [backupRows, inputValue]);
 
     const handleFilterClick = () => {
-        const filtered = filteredRows.filter(row => row.jargon.includes(inputValue));
+        const filtered = backupRows.filter(row => row.jargon.includes(inputValue));
         setRows(filtered);
     }
 

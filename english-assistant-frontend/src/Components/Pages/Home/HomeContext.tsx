@@ -8,6 +8,7 @@ export interface HomeContextProps {
     idState: [string, React.Dispatch<React.SetStateAction<string>>];
     exampleOfUseState: [string, React.Dispatch<React.SetStateAction<string>>];
     rowsState: [Row[], React.Dispatch<React.SetStateAction<Row[]>>];
+    backupRowsState: [Row[], React.Dispatch<React.SetStateAction<Row[]>>];
     fetchJargon: () => void;
 }
 
@@ -60,6 +61,7 @@ export const HomeProvider: React.FC<HomeProviderProps> = ({ children }) => {
         idState: [id, setId],
         exampleOfUseState: [exampleOfUse, setExampleOfUse],
         rowsState: [rows, setRows],
+        backupRowsState: [rows, setRows],
         fetchJargon: fetchJargon
     };
 
