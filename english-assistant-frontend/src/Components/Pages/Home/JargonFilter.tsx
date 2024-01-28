@@ -8,23 +8,35 @@ import Button from '@mui/material/Button'
 //MyComponents Import
 import { useHomeContext } from '../Home/HomeContext'
 
+type Row = {
+    id: string;
+    jargon: string;
+    translate: string;
+    exampleOfUse: string;
+};
+
 const JargonFilter: React.FC = () => {
     const { rowsState, jargonState } = useHomeContext();
     const [rows, setRows] = rowsState;
     const [inputValue, setInputValue] = React.useState('');
+    const [filteredRows, setFilteredRows] = React.useState<Row[]>([]);
+
+    React.useEffect(() => {
+        if (filteredRows.length === 0) setFilteredRows(rows);
+    }, []);
 
     const [filteredJargons, setFilteredJargons] = React.useState(['']);
-    // После загрузки rows
+    // После загрузки filteredRows
     React.useEffect(() => {
-        const filteredJargon = rows
-            .filter((row) => row.jargon.toLowerCase().includes(inputValue))
+        const filteredJargon = filteredRows
+            .filter((row) => row.jargon.includes(inputValue))
             .map((row) => row.jargon);
         setFilteredJargons(filteredJargon);
-    }, [rows, inputValue]);
+    }, [filteredRows, inputValue]);
 
     const handleFilterClick = () => {
-        const filteredRows = rows.filter(row => row.jargon.includes(inputValue));
-        setRows(filteredRows);
+        const filtered = filteredRows.filter(row => row.jargon.includes(inputValue));
+        setRows(filtered);
     }
 
     return (
