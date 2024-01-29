@@ -14,10 +14,12 @@ const MyButton: React.FC<MyButtonProps> = (props) => {
             sx={{
                 transition: 'background-color 1s ease, color 1s ease, border-color 1s ease',
                 border: 1,
+                borderColor: 'black',
                 '&:hover': {
                     border: 1,
-                }
-                //...props.sx // Позволяет вам передавать другие стили через props
+                    borderColor: 'black',
+                },
+                ...props.sx // Позволяет вам передавать другие стили через props
             }}
         />
     );

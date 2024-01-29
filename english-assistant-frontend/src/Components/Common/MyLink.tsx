@@ -19,7 +19,6 @@ const MyLink: React.FC<MyLinkProps> = (props) => {
 
     const theme = useTheme();
     const PrimaryMainColor = theme.palette.primary.main;
-    const PrimaryDarkColor = theme.palette.text.primary;
 
     return (
         <Link
@@ -30,7 +29,7 @@ const MyLink: React.FC<MyLinkProps> = (props) => {
             underline="none"
             sx={{
                 cursor: 'pointer',
-                color: isHovered ? `${PrimaryMainColor}` : `${PrimaryDarkColor}`,
+                color: PrimaryMainColor,
                 transition: 'color 1s ease'
             }}
         />
