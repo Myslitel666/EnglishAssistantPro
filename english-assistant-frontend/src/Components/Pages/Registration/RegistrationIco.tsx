@@ -2,7 +2,7 @@ interface RegisterIcoProps {
     style?: React.CSSProperties; // Добавляем проп для стилей
 }
 
-const RegisterIco: React.FC<RegisterIcoProps> = ({ style }) => {
+const RegistrationIco: React.FC<RegisterIcoProps> = ({ style }) => {
 
     return (
         <svg xmlns="http://www.w3.org/2000/svg"
@@ -17,5 +17,5 @@ const RegisterIco: React.FC<RegisterIcoProps> = ({ style }) => {
     )
 }
 
-export default RegisterIco
+export default RegistrationIco
 

@@ -4,13 +4,16 @@ import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
 import KeyIcon from '../Registration/RegistrationIco'
 import { useTheme } from '@mui/material';
+import LockIcon from '@mui/icons-material/Lock';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 
 //MyComponents Import
 import Header from '../../Common/Header/Header';
 import MyButton from '../../Common/MyButton';
 import MyLink from '../../Common/MyLink';
 
-const Registration: React.FC = () => {
+const Authorization: React.FC = () => {
     const theme = useTheme();
     const KeyIconColor = theme.palette.background.default;
 
@@ -18,7 +21,6 @@ const Registration: React.FC = () => {
         <>
             <Header/>
             <Box
-                //height='29.5rem'
                 width='23.5rem'
                 margin='8rem auto 0'
                 border='1px solid'
@@ -39,7 +41,7 @@ const Registration: React.FC = () => {
                     bgcolor="primary.main"
                     sx={{ transition: 'background-color 1s ease' } }
                 >
-                    <KeyIcon style={{
+                    <LockIcon style={{
                             fill: KeyIconColor,
                             width: '2.88rem',
                             height: '2.88rem'
@@ -52,7 +54,7 @@ const Registration: React.FC = () => {
                     fontSize='1.66rem'
                     color='primary.main'
                 >
-                    Registration Form
+                    Authorization
                 </Typography>
                 <TextField
                     id="outlined-basic"
@@ -72,29 +74,25 @@ const Registration: React.FC = () => {
                         marginTop: '1rem'
                     }}
                 />
-                <TextField
-                    id="outlined-basic"
-                    label="Confirm Password"
-                    variant="outlined"
-                    sx={{
-                        width: '100%',
-                        marginTop: '1rem',
-                        transition: 'background-color 1s ease'
-                    }}
-                />
+                <Box style={{ display: 'flex', alignItems: 'center' }}>
+                    <FormControlLabel control={<Checkbox defaultChecked />} label='' />
+                    <Typography sx={{marginLeft: '-1.4rem', fontSize: '0.8rem'}}>
+                        Remember me
+                    </Typography>
+                </Box>
                 <MyButton
                     variant="contained"
                     sx={{
                         width: '100%',
                         height: '3.6rem',
                         transition: 'background-color 1s ease',
-                        marginTop: '1rem',
+                        marginTop: '0rem',
                     }}
                 >
                     <Typography
                         fontSize='1.12rem'
                     >
-                        Create Account
+                        SIGN IN
                     </Typography>
                 </MyButton>
                 <Typography
@@ -104,12 +102,12 @@ const Registration: React.FC = () => {
                         marginBottom: '1rem',
                     }}
                 >
-                    Already have an account? 
+                    Don't have an account yet?
                     <MyLink
                         fontSize='0.75rem'
                         marginLeft='0.25rem'
                     >
-                        Sign in
+                        Sign up
                     </MyLink>
                 </Typography>
             </Box>
@@ -117,4 +115,4 @@ const Registration: React.FC = () => {
     )
 }
 
-export default Registration
+export default Authorization

@@ -2,7 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CssBaseline } from '@mui/material';
 import { ColorModeProvider } from './ColorModeContext';
 import Home from './Components/Pages/Home/Home';
-import Register from '../src/Components/Pages/Registration/Registration';
+import Registration from '../src/Components/Pages/Registration/Registration';
+import Authorization from '../src/Components/Pages/Authorization/Authorization';
 import '../src/App.css'
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
             <Router>
                 <Routes>
                     <Route
-                        path="/English-Assistant-Pro"
+                        path="/home"
                         element={
                             <>
                                 <Home />
@@ -20,10 +21,18 @@ function App() {
                         }
                     />
                     <Route
-                        path="/"
+                        path="/reg"
                         element={
                             <>
-                                <Register />
+                                <Registration />
+                            </>
+                        }
+                    />
+                    <Route
+                        path="/auth"
+                        element={
+                            <>
+                                <Authorization />
                             </>
                         }
                     />
