@@ -2,7 +2,7 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
-import KeyIcon from '../Register/RegisterIco'
+import KeyIcon from '../Registration/RegistrationIco'
 import { useTheme } from '@mui/material';
 
 //MyComponents Import

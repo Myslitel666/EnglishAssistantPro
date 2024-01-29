@@ -9,7 +9,6 @@
     <PublishAssetsDirectory>$(MSBuildProjectDirectory)\dist</PublishAssetsDirectory>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="src\Components\Pages\Register\" />
     <Folder Include="src\Components\Pages\Authorization\" />
   </ItemGroup>
 </Project>
