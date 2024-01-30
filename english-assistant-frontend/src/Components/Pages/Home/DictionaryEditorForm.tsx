@@ -293,7 +293,7 @@ const DictionaryEditorForm: React.FC = () => {
             />
             <Box paddingTop='0.7rem'
                 display="flex"
-                justifyContent = 'space-between'
+                justifyContent='space-between'
             >
 
                 <MyButton

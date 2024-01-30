@@ -26,6 +26,7 @@ const LeftHalfScreen: React.FC = () => {
             <Box
                 sx={{
                     marginTop: '4.2rem',
+                    marginBottom: '0',
                     cursor: 'pointer',
                 }}
             >

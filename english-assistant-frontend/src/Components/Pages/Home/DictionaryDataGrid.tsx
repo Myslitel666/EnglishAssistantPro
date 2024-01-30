@@ -88,7 +88,7 @@ export default function DictionaryDataGrid() {
         <Box sx={{
             padding: '1rem',
             marginTop: '0.1rem',
-            height: '38.5rem',
+            height: '38.9rem',
             width: '100%',
         }}>
             <DataGrid
@@ -108,16 +108,16 @@ export default function DictionaryDataGrid() {
                 }}
                 sx={{
                     '@media screen and (max-width: 1400px)': {
-                        height: '35.5rem',
+                        height: '36.05rem',
                     },
                     '@media screen and (max-width: 1200px)': {
-                        height: '35rem',
+                        height: '35.37rem',
                     },
                     '@media screen and (max-width: 1000px)': {
                         height: '36.2rem',
                     },
                     "& .custom-header": {
-                        color: `${ theme.palette.primary.main }`,
+                        color: `${theme.palette.primary.main}`,
                         transition: 'color 1s ease'
                     },
                     "& .custom-cell": {
@@ -129,7 +129,7 @@ export default function DictionaryDataGrid() {
                         cursor: 'pointer'
                     },
                 }}
-                />
+            />
         </Box>
     );
 }
