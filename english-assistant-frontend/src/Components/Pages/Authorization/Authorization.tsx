@@ -1,8 +1,10 @@
+//React Import
+import React, { useState } from 'react';
+
 //MUI Import
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
-import KeyIcon from '../Registration/RegistrationIco'
 import { useTheme } from '@mui/material';
 import LockIcon from '@mui/icons-material/Lock';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -12,10 +14,22 @@ import Checkbox from '@mui/material/Checkbox';
 import Header from '../../Common/Header/Header';
 import MyButton from '../../Common/MyButton';
 import MyLink from '../../Common/MyLink';
+import { useColorLabel } from '../../../UseColorLabel';
+import PasswordTextField from '../../Common/PasswordTextField'
 
 const Authorization: React.FC = () => {
     const theme = useTheme();
+    const [password, setPassword] = useState('');
+    const [feedbackMessage, setFeedbackMessage] = useState('');
+    const [isError, setIsError] = useState(false);
+    const { getColorFromLabel } = useColorLabel('green');
     const KeyIconColor = theme.palette.background.default;
+    const borderBoxColor = theme.palette.action.disabled;
+
+    const updateFeedbackMessage = (isError: boolean, message: string) => {
+        setIsError(isError);
+        setFeedbackMessage(message);
+    };
 
     return (
         <>
@@ -24,7 +38,7 @@ const Authorization: React.FC = () => {
                 width='23.5rem'
                 margin='8rem auto 0'
                 border='1px solid'
-                borderColor='#494949'
+                borderColor={`${borderBoxColor}`}
                 borderRadius='2rem'
                 textAlign='center'
                 paddingLeft='1rem'
@@ -65,14 +79,10 @@ const Authorization: React.FC = () => {
                         marginTop: '0.6rem'
                     }}
                 />
-                <TextField
-                    id="outlined-basic"
-                    label="Password"
-                    variant="outlined"
-                    sx={{
-                        width: '100%',
-                        marginTop: '1rem'
-                    }}
+                <PasswordTextField
+                    externalPassword={password}
+                    setExternalPassword={setPassword}
+                    containerSx={{ width: '100%', marginTop: '1rem' }}
                 />
                 <Box style={{ display: 'flex', alignItems: 'center' }}>
                     <FormControlLabel control={<Checkbox defaultChecked />} label='' />
@@ -106,6 +116,7 @@ const Authorization: React.FC = () => {
                     <MyLink
                         fontSize='0.75rem'
                         marginLeft='0.25rem'
+                        href='/reg'
                     >
                         Sign up
                     </MyLink>

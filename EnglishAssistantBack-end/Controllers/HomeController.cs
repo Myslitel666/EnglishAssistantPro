@@ -4,7 +4,7 @@ using EnglishAssistentBackend.DTOs;
 using EnglishAssistantBackend.Context;
 using EnglishAssistantBackend.Models.Entities;
 
-namespace Controllers
+namespace EnglishAssistantBackend.Controllers
 {
     [Route("api/home")]
     [ApiController]
