@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace EnglishAssistantBackend.Models.Entities;
 
-public partial class UserDto
+public partial class User
 {
     public int UserId { get; set; }
 

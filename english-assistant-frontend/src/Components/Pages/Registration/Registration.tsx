@@ -20,21 +20,40 @@ const Registration: React.FC = () => {
     const keyIconColor = theme.palette.background.default;
     const borderBoxColor = theme.palette.action.disabled;
     const [feedbackMessage, setFeedbackMessage] = useState('');
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [username, setUsername] = useState('aaa');
+    const [password, setPassword] = useState('aaaaaa1');
+    const [confirmPassword, setConfirmPassword] = useState('aaaaaa1');
 
     const [isError, setIsError] = useState(false);
     const { getColorFromLabel } = useColorLabel('green');
 
-    function hasDigits(str: string) {
-        return /\d/.test(str);
-    }
+    const apiUrl = process.env.REACT_APP_API_URL as string;
 
     const updateFeedbackMessage = (isError: boolean, message: string) => {
         setIsError(isError);
         setFeedbackMessage(message);
     };
+
+    async function signUp() {
+        const response = await fetch(`${apiUrl}/api/reg/setUser`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password,
+                //userId: 0
+            }),
+        });
+
+        const data = await response.json();
+        updateFeedbackMessage(data.isError, data.feedbackMessage);
+    };
+
+    function hasDigits(str: string) {
+        return /\d/.test(str);
+    }
 
     const handleRegistration = () => {
         if (username === '') updateFeedbackMessage(true, '✗Enter the "Username"')
@@ -43,7 +62,9 @@ const Registration: React.FC = () => {
         else if (password.length < 6) updateFeedbackMessage(true, '✗The password must be at least 6 characters long')
         else if (!hasDigits(password)) updateFeedbackMessage(true, '✗The password must contain letters and numbers')
         else if (password !== confirmPassword) updateFeedbackMessage(true, '✗The password and confirmation password do not match')
-        else updateFeedbackMessage(false, '✓Account successfully created')
+        else {
+            signUp()
+        }
     };
 
     return (
