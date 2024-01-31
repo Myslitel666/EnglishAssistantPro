@@ -1,4 +1,4 @@
-import * as React from 'react';
+ï»¿import * as React from 'react';
 import Box from '@mui/material/Box';
 import Autocomplete, { autocompleteClasses } from '@mui/material/Autocomplete';
 import Stack from '@mui/material/Stack';
@@ -22,7 +22,7 @@ const JargonFilter: React.FC = () => {
     const [inputValue, setInputValue] = React.useState('');
 
     const [filteredJargons, setFilteredJargons] = React.useState(['']);
-    // Ïîñëå îáíîâëåíèÿ filteredRows
+    // ÐŸÐ¾ÑÐ»Ðµ Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ñ filteredRows
     React.useEffect(() => {
         const filteredJargon = backupRows
             .filter((row) => row.jargon.includes(inputValue))

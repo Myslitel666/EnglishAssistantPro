@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+ï»¿import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import '../../Common/Header/Logo.css';
 import { useColorMode, ColorModeContextProps } from '../../../ColorModeContext';
@@ -16,8 +16,8 @@ const BackgroundImage: React.FC = () => {
     const [isThemeChanged, setIsThemeChanged] = useState(true);
 
     const getLogoImage = () => {
-        // Îïðåäåëèòå óñëîâèÿ äëÿ âûáîðà èçîáðàæåíèÿ â çàâèñèìîñòè îò çíà÷åíèé
-        // localStorage.getItem('themeMode') è localStorage.getItem('primaryColor')
+        // ÐžÐ¿Ñ€ÐµÐ´ÐµÐ»Ð¸Ñ‚Ðµ ÑƒÑÐ»Ð¾Ð²Ð¸Ñ Ð´Ð»Ñ Ð²Ñ‹Ð±Ð¾Ñ€Ð° Ð¸Ð·Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ñ Ð² Ð·Ð°Ð²Ð¸ÑÐ¸Ð¼Ð¾ÑÑ‚Ð¸ Ð¾Ñ‚ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ð¹
+        // localStorage.getItem('themeMode') Ð¸ localStorage.getItem('primaryColor')
         if (themeMode === 'light' && getLabelFromColor() === 'green') {
             return '/images/background-light-green.png';
         } else if (themeMode === 'dark' && getLabelFromColor() === 'green') {
@@ -47,7 +47,7 @@ const BackgroundImage: React.FC = () => {
         } else if (themeMode === 'dark' && getLabelFromColor() === 'light green') {
             return '/images/background-dark-light-green.png';
         } else {
-            // Âåðíóòü çíà÷åíèå ïî óìîë÷àíèþ èëè äëÿ äðóãèõ óñëîâèé
+            // Ð’ÐµÑ€Ð½ÑƒÑ‚ÑŒ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ Ð¿Ð¾ ÑƒÐ¼Ð¾Ð»Ñ‡Ð°Ð½Ð¸ÑŽ Ð¸Ð»Ð¸ Ð´Ð»Ñ Ð´Ñ€ÑƒÐ³Ð¸Ñ… ÑƒÑÐ»Ð¾Ð²Ð¸Ð¹
             return '/images/logo-light-green.png';
         }
     };
@@ -56,7 +56,7 @@ const BackgroundImage: React.FC = () => {
         const currentLogoPath = getLogoImage();
 
         const delayedUpdate = () => {
-            const delay = 1; // çàäåðæêà â ìèëëèñåêóíäàõ
+            const delay = 1; // Ð·Ð°Ð´ÐµÑ€Ð¶ÐºÐ° Ð² Ð¼Ð¸Ð»Ð»Ð¸ÑÐµÐºÑƒÐ½Ð´Ð°Ñ…
 
             setTimeout(() => {
                 if (newLogoPath !== currentLogoPath) {

@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+п»їimport { useState, useEffect } from 'react';
 import { useColorMode, ColorModeContextProps } from '../src/ColorModeContext';
 
 export const useColorLabel = (initialLabel: string) => {
     const { themeMode, primaryColor }: ColorModeContextProps = useColorMode();
 
-    //Преобразование метки в цвет
+    //РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ РјРµС‚РєРё РІ С†РІРµС‚
     const getColorFromLabel = (label: string): string => {
         if (themeMode === 'dark' && label === 'green') {
             return '#1cc841';
@@ -35,12 +35,12 @@ export const useColorLabel = (initialLabel: string) => {
         } else if (themeMode === 'light' && label === 'light green') {
             return '#aac06f';
         } else {
-            // Вернуть значение по умолчанию или для других условий
+            // Р’РµСЂРЅСѓС‚СЊ Р·РЅР°С‡РµРЅРёРµ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РёР»Рё РґР»СЏ РґСЂСѓРіРёС… СѓСЃР»РѕРІРёР№
             return '#5bb056';
         }
     };
 
-    //Получение метки по текущему цвету
+    //РџРѕР»СѓС‡РµРЅРёРµ РјРµС‚РєРё РїРѕ С‚РµРєСѓС‰РµРјСѓ С†РІРµС‚Сѓ
     const getLabelFromColor = (): string => {
         if (primaryColor === '#2ef824' || primaryColor === '#5bb056') {
             return 'green';
@@ -57,7 +57,7 @@ export const useColorLabel = (initialLabel: string) => {
         } else if (primaryColor === '#bcff2d' || primaryColor === '#aac06f') {
             return 'light green';
         } else {
-            // Вернуть значение по умолчанию или для других условий
+            // Р’РµСЂРЅСѓС‚СЊ Р·РЅР°С‡РµРЅРёРµ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РёР»Рё РґР»СЏ РґСЂСѓРіРёС… СѓСЃР»РѕРІРёР№
             return 'green';
         }
     };

@@ -1,4 +1,4 @@
-//React Import
+п»ї//React Import
 import React, { useEffect } from 'react';
 
 //MUI Import
@@ -11,7 +11,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 interface PasswordTextFieldProps {
     externalPassword: string;
     setExternalPassword: React.Dispatch<React.SetStateAction<string>>;
-    containerSx?: React.CSSProperties; // Дополнительные стили для контейнера
+    containerSx?: React.CSSProperties; // Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ СЃС‚РёР»Рё РґР»СЏ РєРѕРЅС‚РµР№РЅРµСЂР°
 }
 
 const PasswordTextField: React.FC<PasswordTextFieldProps> = ({ externalPassword, setExternalPassword, containerSx }) => {
@@ -20,7 +20,7 @@ const PasswordTextField: React.FC<PasswordTextFieldProps> = ({ externalPassword,
     const [cursorPosition, setCursorPosition] = React.useState<number | null>(null);
 
     useEffect(() => {
-        // Восстанавливаем позицию курсора после рендеринга
+        // Р’РѕСЃСЃС‚Р°РЅР°РІР»РёРІР°РµРј РїРѕР·РёС†РёСЋ РєСѓСЂСЃРѕСЂР° РїРѕСЃР»Рµ СЂРµРЅРґРµСЂРёРЅРіР°
         setTimeout(() => {
             if (inputRef.current) {
                 inputRef.current.setSelectionRange(cursorPosition, cursorPosition);
@@ -36,7 +36,7 @@ const PasswordTextField: React.FC<PasswordTextFieldProps> = ({ externalPassword,
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         if (inputRef.current) {
-            // Сохраняем текущую позицию курсора
+            // РЎРѕС…СЂР°РЅСЏРµРј С‚РµРєСѓС‰СѓСЋ РїРѕР·РёС†РёСЋ РєСѓСЂСЃРѕСЂР°
             setCursorPosition(inputRef.current.selectionStart);
         }
     };
@@ -48,7 +48,7 @@ const PasswordTextField: React.FC<PasswordTextFieldProps> = ({ externalPassword,
                 label="Password"
                 onChange={(e) => {
                     setExternalPassword(e.target.value);
-                    setCursorPosition(e.target.selectionStart); // Сохраняем позицию курсора
+                    setCursorPosition(e.target.selectionStart); // РЎРѕС…СЂР°РЅСЏРµРј РїРѕР·РёС†РёСЋ РєСѓСЂСЃРѕСЂР°
                 }}
                 value={externalPassword}
                 type={showPassword ? 'text' : 'password'}

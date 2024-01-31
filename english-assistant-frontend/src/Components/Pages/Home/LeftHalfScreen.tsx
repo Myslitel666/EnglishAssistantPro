@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+п»їimport React, { useState } from 'react';
 
 //MUI Import
 import Box from '@mui/material/Box'
@@ -11,7 +11,7 @@ import DictionaryDataGrid from '../Home/DictionaryDataGrid'
 import JargonFilter from '../Home/JargonFilter'
 
 const LeftHalfScreen: React.FC = () => {
-    //Работа с контекстом домашней страницы
+    //Р Р°Р±РѕС‚Р° СЃ РєРѕРЅС‚РµРєСЃС‚РѕРј РґРѕРјР°С€РЅРµР№ СЃС‚СЂР°РЅРёС†С‹
     const { fetchJargon } = useHomeContext();
 
     const [rotation, setRotation] = useState(0);

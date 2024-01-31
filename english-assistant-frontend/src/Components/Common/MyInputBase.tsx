@@ -1,4 +1,4 @@
-import InputBase, { InputBaseProps } from '@mui/material/InputBase';
+ï»¿import InputBase, { InputBaseProps } from '@mui/material/InputBase';
 import { useTheme } from '@mui/material';
 
 interface MyInputProps extends InputBaseProps {
@@ -24,10 +24,10 @@ const MyInputBase: React.FC<MyInputProps> = (props) => {
                 borderRadius: '4px',
                 padding: '1.2vh',
                 '&.Mui-focused': {
-                    borderColor: `${theme.palette.primary.main}`, // Âàøè ñòèëè ïðè ôîêóñèðîâêå
+                    borderColor: `${theme.palette.primary.main}`, // Ð’Ð°ÑˆÐ¸ ÑÑ‚Ð¸Ð»Ð¸ Ð¿Ñ€Ð¸ Ñ„Ð¾ÐºÑƒÑÐ¸Ñ€Ð¾Ð²ÐºÐµ
                 },
 
-                //...props.sx // Ïîçâîëÿåò âàì ïåðåäàâàòü äðóãèå ñòèëè ÷åðåç props
+                //...props.sx // ÐŸÐ¾Ð·Ð²Ð¾Ð»ÑÐµÑ‚ Ð²Ð°Ð¼ Ð¿ÐµÑ€ÐµÐ´Ð°Ð²Ð°Ñ‚ÑŒ Ð´Ñ€ÑƒÐ³Ð¸Ðµ ÑÑ‚Ð¸Ð»Ð¸ Ñ‡ÐµÑ€ÐµÐ· props
             }}
         />
     );

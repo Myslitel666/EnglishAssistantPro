@@ -1,9 +1,9 @@
-//MUI Import
+п»ї//MUI Import
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox, { CheckboxProps } from '@mui/material/Checkbox';
 
 interface MyCheckboxProps extends CheckboxProps {
-    // Дополнительные свойства, если необходимо
+    // Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ СЃРІРѕР№СЃС‚РІР°, РµСЃР»Рё РЅРµРѕР±С…РѕРґРёРјРѕ
 }
 
 const MyCheckbox: React.FC<MyCheckboxProps> = (props) => {
@@ -12,7 +12,7 @@ const MyCheckbox: React.FC<MyCheckboxProps> = (props) => {
             {...props}
             sx={{
                 transition: 'background-color 1s ease, color 1s ease, border-color 1s ease'
-                //...props.sx // Позволяет вам передавать другие стили через props
+                //...props.sx // РџРѕР·РІРѕР»СЏРµС‚ РІР°Рј РїРµСЂРµРґР°РІР°С‚СЊ РґСЂСѓРіРёРµ СЃС‚РёР»Рё С‡РµСЂРµР· props
             }}
         />
     );
