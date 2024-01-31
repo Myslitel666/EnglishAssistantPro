@@ -1,5 +1,5 @@
 ﻿//React Import
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 //MUI Import
 import Box from '@mui/material/Box'
@@ -14,6 +14,7 @@ import MyButton from '../../Common/MyButton';
 import MyLink from '../../Common/MyLink';
 import { useColorLabel } from '../../../UseColorLabel';
 import PasswordTextField from '../../Common/PasswordTextField'
+import { useNavigate } from 'react-router-dom';
 
 const Registration: React.FC = () => {
     const theme = useTheme();
@@ -23,8 +24,9 @@ const Registration: React.FC = () => {
     const [username, setUsername] = useState('aaa');
     const [password, setPassword] = useState('aaaaaa1');
     const [confirmPassword, setConfirmPassword] = useState('aaaaaa1');
+    const navigate = useNavigate();
 
-    const [isError, setIsError] = useState(false);
+    const [isError, setIsError] = useState(true);
     const { getColorFromLabel } = useColorLabel('green');
 
     const apiUrl = process.env.REACT_APP_API_URL as string;
@@ -43,13 +45,24 @@ const Registration: React.FC = () => {
             body: JSON.stringify({
                 username: username,
                 password: password,
-                //userId: 0
             }),
         });
 
         const data = await response.json();
         updateFeedbackMessage(data.isError, data.feedbackMessage);
     };
+
+    useEffect(() => {
+        if (isError === false) {
+            // Выполнить переход после успешной регистрации
+            const timeoutId = setTimeout(() => {
+                navigate('/home');
+            }, 1000);
+
+            // Очистить таймаут, чтобы избежать утечек при размонтировании компонента
+            return () => clearTimeout(timeoutId);
+        }
+    }, [isError]);
 
     function hasDigits(str: string) {
         return /\d/.test(str);
@@ -63,7 +76,7 @@ const Registration: React.FC = () => {
         else if (!hasDigits(password)) updateFeedbackMessage(true, '✗The password must contain letters and numbers')
         else if (password !== confirmPassword) updateFeedbackMessage(true, '✗The password and confirmation password do not match')
         else {
-            signUp()
+            signUp();
         }
     };
 

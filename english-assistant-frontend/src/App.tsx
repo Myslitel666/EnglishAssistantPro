@@ -14,27 +14,15 @@ function App() {
                 <Routes>
                     <Route
                         path="/home"
-                        element={
-                            <>
-                                <Home />
-                            </>
-                        }
+                        element={ <Home /> }
                     />
                     <Route
                         path="/reg"
-                        element={
-                            <>
-                                <Registration />
-                            </>
-                        }
+                        element={ <Registration /> }
                     />
                     <Route
                         path="/auth"
-                        element={
-                            <>
-                                <Authorization />
-                            </>
-                        }
+                        element={ <Authorization /> }
                     />
                 </Routes>
             </Router>
