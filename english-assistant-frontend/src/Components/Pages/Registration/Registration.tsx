@@ -1,5 +1,6 @@
 ﻿//React Import
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 //MUI Import
 import Box from '@mui/material/Box'
@@ -14,7 +15,6 @@ import MyButton from '../../Common/MyButton';
 import MyLink from '../../Common/MyLink';
 import { useColorLabel } from '../../../UseColorLabel';
 import PasswordTextField from '../../Common/PasswordTextField'
-import { useNavigate } from 'react-router-dom';
 
 const Registration: React.FC = () => {
     const theme = useTheme();

@@ -1,6 +1,5 @@
 ﻿using EnglishAssistantBackend.Context;
 using EnglishAssistantBackend.Models.Entities;
-using EnglishAssistentBackend.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EnglishAssistantBackend.DTOs;
@@ -19,7 +18,7 @@ namespace EnglishAssistantBackend.Controllers
         }
 
         [HttpPost("setUser")]
-        public async Task<IActionResult> SendJargon([FromBody] UserDto userDto)
+        public async Task<IActionResult> SetUser([FromBody] UserDto userDto)
         {
             //Извлекаем пользователя из списка по username (в случае его отсутствия получим null)
             var existingUser = await _dbContext.Users
@@ -31,7 +30,7 @@ namespace EnglishAssistantBackend.Controllers
                 return Ok(new
                 {
                     IsError = true,
-                    FeedbackMessage = "✗A user with this username already exists in the system"
+                    FeedbackMessage = "✗A user with this username already exists"
                 });
             }
 
@@ -62,7 +61,7 @@ namespace EnglishAssistantBackend.Controllers
                 return Ok(new
                 {
                     IsError = false,
-                    FeedbackMessage = "✓User successfully registered in the system"
+                    FeedbackMessage = "✓User successfully registered"
                 });
             }
             catch (Exception ex)

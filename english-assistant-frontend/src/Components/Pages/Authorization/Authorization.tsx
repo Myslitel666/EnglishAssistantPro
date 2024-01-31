@@ -1,5 +1,6 @@
 ﻿//React Import
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 //MUI Import
 import Box from '@mui/material/Box'
@@ -19,16 +20,56 @@ import PasswordTextField from '../../Common/PasswordTextField'
 
 const Authorization: React.FC = () => {
     const theme = useTheme();
-    const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('aaa');
+    const [password, setPassword] = useState('aaa');
     const [feedbackMessage, setFeedbackMessage] = useState('');
-    const [isError, setIsError] = useState(false);
+    const [isError, setIsError] = useState(true);
     const { getColorFromLabel } = useColorLabel('green');
     const KeyIconColor = theme.palette.background.default;
     const borderBoxColor = theme.palette.action.disabled;
+    const navigate = useNavigate();
+
+    const apiUrl = process.env.REACT_APP_API_URL as string;
 
     const updateFeedbackMessage = (isError: boolean, message: string) => {
         setIsError(isError);
         setFeedbackMessage(message);
+    };
+
+    async function signIn() {
+        const response = await fetch(`${apiUrl}/api/auth/findUser`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password,
+            }),
+        });
+
+        const data = await response.json();
+        updateFeedbackMessage(data.isError, data.feedbackMessage);
+    };
+
+    useEffect(() => {
+        if (isError === false) {
+            // Выполнить переход после успешной регистрации
+            const timeoutId = setTimeout(() => {
+                navigate('/home');
+            }, 1000);
+
+            // Очистить таймаут, чтобы избежать утечек при размонтировании компонента
+            return () => clearTimeout(timeoutId);
+        }
+    }, [isError]);
+
+    const handleRegistration = () => {
+        if (username === '') updateFeedbackMessage(true, '✗Enter the "Username"')
+        else if (password === '') updateFeedbackMessage(true, '✗Enter the "Password"')
+        else {
+            signIn();
+        }
     };
 
     return (
@@ -62,7 +103,6 @@ const Authorization: React.FC = () => {
                         }}
                     />
                 </Box>
-
                 <Typography
                     marginTop='-0.7rem'
                     fontSize='1.66rem'
@@ -70,10 +110,19 @@ const Authorization: React.FC = () => {
                 >
                     Authorization
                 </Typography>
+                <Typography sx={{
+                    textAlign: 'left',
+                    color: isError ? getColorFromLabel('red') : getColorFromLabel('green'),
+                }}
+                >
+                    {feedbackMessage}
+                </Typography>
                 <TextField
                     id="outlined-basic"
                     label="Username"
                     variant="outlined"
+                    onChange={(e) => setUsername(e.target.value)}
+                    value={username}
                     sx={{
                         width: '100%',
                         marginTop: '0.6rem'
@@ -92,6 +141,7 @@ const Authorization: React.FC = () => {
                 </Box>
                 <MyButton
                     variant="contained"
+                    onClick={handleRegistration}
                     sx={{
                         width: '100%',
                         height: '3.6rem',
