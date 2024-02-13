@@ -64,7 +64,7 @@ const Authorization: React.FC = () => {
         }
     }, [isError]);
 
-    const handleRegistration = () => {
+    const handleAuthoriazation = () => {
         if (username === '') updateFeedbackMessage(true, '✗Enter the "Username"')
         else if (password === '') updateFeedbackMessage(true, '✗Enter the "Password"')
         else {
@@ -141,7 +141,7 @@ const Authorization: React.FC = () => {
                 </Box>
                 <MyButton
                     variant="contained"
-                    onClick={handleRegistration}
+                    onClick={handleAuthoriazation}
                     sx={{
                         width: '100%',
                         height: '3.6rem',
