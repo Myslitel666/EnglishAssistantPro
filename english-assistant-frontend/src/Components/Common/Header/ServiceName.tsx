@@ -42,7 +42,7 @@ const ServiceName: React.FC = () => {
                 color: isHovered ? `${primaryDarkColor}` : `${primaryMainColor}`,
                 transition: 'color 1s ease',
                 marginLeft: '5px',
-                '@media screen and (max-width: 650px)': {
+                '@media screen and (max-width: 692px)': {
                     fontSize: '25px'
                 }
             }}

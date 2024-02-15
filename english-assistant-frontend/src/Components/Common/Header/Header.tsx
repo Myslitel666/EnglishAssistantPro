@@ -13,6 +13,8 @@ import ServiceName from './ServiceName';
 import { useColorMode } from '../../../Context/ColorModeContext';
 import CustomizationModal from '../CustomizationModal/CustomizationModal'
 import Logout from '../Header/Logout'
+import Login from '../Header/Login'
+
 
 const Header: React.FC = () => {
     const { toggleColorMode } = useColorMode();
@@ -44,7 +46,7 @@ const Header: React.FC = () => {
                         }}
                     >
                         <CustomizationModal />
-                        <Logout />
+                        <Login />
                     </Box>
                 </Toolbar>
             </AppBar>
