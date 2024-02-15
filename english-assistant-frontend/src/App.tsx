@@ -1,14 +1,23 @@
-﻿import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+﻿//React Import
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+//MUI Import
 import { CssBaseline } from '@mui/material';
-import { ColorModeProvider } from './ColorModeContext';
+
+//MyComponents Import
+import { ColorModeProvider } from '../src/Context/ColorModeContext';
+import { UserProvider } from '../src/Context/UserContext';
 import Home from './Components/Pages/Home/Home';
 import Registration from '../src/Components/Pages/Registration/Registration';
 import Authorization from '../src/Components/Pages/Authorization/Authorization';
+
+//CSS Import
 import '../src/App.css'
 
 function App() {
     return (
         <ColorModeProvider>
+        <UserProvider>
             <CssBaseline />
             <Router>
                 <Routes>
@@ -25,7 +34,8 @@ function App() {
                         element={ <Authorization /> }
                     />
                 </Routes>
-            </Router>
+                </Router>
+        </UserProvider>
         </ColorModeProvider>
     );
 }

@@ -50,8 +50,21 @@ namespace EnglishAssistantBackend.Controllers
 
             try
             {
+                // Получаем идентификатор роли по её имени из базы данных
+                var role = await _dbContext.Roles.FirstOrDefaultAsync(r => r.RoleName == userDto.Role);
+
+                if (role == null)
+                {
+                    return BadRequest(new
+                    {
+                        IsError = true,
+                        FeedbackMessage = "✗Role does not exist"
+                    });
+                }
+
                 var user = new User
                 {
+                    RoleId = role.RoleId,
                     Username = userDto.Username,
                     Password = userDto.Password,
                 };

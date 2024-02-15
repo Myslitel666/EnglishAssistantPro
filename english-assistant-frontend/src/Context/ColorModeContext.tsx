@@ -1,6 +1,6 @@
 ﻿import React, { createContext, useContext, useMemo, useState, ReactNode, useEffect } from 'react';
 import { ThemeProvider, createTheme, Theme } from '@mui/material';
-import '../src/Font.css';
+import '../../src/Font.css';
 
 export interface ColorModeContextProps {
     toggleColorMode: () => void;

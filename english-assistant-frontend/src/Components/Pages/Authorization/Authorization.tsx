@@ -17,6 +17,7 @@ import MyButton from '../../Common/MyButton';
 import MyLink from '../../Common/MyLink';
 import { useColorLabel } from '../../../UseColorLabel';
 import PasswordTextField from '../../Common/PasswordTextField'
+import { useUserContext } from '../../../Context/UserContext';
 
 const Authorization: React.FC = () => {
     const theme = useTheme();
@@ -28,6 +29,9 @@ const Authorization: React.FC = () => {
     const KeyIconColor = theme.palette.background.default;
     const borderBoxColor = theme.palette.action.disabled;
     const navigate = useNavigate();
+
+    //Работа с контекстом
+    const { setUser } = useUserContext();
 
     const apiUrl = process.env.REACT_APP_API_URL as string;
 
@@ -50,6 +54,10 @@ const Authorization: React.FC = () => {
 
         const data = await response.json();
         updateFeedbackMessage(data.isError, data.feedbackMessage);
+
+        if (!data.isError) {
+            setUser(data.user.userId, data.user.role, data.user.username)
+        }
     };
 
     useEffect(() => {

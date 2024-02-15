@@ -10,7 +10,7 @@ import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
 //My Components Import
 import { useColorLabel } from '../../../UseColorLabel';
-import { useColorMode, ColorModeContextProps } from '../../../ColorModeContext';
+import { useColorMode, ColorModeContextProps } from '../../../Context/ColorModeContext';
 
 export default function CustomizationModalContent() {
     const { setPrimaryColor, setThemeMode } = useColorMode();

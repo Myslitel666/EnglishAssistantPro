@@ -3,7 +3,7 @@
 //MyComponents Import
 import Logo from '../Header/Logo';
 import ServiceName from './ServiceName';
-import { useColorMode } from '../../../ColorModeContext';
+import { useColorMode } from '../../../Context/ColorModeContext';
 import CustomizationModal from '../CustomizationModal/CustomizationModal'
 
 //MUI Import

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
 using EnglishAssistantBackend.Models.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace EnglishAssistantBackend.Context;
 
@@ -17,6 +17,8 @@ public partial class EnglishAssistantContext : DbContext
     }
 
     public virtual DbSet<JargonDictionary> JargonDictionaries { get; set; }
+
+    public virtual DbSet<Role> Roles { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
 
@@ -39,6 +41,16 @@ public partial class EnglishAssistantContext : DbContext
                 .IsUnicode(false);
         });
 
+        modelBuilder.Entity<Role>(entity =>
+        {
+            entity.ToTable("Role");
+
+            entity.Property(e => e.Description).HasColumnType("text");
+            entity.Property(e => e.RoleName)
+                .HasMaxLength(64)
+                .IsUnicode(false);
+        });
+
         modelBuilder.Entity<User>(entity =>
         {
             entity.ToTable("User");
@@ -49,6 +61,11 @@ public partial class EnglishAssistantContext : DbContext
             entity.Property(e => e.Username)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+
+            entity.HasOne(d => d.Role).WithMany(p => p.Users)
+                .HasForeignKey(d => d.RoleId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_User_Role");
         });
 
         OnModelCreatingPartial(modelBuilder);

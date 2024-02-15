@@ -43,6 +43,7 @@ const Registration: React.FC = () => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
+                role: 'learner',
                 username: username,
                 password: password,
             }),

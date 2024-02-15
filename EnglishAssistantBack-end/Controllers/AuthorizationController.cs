@@ -27,40 +27,56 @@ namespace EnglishAssistantBackend.Controllers
             //Если пользователя с данным username не существует
             if (existingUser == null)
             {
-                return Ok(new
+                AuthorizationResponseDto response = new AuthorizationResponseDto()
                 {
                     IsError = true,
                     FeedbackMessage = "✗A user with this username does not exist"
-                });
+                };
+                return Ok(response);
             }
             else
             {
                 //Если пароль не верный
                 if (existingUser.Password != userDto.Password)
                 {
-                    return Ok(new
+                    AuthorizationResponseDto response = new AuthorizationResponseDto()
                     {
                         IsError = true,
                         FeedbackMessage = "✗The password is incorrect"
-                    });
+                    };
+                    return Ok(response);
                 }
                 else
                 {
                     try
                     {
-                        return Ok(new
+                        // Получаем роль пользователя по её идентификатору в базе данных
+                        var role = await _dbContext.Roles.FirstOrDefaultAsync(r => r.RoleId == existingUser.RoleId);
+
+                        //Создаю экземпляр UserDto
+                        UserDto userResponseDto = new UserDto()
+                        {
+                            UserId = existingUser.UserId,
+                            Role = role.RoleName,
+                            Username = existingUser.Username,
+                        };
+
+                        AuthorizationResponseDto response = new AuthorizationResponseDto()
                         {
                             IsError = false,
-                            FeedbackMessage = "✓User successfully authorized"
-                        });
+                            FeedbackMessage = "✓User successfully authorized",
+                            User = userResponseDto
+                        };
+                        return Ok(response);
                     }
                     catch (Exception ex)
                     {
-                        return BadRequest(new
+                        AuthorizationResponseDto response = new AuthorizationResponseDto()
                         {
                             IsError = true,
                             FeedbackMessage = $"✗Failed to complete the authorization. Error: {ex.Message}"
-                        });
+                        };
+                        return BadRequest(response);
                     }
                 }
             }

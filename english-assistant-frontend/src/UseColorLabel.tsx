@@ -1,5 +1,5 @@
 ﻿import { useState, useEffect } from 'react';
-import { useColorMode, ColorModeContextProps } from '../src/ColorModeContext';
+import { useColorMode, ColorModeContextProps } from '../src/Context/ColorModeContext';
 
 export const useColorLabel = (initialLabel: string) => {
     const { themeMode, primaryColor }: ColorModeContextProps = useColorMode();

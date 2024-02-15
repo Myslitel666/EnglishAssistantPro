@@ -1,6 +1,6 @@
 ﻿import React, { useState, useEffect } from 'react';
 import './Logo.css';
-import { useColorMode, ColorModeContextProps } from '../../../ColorModeContext';
+import { useColorMode, ColorModeContextProps } from '../../../Context/ColorModeContext';
 import { useColorLabel } from '../../../UseColorLabel';
 
 const Logo = () => {

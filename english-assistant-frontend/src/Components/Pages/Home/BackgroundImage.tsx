@@ -1,7 +1,7 @@
 ﻿import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import '../../Common/Header/Logo.css';
-import { useColorMode, ColorModeContextProps } from '../../../ColorModeContext';
+import { useColorMode, ColorModeContextProps } from '../../../Context/ColorModeContext';
 import { useColorLabel } from '../../../UseColorLabel';
 
 const BackgroundImage: React.FC = () => {
