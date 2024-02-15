@@ -30,9 +30,15 @@ interface UserProviderProps {
 }
 
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
-    const [userId, setUserId] = useState(-1);
-    const [userRole, setUserRole] = useState('');
-    const [username, setUsername] = useState('');
+    const storedUserId = localStorage.getItem('userId');
+    const parsedUserId = storedUserId ? parseInt(storedUserId) : -1;
+    const [userId, setUserId] = useState(parsedUserId);
+
+    const storedUserRole = localStorage.getItem('userRole');
+    const [userRole, setUserRole] = useState(storedUserRole ? storedUserRole : '');
+
+    const storedUsername = localStorage.getItem('username');
+    const [username, setUsername] = useState(storedUsername ? storedUsername : '');
 
     const getUser = (): User => {
         return {
@@ -44,8 +50,11 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
     const setUser = (userId: number, userRole: string, username: string) => {
         setUserId(userId);
+        localStorage.setItem('userId', userId.toString());
         setUserRole(userRole);
+        localStorage.setItem('userRole', userRole);
         setUsername(username);
+        localStorage.setItem('username', username);
     }
 
     const contextValue: UserContextProps = {
