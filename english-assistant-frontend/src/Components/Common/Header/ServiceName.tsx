@@ -33,7 +33,7 @@ const ServiceName: React.FC = () => {
     return (
         <Typography
             fontSize = '2.3rem'
-            color={theme.palette.primary.main}
+            color={primaryMainColor}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onClick={handleMouseClick }
@@ -42,7 +42,7 @@ const ServiceName: React.FC = () => {
                 color: isHovered ? `${primaryDarkColor}` : `${primaryMainColor}`,
                 transition: 'color 1s ease',
                 marginLeft: '5px',
-                '@media screen and (max-width: 600px)': {
+                '@media screen and (max-width: 650px)': {
                     fontSize: '25px'
                 }
             }}

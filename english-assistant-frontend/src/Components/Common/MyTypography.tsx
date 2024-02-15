@@ -2,11 +2,11 @@
 import Typography, { TypographyProps } from '@mui/material/Typography';
 import { useTheme } from '@mui/material';
 
-interface MyButtonProps extends TypographyProps {
+interface MyTypographyProps extends TypographyProps {
     // Дополнительные свойства, если необходимо
 }
 
-const MyButton: React.FC<MyButtonProps> = (props) => {
+const MyTypography: React.FC<MyTypographyProps> = (props) => {
     const [isHovered, setIsHovered] = useState(false);
 
     const handleMouseEnter = () => {
@@ -19,21 +19,21 @@ const MyButton: React.FC<MyButtonProps> = (props) => {
 
     const theme = useTheme();
     const primaryMainColor = theme.palette.primary.main;
-    const primaryDarkColor = theme.palette.text.primary;
+    const TextPrimaryColor = theme.palette.text.primary;
 
     return (
         <Typography
             {...props}
-            color={theme.palette.primary.main}
+            color={primaryMainColor}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             sx={{
                 cursor: 'pointer',
-                color: isHovered ? `${primaryMainColor}` : `${primaryDarkColor}`,
+                color: isHovered ? `${primaryMainColor}` : `${TextPrimaryColor}`,
                 transition: 'color 1s ease'
             }}
         />
     );
 };
 
-export default MyButton;
+export default MyTypography;

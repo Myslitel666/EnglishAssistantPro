@@ -13,6 +13,7 @@ export interface UserContextProps {
     usernameState: [string, React.Dispatch<React.SetStateAction<string>>];
     setUser: (userId: number, userRole: string, username: string) => void;
     getUser: () => User;
+    logoutUser: () => void;
 }
 
 const UserContext = createContext<UserContextProps | undefined>(undefined);
@@ -57,12 +58,17 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         localStorage.setItem('username', username);
     }
 
+    const logoutUser = () => {
+        setUser(-1, '', '')
+    }
+
     const contextValue: UserContextProps = {
         userIdState: [userId, setUserId],
         userRoleState: [userRole, setUserRole],
         usernameState: [username, setUsername],
         setUser: setUser,
-        getUser: getUser
+        getUser: getUser,
+        logoutUser: logoutUser
     };
 
     return (
