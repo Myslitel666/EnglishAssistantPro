@@ -8,12 +8,10 @@ type User = {
 }
 
 export interface UserContextProps {
-    userIdState: [number, React.Dispatch<React.SetStateAction<number>>];
-    userRoleState: [string, React.Dispatch<React.SetStateAction<string>>];
-    usernameState: [string, React.Dispatch<React.SetStateAction<string>>];
     setUser: (userId: number, userRole: string, username: string) => void;
     getUser: () => User;
     logoutUser: () => void;
+    isLogged: () => boolean;
 }
 
 const UserContext = createContext<UserContextProps | undefined>(undefined);
@@ -62,13 +60,18 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         setUser(-1, '', '')
     }
 
+    const isLogged = (): boolean => {
+        if (userId !== -1) {
+            return true
+        }
+        return false;
+    }
+
     const contextValue: UserContextProps = {
-        userIdState: [userId, setUserId],
-        userRoleState: [userRole, setUserRole],
-        usernameState: [username, setUsername],
         setUser: setUser,
         getUser: getUser,
-        logoutUser: logoutUser
+        logoutUser: logoutUser,
+        isLogged: isLogged
     };
 
     return (

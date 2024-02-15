@@ -56,7 +56,9 @@ const Authorization: React.FC = () => {
         updateFeedbackMessage(data.isError, data.feedbackMessage);
 
         if (!data.isError) {
-            setUser(data.user.userId, data.user.role, data.user.username)
+            setTimeout(() => {
+                setUser(data.user.userId, data.user.role, data.user.username);
+            }, 600);
         }
     };
 
@@ -65,7 +67,7 @@ const Authorization: React.FC = () => {
             // Выполнить переход после успешной регистрации
             const timeoutId = setTimeout(() => {
                 navigate('/home');
-            }, 1000);
+            }, 600);
 
             // Очистить таймаут, чтобы избежать утечек при размонтировании компонента
             return () => clearTimeout(timeoutId);

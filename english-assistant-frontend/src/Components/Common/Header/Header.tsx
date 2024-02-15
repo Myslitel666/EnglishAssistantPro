@@ -1,5 +1,5 @@
 ﻿//React Import
-import React, { useState } from 'react';
+import React from 'react';
 
 //MUI Import
 import AppBar from '@mui/material/AppBar';
@@ -10,14 +10,15 @@ import { useTheme } from '@mui/material/styles';
 //MyComponents Import
 import Logo from '../Header/Logo';
 import ServiceName from './ServiceName';
-import { useColorMode } from '../../../Context/ColorModeContext';
 import CustomizationModal from '../CustomizationModal/CustomizationModal'
 import Logout from '../Header/Logout'
 import Login from '../Header/Login'
+import { useUserContext } from '../../../Context/UserContext';
 
 
 const Header: React.FC = () => {
-    const { toggleColorMode } = useColorMode();
+    //Работа с контекстом
+    const { isLogged } = useUserContext();
     const theme = useTheme();
 
     return (
@@ -46,7 +47,7 @@ const Header: React.FC = () => {
                         }}
                     >
                         <CustomizationModal />
-                        <Login />
+                        {isLogged() ? <Logout /> : <Login />}
                     </Box>
                 </Toolbar>
             </AppBar>
