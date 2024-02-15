@@ -10,6 +10,7 @@ import KeyIcon from '../Registration/RegistrationIco'
 import { useTheme } from '@mui/material';
 
 //MyComponents Import
+import MyTypography from '../../Common/MyTypography'
 import Header from '../../Common/Header/Header';
 import MyButton from '../../Common/MyButton';
 import MyLink from '../../Common/MyLink';
@@ -113,13 +114,13 @@ const Registration: React.FC = () => {
                     />
                 </Box>
 
-                <Typography
+                <MyTypography
                     marginTop='-0.7rem'
                     fontSize='1.66rem'
                     color='primary.main'
                 >
                     Registration Form
-                </Typography>
+                </MyTypography>
                 <Typography sx={{
                         textAlign: 'left',
                     color: isError ? getColorFromLabel('red') : getColorFromLabel('green'),

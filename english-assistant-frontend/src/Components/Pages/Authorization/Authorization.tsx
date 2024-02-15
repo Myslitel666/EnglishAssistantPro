@@ -12,6 +12,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
 //MyComponents Import
+import MyTypography from '../../Common/MyTypography'
 import Header from '../../Common/Header/Header';
 import MyButton from '../../Common/MyButton';
 import MyLink from '../../Common/MyLink';
@@ -58,7 +59,7 @@ const Authorization: React.FC = () => {
         if (!data.isError) {
             setTimeout(() => {
                 setUser(data.user.userId, data.user.role, data.user.username);
-            }, 600);
+            }, 500);
         }
     };
 
@@ -67,7 +68,7 @@ const Authorization: React.FC = () => {
             // Выполнить переход после успешной регистрации
             const timeoutId = setTimeout(() => {
                 navigate('/home');
-            }, 600);
+            }, 500);
 
             // Очистить таймаут, чтобы избежать утечек при размонтировании компонента
             return () => clearTimeout(timeoutId);
@@ -113,13 +114,13 @@ const Authorization: React.FC = () => {
                         }}
                     />
                 </Box>
-                <Typography
+                <MyTypography
                     marginTop='-0.7rem'
                     fontSize='1.66rem'
                     color='primary.main'
                 >
                     Authorization
-                </Typography>
+                </MyTypography>
                 <Typography sx={{
                     textAlign: 'left',
                     color: isError ? getColorFromLabel('red') : getColorFromLabel('green'),
@@ -144,7 +145,17 @@ const Authorization: React.FC = () => {
                     containerSx={{ width: '100%', marginTop: '1rem' }}
                 />
                 <Box style={{ display: 'flex', alignItems: 'center' }}>
-                    <FormControlLabel control={<Checkbox defaultChecked />} label='' />
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                defaultChecked
+                                sx={{
+                                    transition: 'background-color 1s ease, color 1s ease, border-color 1s ease'
+                                }}
+                            />
+                        }
+                        label=''
+                    />
                     <Typography sx={{marginLeft: '-1.4rem', fontSize: '0.8rem'}}>
                         Remember me
                     </Typography>

@@ -1,8 +1,11 @@
-﻿import { useEffect } from 'react';
+﻿//React Import
+import { useEffect } from 'react';
+import { useMediaQuery } from 'react-responsive';
+
+//MUI Import
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { useTheme } from '@mui/material';
-import { useMediaQuery } from 'react-responsive';
 
 //My components import
 import { useHomeContext } from '../Home/HomeContext'
@@ -77,8 +80,8 @@ export default function DictionaryDataGrid() {
     const theme = useTheme();
     const [rows, setRows] = rowsState;
 
-    const isDesktop = useMediaQuery({ minWidth: 600 });
-    const columns = isDesktop ? columnsDesktop : columnsMobile;
+    const isMobile = useMediaQuery({ minWidth: 600 });
+    const columns = isMobile ? columnsDesktop : columnsMobile;
 
     useEffect(() => {
         fetchJargon()

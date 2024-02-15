@@ -1,5 +1,6 @@
 ﻿//React Import
 import React from 'react';
+import { useMediaQuery } from 'react-responsive';
 
 //MUI Import
 import AppBar from '@mui/material/AppBar';
@@ -14,12 +15,22 @@ import CustomizationModal from '../CustomizationModal/CustomizationModal'
 import Logout from '../Header/Logout'
 import Login from '../Header/Login'
 import { useUserContext } from '../../../Context/UserContext';
+import Drawer from '../../Common/Drawer/Drawer'
 
 
 const Header: React.FC = () => {
     //Работа с контекстом
     const { isLogged } = useUserContext();
     const theme = useTheme();
+
+    const isMobile = useMediaQuery({ maxWidth: 692 });
+    if (isMobile) {
+        return (
+            <>
+                <Drawer />
+            </>
+        )
+    }
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -29,12 +40,13 @@ const Header: React.FC = () => {
                     backgroundColor: `${theme.palette.action.disabledBackground}`
                 }}
             >
-                <Toolbar style={{
-                    paddingLeft: 0,
-                    paddingTop: 0,
-                    paddingBottom: 0,
-                    height: '4.1rem',
-                    minHeight: '0',
+                <Toolbar
+                    style={{
+                        paddingLeft: 0,
+                        paddingTop: 0,
+                        paddingBottom: 0,
+                        height: '4.1rem',
+                        minHeight: '0',
                     }}
                 >
 
