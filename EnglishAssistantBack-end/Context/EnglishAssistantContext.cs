@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using EnglishAssistantBackend.Models.Entities;
 using Microsoft.EntityFrameworkCore;
+using EnglishAssistantBackend.Models.Entities;
 
 namespace EnglishAssistantBackend.Context;
 
@@ -16,11 +16,15 @@ public partial class EnglishAssistantContext : DbContext
     {
     }
 
+    public virtual DbSet<Jargon> Jargons { get; set; }
+
     public virtual DbSet<JargonDictionary> JargonDictionaries { get; set; }
 
     public virtual DbSet<Role> Roles { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
+
+    public virtual DbSet<UserJargon> UserJargons { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -28,6 +32,20 @@ public partial class EnglishAssistantContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Jargon>(entity =>
+        {
+            entity.ToTable("Jargon");
+
+            entity.Property(e => e.ExampleOfUse).HasColumnType("text");
+            entity.Property(e => e.Jargon1)
+                .HasMaxLength(256)
+                .IsUnicode(false)
+                .HasColumnName("Jargon");
+            entity.Property(e => e.Translate)
+                .HasMaxLength(256)
+                .IsUnicode(false);
+        });
+
         modelBuilder.Entity<JargonDictionary>(entity =>
         {
             entity.ToTable("JargonDictionary");
@@ -66,6 +84,21 @@ public partial class EnglishAssistantContext : DbContext
                 .HasForeignKey(d => d.RoleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_User_Role");
+        });
+
+        modelBuilder.Entity<UserJargon>(entity =>
+        {
+            entity.HasKey(e => e.UserJargonsId).HasName("PK_UserJargons_1");
+
+            entity.HasOne(d => d.Jargon).WithMany(p => p.UserJargons)
+                .HasForeignKey(d => d.JargonId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_UserJargons_Jargon");
+
+            entity.HasOne(d => d.User).WithMany(p => p.UserJargons)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_UserJargons_User");
         });
 
         OnModelCreatingPartial(modelBuilder);

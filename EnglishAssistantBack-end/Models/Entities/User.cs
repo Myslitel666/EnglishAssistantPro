@@ -14,4 +14,6 @@ public partial class User
     public string? Password { get; set; }
 
     public virtual Role Role { get; set; } = null!;
+
+    public virtual ICollection<UserJargon> UserJargons { get; set; } = new List<UserJargon>();
 }
