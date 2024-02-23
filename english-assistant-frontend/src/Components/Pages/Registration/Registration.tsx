@@ -1,6 +1,6 @@
 ﻿//React Import
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 //MUI Import
 import Box from '@mui/material/Box'
@@ -27,12 +27,13 @@ const Registration: React.FC = () => {
     const [password, setPassword] = useState('aaaaaa1');
     const [confirmPassword, setConfirmPassword] = useState('aaaaaa1');
     const navigate = useNavigate();
+    const location = useLocation();
 
     const [isError, setIsError] = useState(true);
     const { getColorFromLabel } = useColorLabel('green');
 
     //Работа с контекстом
-    const { setUser } = useUserContext();
+    const { setUser, logoutUser } = useUserContext();
 
     const apiUrl = process.env.REACT_APP_API_URL as string;
 
@@ -75,6 +76,12 @@ const Registration: React.FC = () => {
             return () => clearTimeout(timeoutId);
         }
     }, [isError]);
+
+    useEffect(() => {
+        if (location.pathname === '/reg') {
+            logoutUser();
+        }
+    }, [location.pathname]);
 
     function hasDigits(str: string) {
         return /\d/.test(str);
