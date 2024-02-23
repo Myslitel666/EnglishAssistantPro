@@ -11,30 +11,10 @@ import { UserProvider } from '../src/Context/UserContext';
 import Home from './Components/Pages/Home/Home';
 import Registration from '../src/Components/Pages/Registration/Registration';
 import Authorization from '../src/Components/Pages/Authorization/Authorization';
-import { useUserContext } from '../src/Context/UserContext';
+import Redirect from '../src/Components/Common/Redirect'
 
 //CSS Import
 import '../src/App.css'
-
-function Redirect() {
-    const navigate = useNavigate();
-    const { getUser } = useUserContext();
-    const user = getUser()
-
-    useEffect(() => {
-        if (user.userId !== -1) {
-            navigate('/home');
-        }
-        else {
-            navigate('/auth');
-        }
-    });
-
-    return (
-        <>
-        </>
-    )
-}
 
 function App() {
     return (
@@ -45,7 +25,7 @@ function App() {
                 <Routes>
                     <Route
                         path="/"
-                        element={<Redirect />}
+                            element={<Redirect />}
                     />
                     <Route
                         path="/home"
