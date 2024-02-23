@@ -16,6 +16,7 @@ import MyButton from '../../Common/MyButton';
 import MyLink from '../../Common/MyLink';
 import { useColorLabel } from '../../../UseColorLabel';
 import PasswordTextField from '../../Common/PasswordTextField'
+import { useUserContext } from '../../../Context/UserContext';
 
 const Registration: React.FC = () => {
     const theme = useTheme();
@@ -29,6 +30,9 @@ const Registration: React.FC = () => {
 
     const [isError, setIsError] = useState(true);
     const { getColorFromLabel } = useColorLabel('green');
+
+    //Работа с контекстом
+    const { setUser } = useUserContext();
 
     const apiUrl = process.env.REACT_APP_API_URL as string;
 
@@ -52,6 +56,12 @@ const Registration: React.FC = () => {
 
         const data = await response.json();
         updateFeedbackMessage(data.isError, data.feedbackMessage);
+
+        if (!data.isError) {
+            setTimeout(() => {
+                setUser(data.user.userId, data.user.role, data.user.username);
+            }, 500);
+        }
     };
 
     useEffect(() => {
@@ -59,7 +69,7 @@ const Registration: React.FC = () => {
             // Выполнить переход после успешной регистрации
             const timeoutId = setTimeout(() => {
                 navigate('/home');
-            }, 1000);
+            }, 500);
 
             // Очистить таймаут, чтобы избежать утечек при размонтировании компонента
             return () => clearTimeout(timeoutId);

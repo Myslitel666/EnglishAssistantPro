@@ -31,8 +31,14 @@ export default function BasicModal() {
 
     return (
         <div>
-            <Button onClick={handleOpen}>
-                <SettingsOutlinedIcon sx={{color:'text.primary'}} />
+            <Button
+                onClick={handleOpen}
+                style={{
+                    minWidth: 0,
+                    marginRight: '0.33rem'
+                }}
+            >
+                <SettingsOutlinedIcon sx={{ color:'text.primary'}} />
             </Button>
             <Modal
                 open={open}

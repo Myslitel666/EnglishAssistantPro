@@ -22,6 +22,10 @@ function App() {
             <Router>
                 <Routes>
                     <Route
+                        path="/"
+                        
+                    />
+                    <Route
                         path="/home"
                         element={ <Home /> }
                     />

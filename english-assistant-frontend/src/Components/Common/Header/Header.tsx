@@ -23,7 +23,7 @@ const Header: React.FC = () => {
     const { isLogged } = useUserContext();
     const theme = useTheme();
 
-    const isMobile = useMediaQuery({ maxWidth: 692 });
+    const isMobile = useMediaQuery({ maxWidth: 725 });
     if (isMobile) {
         return (
             <>

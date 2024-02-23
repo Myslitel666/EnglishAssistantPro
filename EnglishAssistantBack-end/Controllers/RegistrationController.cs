@@ -27,11 +27,12 @@ namespace EnglishAssistantBackend.Controllers
             //Если пользователь с данным username уже присутствует в System
             if (existingUser != null)
             {
-                return Ok(new
+                AuthorizationResponseDto response = new AuthorizationResponseDto()
                 {
                     IsError = true,
                     FeedbackMessage = "✗A user with this username already exists"
-                });
+                };
+                return Ok(response);
             }
 
             //Извлекаем пользователя из списка по паролю (в случае его отсутствия получим null)
@@ -41,16 +42,17 @@ namespace EnglishAssistantBackend.Controllers
             //Если пользователь с данным паролем уже присутствует в System
             if (existingUser != null)
             {
-                return Ok(new
+                AuthorizationResponseDto response = new AuthorizationResponseDto()
                 {
                     IsError = true,
                     FeedbackMessage = "✗This password is already taken"
-                });
+                };
+                return Ok(response);
             }
 
             try
             {
-                // Получаем идентификатор роли по её имени из базы данных
+                //Получаем идентификатор роли по её имени из базы данных
                 var role = await _dbContext.Roles.FirstOrDefaultAsync(r => r.RoleName == userDto.Role);
 
                 if (role == null)
@@ -71,19 +73,34 @@ namespace EnglishAssistantBackend.Controllers
                 _dbContext.Users.AddAsync(user);
                 await _dbContext.SaveChangesAsync();
 
-                return Ok(new
+                //Извлекаем пользователя из списка по username для отправки на client
+                var registeredUser = await _dbContext.Users
+                .FirstOrDefaultAsync(user => user.Username == userDto.Username);
+
+                //Создаю экземпляр UserDto
+                UserDto userResponseDto = new UserDto()
+                {
+                    UserId = registeredUser.UserId,
+                    Role = role.RoleName,
+                    Username = registeredUser.Username,
+                };
+
+                AuthorizationResponseDto response = new AuthorizationResponseDto()
                 {
                     IsError = false,
-                    FeedbackMessage = "✓User successfully registered"
-                });
+                    FeedbackMessage = "✓User successfully registered",
+                    User = userResponseDto
+                };
+                return Ok(response);
             }
             catch (Exception ex)
             {
-                return BadRequest(new
+                AuthorizationResponseDto response = new AuthorizationResponseDto()
                 {
                     IsError = true,
                     FeedbackMessage = $"✗Failed to complete the registration. Error: {ex.Message}"
-                });
+                };
+                return BadRequest(response);
             }
         }
     }
