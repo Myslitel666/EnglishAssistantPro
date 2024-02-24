@@ -7,7 +7,7 @@ public partial class Jargon
 {
     public int JargonId { get; set; }
 
-    public string? Jargon1 { get; set; }
+    public string? JargonInstance { get; set; }
 
     public string? Translate { get; set; }
 

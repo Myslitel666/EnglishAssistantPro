@@ -11,6 +11,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { useHomeContext } from '../Home/HomeContext'
 import MyInputBase from '../../Common/MyInputBase';
 import MyButton from '../../Common/MyButton';
+import { useUserContext } from '../../../Context/UserContext';
 
 const DictionaryEditorForm: React.FC = () => {
     //Работа с контекстом домашней страницы
@@ -20,9 +21,13 @@ const DictionaryEditorForm: React.FC = () => {
     const [id, setId] = idState;
     const [exampleOfUse, setExampleOfUse] = exampleOfUseState;
 
+    //Работа с контекстом пользователя
+    const { getUser } = useUserContext();
+
     const apiUrl = process.env.REACT_APP_API_URL as string;
     const [feedbackMessage, setFeedbackMessage] = useState('');
     const [isError, setIsError] = useState(false);
+    const user = getUser();
 
     const updateFeedbackMessage = (isError: boolean, message: string) => {
         setIsError(isError);
@@ -50,6 +55,7 @@ const DictionaryEditorForm: React.FC = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
+                    userId: user.userId,
                     jargon: jargon,
                     translate: translate,
                     exampleOfUse: exampleOfUse

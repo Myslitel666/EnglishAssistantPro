@@ -37,10 +37,10 @@ public partial class EnglishAssistantContext : DbContext
             entity.ToTable("Jargon");
 
             entity.Property(e => e.ExampleOfUse).HasColumnType("text");
-            entity.Property(e => e.Jargon1)
+            entity.Property(e => e.JargonInstance)
                 .HasMaxLength(256)
                 .IsUnicode(false)
-                .HasColumnName("Jargon");
+                .HasColumnName("JargonInstance");
             entity.Property(e => e.Translate)
                 .HasMaxLength(256)
                 .IsUnicode(false);

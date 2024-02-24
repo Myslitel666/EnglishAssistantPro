@@ -27,14 +27,25 @@ namespace EnglishAssistantBackend.Controllers
         }
 
         [HttpPost("setJargonDictionary")]
-        public async Task<IActionResult> SendJargon([FromBody] JargonDictionaryDto jargonDictionaryDto)
+        public async Task<IActionResult> SendJargon([FromBody] JargonDto jargonDto)
         {
-            //Извлекаем слово из словаря (в случае его отсутствия получим null)
-            var existingWord = await _dbContext.JargonDictionaries
-            .FirstOrDefaultAsync(j => j.Jargon == jargonDictionaryDto.Jargon);
+            //Извлекаем слово из общего словаря (в случае его отсутствия получим null)
+            var existingJargon = await _dbContext.Jargons
+            .FirstOrDefaultAsync(j => j.JargonInstance == jargonDto.JargonInstance);
 
-            //Если слово уже присутствует в словаре
-            if (existingWord != null)
+            //Если слова нет в общем словаре
+
+            UserJargon existingUserJargon = null;
+
+            //Извлекаем слово пользователя, если оно есть
+            if (existingJargon != null)
+            {
+                existingUserJargon = await _dbContext.UserJargons
+                .FirstOrDefaultAsync(j => j.JargonId == existingJargon.JargonId && j.UserId == jargonDto.UserId);
+            }
+
+            //Если слово уже присутствует в пользовательском словаре
+            if (existingUserJargon != null)
             {
                 return Ok(new
                 {
@@ -45,20 +56,35 @@ namespace EnglishAssistantBackend.Controllers
 
             try
             {
-                var jargonDictionary = new JargonDictionary
+                //Добавляем слово в общий словарь
+                var jargon = new Jargon
                 {
-                    Jargon = jargonDictionaryDto.Jargon,
-                    Translate = jargonDictionaryDto.Translate,
-                    ExampleOfUse = jargonDictionaryDto.ExampleOfUse,
+                    JargonInstance = jargonDto.JargonInstance,
+                    Translate = jargonDto.Translate,
+                    ExampleOfUse = jargonDto.ExampleOfUse,
                 };
-                _dbContext.JargonDictionaries.AddAsync(jargonDictionary);
+                _dbContext.Jargons.AddAsync(jargon);
                 await _dbContext.SaveChangesAsync();
+
+                //Узнаём id добавленного слова в общий словарь
+                existingJargon = await _dbContext.Jargons
+                .FirstOrDefaultAsync(j => j.JargonInstance == jargonDto.JargonInstance);
+
+                //Сохраняем id слова в словаре пользователя
+                var userJargon = new UserJargon
+                {
+                    JargonId = existingJargon.JargonId,
+                    UserId = jargonDto.UserId
+                };
+                _dbContext.UserJargons.AddAsync(userJargon);
+                await _dbContext.SaveChangesAsync();
+
                 return Ok(
-                    new
-                    {
-                        IsError = false,
-                        FeedbackMessage = "✓The word has been successfully added"
-                    });
+                new
+                {
+                    IsError = false,
+                    FeedbackMessage = "✓The word has been successfully added"
+                });
             }
             catch (Exception ex)
             {
@@ -71,13 +97,13 @@ namespace EnglishAssistantBackend.Controllers
         }
 
         [HttpPost("modifyJargonDictionary")]
-        public async Task<IActionResult> ModifyJargon([FromBody] JargonDictionaryDto jargonDictionaryDto)
+        public async Task<IActionResult> ModifyJargon([FromBody] JargonDto jargonDto)
         {
             //Извлекаем слово из словаря по id
             //(в случае отсутствия слова с данным id в словаре получим null)
 
             var existingWord = await _dbContext.JargonDictionaries
-            .FirstOrDefaultAsync(j => j.Id == jargonDictionaryDto.Id);
+            .FirstOrDefaultAsync(j => j.Id == jargonDto.Id);
 
             //Если слова с таким id нет в словаре
             if (existingWord == null)
@@ -92,12 +118,12 @@ namespace EnglishAssistantBackend.Controllers
             try
             {
                 //Get instance by Id
-                int OldId = jargonDictionaryDto.Id;
+                int OldId = jargonDto.Id;
                 var jargonDictionary = await _dbContext.JargonDictionaries.FindAsync(OldId);
                 //Modify the values of JargonDictionary attributes
-                jargonDictionary.Jargon = jargonDictionaryDto.Jargon;
-                jargonDictionary.Translate = jargonDictionaryDto.Translate;
-                jargonDictionary.ExampleOfUse = jargonDictionaryDto.ExampleOfUse;
+                jargonDictionary.Jargon = jargonDto.JargonInstance;
+                jargonDictionary.Translate = jargonDto.Translate;
+                jargonDictionary.ExampleOfUse = jargonDto.ExampleOfUse;
                 _dbContext.Entry(existingWord).State = EntityState.Detached; //Отменяем отслеживание элемента по id
                 _dbContext.JargonDictionaries.Update(jargonDictionary);
                 await _dbContext.SaveChangesAsync();
@@ -119,12 +145,12 @@ namespace EnglishAssistantBackend.Controllers
         }
 
         [HttpPost("deleteJargonDictionary")]
-        public async Task<IActionResult> DeleteJargon([FromBody] JargonDictionaryDto jargonDictionaryDto)
+        public async Task<IActionResult> DeleteJargon([FromBody] JargonDto jargonDto)
         {
             //Извлекаем слово из словаря по id
             //(в случае отсутствия слова с данным id в словаре получим null)
             var existingWord = await _dbContext.JargonDictionaries
-            .FirstOrDefaultAsync(j => j.Id == jargonDictionaryDto.Id);
+            .FirstOrDefaultAsync(j => j.Id == jargonDto.Id);
 
             //Если слова с таким id нет в словаре
             if (existingWord == null)
@@ -140,10 +166,10 @@ namespace EnglishAssistantBackend.Controllers
             {
                 var jargonDictionary = new JargonDictionary
                 {
-                    Id = jargonDictionaryDto.Id,
-                    Jargon = jargonDictionaryDto.Jargon,
-                    Translate = jargonDictionaryDto.Translate,
-                    ExampleOfUse = jargonDictionaryDto.ExampleOfUse,
+                    Id = jargonDto.Id,
+                    Jargon = jargonDto.JargonInstance,
+                    Translate = jargonDto.Translate,
+                    ExampleOfUse = jargonDto.ExampleOfUse,
                 };
                 _dbContext.Entry(existingWord).State = EntityState.Detached; //Отменяем отслеживание элемента по id
                 _dbContext.JargonDictionaries.Remove(jargonDictionary);
