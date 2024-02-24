@@ -56,7 +56,7 @@ const DictionaryEditorForm: React.FC = () => {
                 },
                 body: JSON.stringify({
                     userId: user.userId,
-                    jargon: jargon,
+                    jargonInstance: jargon,
                     translate: translate,
                     exampleOfUse: exampleOfUse
                 }),

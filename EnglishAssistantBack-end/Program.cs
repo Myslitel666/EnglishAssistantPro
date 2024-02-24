@@ -13,6 +13,8 @@ builder.Services.AddDbContext<EnglishAssistantContext>(options =>
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+builder.Services.AddScoped<IUserJargonsRepository, UserJargonsRepository>();
+builder.Services.AddScoped<IJargonRepository, JargonRepository>();
 
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IJargonDictionaryService, JargonDictionaryService>();
