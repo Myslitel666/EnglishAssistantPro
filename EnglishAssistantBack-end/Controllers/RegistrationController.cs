@@ -3,6 +3,8 @@ using EnglishAssistantBackend.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EnglishAssistantBackend.DTOs;
+using EnglishAssistantBackend.Interfaces;
+using EnglishAssistantBackend.Repositories;
 
 namespace EnglishAssistantBackend.Controllers
 {
@@ -10,19 +12,20 @@ namespace EnglishAssistantBackend.Controllers
     [ApiController]
     public class RegistrationController : Controller
     {
-        private EnglishAssistantContext _dbContext;
+        private readonly IRoleRepository _roleRepository;
+        private readonly IUserRepository _userRepository;
 
-        public RegistrationController()
+        public RegistrationController(IUserRepository userRepository, IRoleRepository roleRepository)
         {
-            _dbContext = new EnglishAssistantContext();
+            _roleRepository = roleRepository ?? throw new ArgumentNullException(nameof(roleRepository));
+            _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
         }
 
         [HttpPost("setUser")]
         public async Task<IActionResult> SetUser([FromBody] UserDto userDto)
         {
             //Извлекаем пользователя из списка по username (в случае его отсутствия получим null)
-            var existingUser = await _dbContext.Users
-            .FirstOrDefaultAsync(user => user.Username == userDto.Username);
+            var existingUser = await _userRepository.GetUserByUsername(userDto.Username);
 
             //Если пользователь с данным username уже присутствует в System
             if (existingUser != null)
@@ -36,8 +39,7 @@ namespace EnglishAssistantBackend.Controllers
             }
 
             //Извлекаем пользователя из списка по паролю (в случае его отсутствия получим null)
-            existingUser = await _dbContext.Users
-            .FirstOrDefaultAsync(user => user.Password == userDto.Password);
+            existingUser = await _userRepository.GetUserByPassword(userDto.Password);
 
             //Если пользователь с данным паролем уже присутствует в System
             if (existingUser != null)
@@ -53,7 +55,7 @@ namespace EnglishAssistantBackend.Controllers
             try
             {
                 //Получаем идентификатор роли по её имени из базы данных
-                var role = await _dbContext.Roles.FirstOrDefaultAsync(r => r.RoleName == userDto.Role);
+                var role = await _roleRepository.GetIdByRole(userDto.Role);
 
                 if (role == null)
                 {
@@ -70,12 +72,10 @@ namespace EnglishAssistantBackend.Controllers
                     Username = userDto.Username,
                     Password = userDto.Password,
                 };
-                _dbContext.Users.AddAsync(user);
-                await _dbContext.SaveChangesAsync();
+                await _userRepository.AddUser(user);
 
                 //Извлекаем пользователя из списка по username для отправки на client
-                var registeredUser = await _dbContext.Users
-                .FirstOrDefaultAsync(user => user.Username == userDto.Username);
+                var registeredUser = await _userRepository.GetUserByUsername(userDto.Username);
 
                 //Создаю экземпляр UserDto
                 UserDto userResponseDto = new UserDto()

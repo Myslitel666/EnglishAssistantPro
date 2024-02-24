@@ -8,6 +8,8 @@ namespace EnglishAssistantBackend.Interfaces
 
         Task<User> GetUserById(int userId);
 
+        Task<User> GetUserByPassword(string password);
+
         Task AddUser(User user);
     }
 }

@@ -3,6 +3,8 @@ using EnglishAssistantBackend.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EnglishAssistantBackend.DTOs;
+using EnglishAssistantBackend.Interfaces;
+using EnglishAssistantBackend.Repositories;
 
 namespace EnglishAssistantBackend.Controllers
 {
@@ -10,19 +12,20 @@ namespace EnglishAssistantBackend.Controllers
     [ApiController]
     public class AuthorizationController : Controller
     {
-        private EnglishAssistantContext _dbContext;
+        private readonly IRoleRepository _roleRepository;
+        private readonly IUserRepository _userRepository;
 
-        public AuthorizationController()
+        public AuthorizationController(IUserRepository userRepository, IRoleRepository roleRepository)
         {
-            _dbContext = new EnglishAssistantContext();
+            _roleRepository = roleRepository ?? throw new ArgumentNullException(nameof(roleRepository));
+            _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
         }
 
         [HttpPost("findUser")]
         public async Task<IActionResult> FindUser([FromBody] UserDto userDto)
         {
             //Извлекаем пользователя из списка по username (в случае его отсутствия получим null)
-            var existingUser = await _dbContext.Users
-            .FirstOrDefaultAsync(user => user.Username == userDto.Username);
+            var existingUser = await _userRepository.GetUserByUsername(userDto.Username);
 
             //Если пользователя с данным username не существует
             if (existingUser == null)
@@ -51,7 +54,7 @@ namespace EnglishAssistantBackend.Controllers
                     try
                     {
                         // Получаем роль пользователя по её идентификатору в базе данных
-                        var role = await _dbContext.Roles.FirstOrDefaultAsync(r => r.RoleId == existingUser.RoleId);
+                        var role = await _roleRepository.GetRoleById(existingUser.RoleId);
 
                         //Создаю экземпляр UserDto
                         UserDto userResponseDto = new UserDto()
