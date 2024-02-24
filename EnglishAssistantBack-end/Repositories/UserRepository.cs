@@ -1,5 +1,5 @@
 ﻿using EnglishAssistantBackend.Context;
-using EnglishAssistantBackend.Interfaces;
+using EnglishAssistantBackend.Interfaces.Repositories;
 using EnglishAssistantBackend.Models;
 using EnglishAssistantBackend.Models.Entities;
 using Microsoft.EntityFrameworkCore;

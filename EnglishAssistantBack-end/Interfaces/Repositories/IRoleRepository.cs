@@ -1,6 +1,6 @@
 ﻿using EnglishAssistantBackend.Models.Entities;
 
-namespace EnglishAssistantBackend.Interfaces
+namespace EnglishAssistantBackend.Interfaces.Repositories
 {
     public interface IRoleRepository
     {

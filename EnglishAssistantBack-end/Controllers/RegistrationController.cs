@@ -3,8 +3,8 @@ using EnglishAssistantBackend.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EnglishAssistantBackend.DTOs;
-using EnglishAssistantBackend.Interfaces;
 using EnglishAssistantBackend.Repositories;
+using EnglishAssistantBackend.Interfaces.Repositories;
 
 namespace EnglishAssistantBackend.Controllers
 {

@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using EnglishAssistantBackend.Context;
-using EnglishAssistantBackend.Interfaces;
 using EnglishAssistantBackend.Repositories;
+using EnglishAssistantBackend.Interfaces.Repositories;
+using EnglishAssistantBackend.Interfaces.Services;
+using EnglishAssistantBackend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,8 @@ builder.Services.AddDbContext<EnglishAssistantContext>(options =>
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+
+builder.Services.AddScoped<IAccountService, AccountService>();
 
 // Add services to the container.
 builder.Services.AddControllers();
