@@ -22,9 +22,9 @@ namespace EnglishAssistantBackend.Controllers
         [HttpPost("findUser")]
         public async Task<IActionResult> FindUser([FromBody] UserDto userDto)
         {
-            var response = await _accountService.AuthorizeUser(userDto);
+            var authorizationResponse = await _accountService.AuthorizeUser(userDto);
 
-            return Ok(response);
+            return Ok(authorizationResponse);
         }
     }
 }

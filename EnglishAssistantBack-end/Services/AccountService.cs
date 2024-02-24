@@ -1,6 +1,7 @@
 ﻿using EnglishAssistantBackend.DTOs;
 using EnglishAssistantBackend.Interfaces.Services;
 using EnglishAssistantBackend.Interfaces.Repositories;
+using EnglishAssistantBackend.Models.Entities;
 
 namespace EnglishAssistantBackend.Services
 {
@@ -23,7 +24,7 @@ namespace EnglishAssistantBackend.Services
             //Если пользователя с данным username не существует
             if (existingUser == null)
             {
-                AuthorizationResponseDto response = new AuthorizationResponseDto()
+                var response = new AuthorizationResponseDto()
                 {
                     IsError = true,
                     FeedbackMessage = "✗A user with this username does not exist"
@@ -35,7 +36,7 @@ namespace EnglishAssistantBackend.Services
                 //Если пароль не верный
                 if (existingUser.Password != userDto.Password)
                 {
-                    AuthorizationResponseDto response = new AuthorizationResponseDto()
+                    var response = new AuthorizationResponseDto()
                     {
                         IsError = true,
                         FeedbackMessage = "✗The password is incorrect"
@@ -50,14 +51,14 @@ namespace EnglishAssistantBackend.Services
                         var role = await _roleRepository.GetRoleById(existingUser.RoleId);
 
                         //Создаю экземпляр UserDto
-                        UserDto userResponseDto = new UserDto()
+                        var userResponseDto = new UserDto()
                         {
                             UserId = existingUser.UserId,
                             Role = role.RoleName,
                             Username = existingUser.Username,
                         };
 
-                        AuthorizationResponseDto response = new AuthorizationResponseDto()
+                        var response = new AuthorizationResponseDto()
                         {
                             IsError = false,
                             FeedbackMessage = "✓User successfully authorized",
@@ -75,6 +76,91 @@ namespace EnglishAssistantBackend.Services
                         return response;
                     }
                 }
+            }
+        }
+
+        public async Task<AuthorizationResponseDto> RegisterUser(UserDto userDto)
+        {
+            //Извлекаем пользователя из списка по username (в случае его отсутствия получим null)
+            var existingUser = await _userRepository.GetUserByUsername(userDto.Username);
+
+            //Если пользователь с данным username уже присутствует в System
+            if (existingUser != null)
+            {
+                var response = new AuthorizationResponseDto()
+                {
+                    IsError = true,
+                    FeedbackMessage = "✗A user with this username already exists"
+                };
+                return response;
+            }
+
+            //Извлекаем пользователя из списка по паролю (в случае его отсутствия получим null)
+            existingUser = await _userRepository.GetUserByPassword(userDto.Password);
+
+            //Если пользователь с данным паролем уже присутствует в System
+            if (existingUser != null)
+            {
+                var response = new AuthorizationResponseDto()
+                {
+                    IsError = true,
+                    FeedbackMessage = "✗This password is already taken"
+                };
+                return response;
+            }
+
+            try
+            {
+                //Получаем идентификатор роли по её имени из базы данных
+                var role = await _roleRepository.GetIdByRole(userDto.Role);
+
+                if (role == null)
+                {
+                    var response = new AuthorizationResponseDto()
+                    {
+                        IsError = true,
+                        FeedbackMessage = "✗Role does not exist"
+                    };
+                    return response;
+                }
+                else
+                {
+                    var user = new User
+                    {
+                        RoleId = role.RoleId,
+                        Username = userDto.Username,
+                        Password = userDto.Password,
+                    };
+                    await _userRepository.AddUser(user);
+
+                    //Извлекаем пользователя из списка по username для отправки на client
+                    var registeredUser = await _userRepository.GetUserByUsername(userDto.Username);
+
+                    //Создаю экземпляр UserDto
+                    var userResponseDto = new UserDto()
+                    {
+                        UserId = registeredUser.UserId,
+                        Role = role.RoleName,
+                        Username = registeredUser.Username,
+                    };
+
+                    var response = new AuthorizationResponseDto()
+                    {
+                        IsError = false,
+                        FeedbackMessage = "✓User successfully registered",
+                        User = userResponseDto
+                    };
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                var response = new AuthorizationResponseDto()
+                {
+                    IsError = true,
+                    FeedbackMessage = $"✗Failed to complete the registration. Error: {ex.Message}"
+                };
+                return response;
             }
         }
     }
