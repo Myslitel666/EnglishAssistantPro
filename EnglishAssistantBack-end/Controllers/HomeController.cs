@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using EnglishAssistentBackend.DTOs;
 using EnglishAssistantBackend.Context;
 using EnglishAssistantBackend.Models.Entities;
+using EnglishAssistantBackend.DTOs.Requests;
+using EnglishAssistantBackend.Interfaces.Services;
 
 namespace EnglishAssistantBackend.Controllers
 {
@@ -11,10 +12,12 @@ namespace EnglishAssistantBackend.Controllers
     public class HomeController : Controller
     {
         private EnglishAssistantContext _dbContext;
+        private readonly IJargonDictionaryService _jargonDictionaryService;
 
-        public HomeController()
+        public HomeController(IJargonDictionaryService jargonDictionaryService)
         {
             _dbContext = new EnglishAssistantContext();
+            _jargonDictionaryService = jargonDictionaryService;
         }
 
         [HttpGet("getJargonDictionary")]
@@ -29,71 +32,67 @@ namespace EnglishAssistantBackend.Controllers
         [HttpPost("setJargonDictionary")]
         public async Task<IActionResult> SendJargon([FromBody] JargonDto jargonDto)
         {
-            //Извлекаем слово из общего словаря (в случае его отсутствия получим null)
-            var existingJargon = await _dbContext.Jargons
-            .FirstOrDefaultAsync(j => j.JargonInstance == jargonDto.JargonInstance);
+            var response = await _jargonDictionaryService.AddJargon( jargonDto );
+            ////Извлекаем слово из общего словаря (в случае его отсутствия получим null)
+            //var existingJargon = await _dbContext.Jargons
+            //.FirstOrDefaultAsync(j => j.JargonInstance == jargonDto.JargonInstance);
 
-            //Если слова нет в общем словаре
+            ////Если слова нет в общем словаре
 
-            UserJargon existingUserJargon = null;
+            //UserJargon existingUserJargon = null;
 
-            //Извлекаем слово пользователя, если оно есть
-            if (existingJargon != null)
-            {
-                existingUserJargon = await _dbContext.UserJargons
-                .FirstOrDefaultAsync(j => j.JargonId == existingJargon.JargonId && j.UserId == jargonDto.UserId);
-            }
+            ////Извлекаем слово пользователя, если оно есть
+            //if (existingJargon != null)
+            //{
+            //    existingUserJargon = await _dbContext.UserJargons
+            //    .FirstOrDefaultAsync(j => j.JargonId == existingJargon.JargonId && j.UserId == jargonDto.UserId);
+            //}
 
-            //Если слово уже присутствует в пользовательском словаре
-            if (existingUserJargon != null)
-            {
-                return Ok(new
-                {
-                    IsError = true,
-                    FeedbackMessage = "✗The word already exists in the dictionary"
-                });
-            }
+            ////Если слово уже присутствует в пользовательском словаре
+            //if (existingUserJargon != null)
+            //{
+            //    return Ok(new JargonResponseDto
+            //    {
+            //        IsError = true,
+            //        FeedbackMessage = "✗The word already exists in the dictionary"
+            //    });
+            //}
 
-            try
-            {
-                //Добавляем слово в общий словарь
-                var jargon = new Jargon
-                {
-                    JargonInstance = jargonDto.JargonInstance,
-                    Translate = jargonDto.Translate,
-                    ExampleOfUse = jargonDto.ExampleOfUse,
-                };
-                _dbContext.Jargons.AddAsync(jargon);
-                await _dbContext.SaveChangesAsync();
+            //try
+            //{
+            //    //Добавляем слово в общий словарь
+            //    var jargon = new Jargon
+            //    {
+            //        JargonInstance = jargonDto.JargonInstance,
+            //        Translate = jargonDto.Translate,
+            //        ExampleOfUse = jargonDto.ExampleOfUse,
+            //    };
+            //    _dbContext.Jargons.AddAsync(jargon);
+            //    await _dbContext.SaveChangesAsync();
 
-                //Узнаём id добавленного слова в общий словарь
-                existingJargon = await _dbContext.Jargons
-                .FirstOrDefaultAsync(j => j.JargonInstance == jargonDto.JargonInstance);
+            //    //Узнаём id добавленного слова в общий словарь
+            //    existingJargon = await _dbContext.Jargons
+            //    .FirstOrDefaultAsync(j => j.JargonInstance == jargonDto.JargonInstance);
 
-                //Сохраняем id слова в словаре пользователя
-                var userJargon = new UserJargon
-                {
-                    JargonId = existingJargon.JargonId,
-                    UserId = jargonDto.UserId
-                };
-                _dbContext.UserJargons.AddAsync(userJargon);
-                await _dbContext.SaveChangesAsync();
+            //    //Сохраняем id слова в словаре пользователя
+            //    var userJargon = new UserJargon
+            //    {
+            //        JargonId = existingJargon.JargonId,
+            //        UserId = jargonDto.UserId
+            //    };
+            //    _dbContext.UserJargons.AddAsync(userJargon);
+            //    await _dbContext.SaveChangesAsync();
 
-                return Ok(
-                new
-                {
-                    IsError = false,
-                    FeedbackMessage = "✓The word has been successfully added"
-                });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    IsError = true,
-                    FeedbackMessage = $"✗Failed to add the word. Error: {ex.Message}"
-                });
-            }
+            return Ok(response);
+            //}
+            //catch (Exception ex)
+            //{
+            //return BadRequest(new JargonResponseDto
+            //{
+            //    IsError = true,
+            //    FeedbackMessage = $"✗Failed to add the word. Error: {ex.Message}"
+            //});
+            //}
         }
 
         [HttpPost("modifyJargonDictionary")]

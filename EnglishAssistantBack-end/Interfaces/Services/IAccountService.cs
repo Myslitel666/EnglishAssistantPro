@@ -1,5 +1,5 @@
-﻿using EnglishAssistantBackend.DTOs;
-using Microsoft.AspNetCore.Mvc;
+﻿using EnglishAssistantBackend.DTOs.Requests;
+using EnglishAssistantBackend.DTOs.Responses;
 
 namespace EnglishAssistantBackend.Interfaces.Services
 {
@@ -8,6 +8,5 @@ namespace EnglishAssistantBackend.Interfaces.Services
         Task<AuthorizationResponseDto> AuthorizeUser(UserDto userDto);
 
         Task<AuthorizationResponseDto> RegisterUser(UserDto userDto);
-
     }
 }

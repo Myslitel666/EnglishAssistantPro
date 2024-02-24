@@ -1,7 +1,8 @@
-﻿using EnglishAssistantBackend.DTOs;
-using EnglishAssistantBackend.Interfaces.Services;
+﻿using EnglishAssistantBackend.Interfaces.Services;
 using EnglishAssistantBackend.Interfaces.Repositories;
 using EnglishAssistantBackend.Models.Entities;
+using EnglishAssistantBackend.DTOs.Requests;
+using EnglishAssistantBackend.DTOs.Responses;
 
 namespace EnglishAssistantBackend.Services
 {

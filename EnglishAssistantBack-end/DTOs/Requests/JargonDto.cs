@@ -1,4 +1,4 @@
-﻿namespace EnglishAssistentBackend.DTOs;
+﻿namespace EnglishAssistantBackend.DTOs.Requests;
 
 public class JargonDto
 {

@@ -2,10 +2,10 @@
 using EnglishAssistantBackend.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using EnglishAssistantBackend.DTOs;
 using EnglishAssistantBackend.Repositories;
 using EnglishAssistantBackend.Interfaces.Repositories;
 using EnglishAssistantBackend.Interfaces.Services;
+using EnglishAssistantBackend.DTOs.Requests;
 
 namespace EnglishAssistantBackend.Controllers
 {
