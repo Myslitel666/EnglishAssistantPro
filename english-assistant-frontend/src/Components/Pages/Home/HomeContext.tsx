@@ -1,6 +1,5 @@
 ﻿//React Import
 import React, { createContext, useContext, ReactNode, useState } from 'react';
-import axios from 'axios';
 
 export interface HomeContextProps {
     jargonState: [string, React.Dispatch<React.SetStateAction<string>>];
@@ -33,6 +32,13 @@ type Row = {
     exampleOfUse: string;
 };
 
+type Jargon = {
+    jargonId: number;
+    jargonInstance: string;
+    translate: string;
+    exampleOfUse: string;
+};
+
 export const HomeProvider: React.FC<HomeProviderProps> = ({ children }) => {
     const [jargon, setJargon] = useState('');
     const [translate, setTranslate] = useState('');
@@ -52,16 +58,20 @@ export const HomeProvider: React.FC<HomeProviderProps> = ({ children }) => {
             },
             body: JSON.stringify({
                 userId: userId,
-                //role: 'learner',
-                //username: 'aaa',
-                //password: 'bbb'
             }),
         });
 
         const jsonData = await response.json();
-        console.log(jsonData);
-        //setRows(jsonData);
-        //setBackupRows(jsonData);
+
+        const rows = jsonData.map((item: Jargon) => ({
+            id: item.jargonId.toString(), // Преобразуйте jargonId в строку
+            jargon: item.jargonInstance,
+            translate: item.translate,
+            exampleOfUse: item.exampleOfUse,
+        }));
+
+        setRows(rows);
+        setBackupRows(rows);
     };
 
     const contextValue: HomeContextProps = {

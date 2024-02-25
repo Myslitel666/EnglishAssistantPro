@@ -8,13 +8,6 @@ import Button from '@mui/material/Button'
 //MyComponents Import
 import { useHomeContext } from '../Home/HomeContext'
 
-type Row = {
-    id: string;
-    jargon: string;
-    translate: string;
-    exampleOfUse: string;
-};
-
 const JargonFilter: React.FC = () => {
     const { rowsState, backupRowsState } = useHomeContext();
     const [rows, setRows] = rowsState;
