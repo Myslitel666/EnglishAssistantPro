@@ -7,17 +7,21 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 
 //My components import
 import { useHomeContext } from '../Home/HomeContext'
+import { useUserContext } from '../../../Context/UserContext';
 import DictionaryDataGrid from '../Home/DictionaryDataGrid'
 import JargonFilter from '../Home/JargonFilter'
 
 const LeftHalfScreen: React.FC = () => {
     //Работа с контекстом домашней страницы
     const { fetchJargon } = useHomeContext();
-
     const [rotation, setRotation] = useState(0);
 
+    //Работа с контекстом пользователя
+    const { getUser } = useUserContext();
+    const user = getUser();
+
     const handleClickRefreshIcon = () => {
-        fetchJargon();
+        fetchJargon(user.userId);
         setRotation(rotation + 360);
     }
 

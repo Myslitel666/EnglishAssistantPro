@@ -9,7 +9,7 @@ export interface HomeContextProps {
     exampleOfUseState: [string, React.Dispatch<React.SetStateAction<string>>];
     rowsState: [Row[], React.Dispatch<React.SetStateAction<Row[]>>];
     backupRowsState: [Row[], React.Dispatch<React.SetStateAction<Row[]>>];
-    fetchJargon: () => void;
+    fetchJargon: (userId: number) => void;
 }
 
 const HomeContext = createContext<HomeContextProps | undefined>(undefined);
@@ -44,14 +44,24 @@ export const HomeProvider: React.FC<HomeProviderProps> = ({ children }) => {
 
     const apiUrl = process.env.REACT_APP_API_URL as string;
 
-    const fetchJargon = async () => {
-        try {
-            const response = await axios.get(`${apiUrl}/api/home/getJargonDictionary`);
-            setRows(response.data);
-            setBackupRows(response.data);
-        } catch (error) {
-            console.error('Error fetching popular products:', error);
-        }
+    const fetchJargon = async (userId: number) => {
+        const response = await fetch(`${apiUrl}/api/home/getUserJargons`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                userId: userId,
+                //role: 'learner',
+                //username: 'aaa',
+                //password: 'bbb'
+            }),
+        });
+
+        const jsonData = await response.json();
+        console.log(jsonData);
+        //setRows(jsonData);
+        //setBackupRows(jsonData);
     };
 
     const contextValue: HomeContextProps = {

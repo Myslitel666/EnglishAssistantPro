@@ -9,9 +9,9 @@ import Tooltip from '@mui/material/Tooltip';
 
 //MyComponents Import
 import { useHomeContext } from '../Home/HomeContext'
+import { useUserContext } from '../../../Context/UserContext';
 import MyInputBase from '../../Common/MyInputBase';
 import MyButton from '../../Common/MyButton';
-import { useUserContext } from '../../../Context/UserContext';
 
 const DictionaryEditorForm: React.FC = () => {
     //Работа с контекстом домашней страницы
@@ -23,11 +23,11 @@ const DictionaryEditorForm: React.FC = () => {
 
     //Работа с контекстом пользователя
     const { getUser } = useUserContext();
+    const user = getUser();
 
     const apiUrl = process.env.REACT_APP_API_URL as string;
     const [feedbackMessage, setFeedbackMessage] = useState('');
     const [isError, setIsError] = useState(false);
-    const user = getUser();
 
     const updateFeedbackMessage = (isError: boolean, message: string) => {
         setIsError(isError);
@@ -49,7 +49,7 @@ const DictionaryEditorForm: React.FC = () => {
         }
         else
         {
-            const response = await fetch(`${apiUrl}/api/home/setJargonDictionary`, {
+            const response = await fetch(`${apiUrl}/api/home/setJargon`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ const DictionaryEditorForm: React.FC = () => {
             updateFeedbackMessage(true, 'Enter the "Translate"');
         }
         else {
-            const response = await fetch(`${apiUrl}/api/home/modifyJargonDictionary`, {
+            const response = await fetch(`${apiUrl}/api/home/modifyJargon`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ const DictionaryEditorForm: React.FC = () => {
             updateFeedbackMessage(true, 'Enter the "Id"');
         }
         else {
-            const response = await fetch(`${apiUrl}/api/home/deleteJargonDictionary`, {
+            const response = await fetch(`${apiUrl}/api/home/deleteJargon`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

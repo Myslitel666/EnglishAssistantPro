@@ -3,6 +3,7 @@ using EnglishAssistantBackend.DTOs.Requests;
 using EnglishAssistantBackend.Interfaces.Repositories;
 using EnglishAssistantBackend.Models.Entities;
 using Microsoft.EntityFrameworkCore;
+using EnglishAssistantBackend.Repositories;
 
 namespace EnglishAssistantBackend.Repositories
 {
@@ -18,7 +19,25 @@ namespace EnglishAssistantBackend.Repositories
         public async Task<Jargon> GetJargonById(int jargonId)
         {
             return await _dbContext.Jargons
-            .FirstOrDefaultAsync(jargon => jargon.JargonId == jargonId);
+                .FirstOrDefaultAsync(jargon => jargon.JargonId == jargonId);
+        }
+
+        public async Task<IEnumerable<Jargon>> GetUserJargons(IEnumerable<int> jargonIds)
+        {
+            var userJargonsList = new List<Jargon>();
+
+            foreach (var jargonId in jargonIds)
+            {
+                var jargon = await _dbContext.Jargons
+                  .FirstOrDefaultAsync(j => j.JargonId == jargonId);
+
+                if (jargon != null)
+                {
+                    userJargonsList.Add(jargon);
+                }
+            }
+
+            return userJargonsList;
         }
 
         public async Task<int> AddJargon(Jargon jargon)

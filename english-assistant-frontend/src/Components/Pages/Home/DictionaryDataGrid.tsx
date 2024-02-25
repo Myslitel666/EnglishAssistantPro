@@ -9,6 +9,7 @@ import { useTheme } from '@mui/material';
 
 //My components import
 import { useHomeContext } from '../Home/HomeContext'
+import { useUserContext } from '../../../Context/UserContext'
 import '../Home/DictionaryDataGrid.css'
 
 const columnsDesktop: GridColDef[] = [
@@ -72,10 +73,12 @@ const columnsMobile: GridColDef[] = [
 export default function DictionaryDataGrid() {
     //Работа с контекстом домашней страницы
     const { rowsState, jargonState, translateState, idState, exampleOfUseState, fetchJargon } = useHomeContext();
+    const { getUser } = useUserContext();
     const [jargon, setJargon] = jargonState;
     const [translate, setTranslate] = translateState;
     const [id, setId] = idState;
     const [exampleOfUse, setExampleOfUse] = exampleOfUseState;
+    const user = getUser();
 
     const theme = useTheme();
     const [rows, setRows] = rowsState;
@@ -84,7 +87,7 @@ export default function DictionaryDataGrid() {
     const columns = isMobile ? columnsDesktop : columnsMobile;
 
     useEffect(() => {
-        fetchJargon()
+        fetchJargon(user.userId)
     }, []);
 
     return (

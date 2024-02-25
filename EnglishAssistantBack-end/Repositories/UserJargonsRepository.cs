@@ -18,20 +18,20 @@ namespace EnglishAssistantBackend.Repositories
         public async Task<IEnumerable<string>> GetJargonsByUserId(int userId)
         {
             //Извлекаю список id слов пользователя
-            var JargonIdList = await GetJargonIdsByUserId(userId);
+            var JargonIdsList = await GetJargonIdsByUserId(userId);
 
             var userJargonsList = new List<string>();
 
-            foreach (var jargonId in JargonIdList)
+            foreach (var jargonId in JargonIdsList)
             {
-                var word = _dbContext.Jargons
+                var jargon = _dbContext.Jargons
                   .Where(j => j.JargonId == jargonId)
                   .Select(j => j.JargonInstance)
                   .FirstOrDefault();
 
-                if (word != null)
+                if (jargon != null)
                 {
-                    userJargonsList.Add(word);
+                    userJargonsList.Add(jargon);
                 }
             }
 

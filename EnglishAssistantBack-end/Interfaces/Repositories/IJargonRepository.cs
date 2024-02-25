@@ -7,6 +7,8 @@ namespace EnglishAssistantBackend.Interfaces.Repositories
     {
         Task<Jargon> GetJargonById(int jargonId);
 
+        Task<IEnumerable<Jargon>> GetUserJargons(IEnumerable<int> jargonIds);
+
         Task<int> AddJargon(Jargon jargon);
 
         Task ModifyJargon(JargonDto jargonDto);

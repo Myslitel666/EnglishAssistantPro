@@ -22,16 +22,14 @@ namespace EnglishAssistantBackend.Controllers
             _jargonDictionaryService = jargonDictionaryService;
         }
 
-        [HttpGet("getJargonDictionary")]
-        public async Task<IActionResult> GetAll()
+        [HttpPost("getUserJargons")]
+        public async Task<IActionResult> GetUserJargons([FromBody] UserDto userDto)
         {
-            var jargonEntries = await _dbContext.JargonDictionaries
-            .OrderBy(entry => entry.Jargon) //Сортировка по колонке jargon
-            .ToListAsync();
+            var jargonEntries = await _jargonDictionaryService.GetUserJargons(userDto.UserId);
             return Ok(jargonEntries);
         }
 
-        [HttpPost("setJargonDictionary")]
+        [HttpPost("setJargon")]
         public async Task<IActionResult> SendJargon([FromBody] JargonDto jargonDto)
         {
             var response = await _jargonDictionaryService.AddJargon(jargonDto);
@@ -39,7 +37,7 @@ namespace EnglishAssistantBackend.Controllers
             return Ok(response);
         }
 
-        [HttpPost("modifyJargonDictionary")]
+        [HttpPost("modifyJargon")]
         public async Task<IActionResult> ModifyJargon([FromBody] JargonDto jargonDto)
         {
             var jargonResponseDto = await _jargonDictionaryService.ModifyJargon(jargonDto);
@@ -47,7 +45,7 @@ namespace EnglishAssistantBackend.Controllers
             return Ok(jargonResponseDto);
         }
 
-        [HttpPost("deleteJargonDictionary")]
+        [HttpPost("deleteJargon")]
         public async Task<IActionResult> DeleteJargon([FromBody] JargonDto jargonDto)
         {
             var jargonResponseDto = await _jargonDictionaryService.DeleteJargon(jargonDto);

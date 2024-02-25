@@ -1,12 +1,8 @@
-﻿using EnglishAssistantBackend.DTOs;
-using EnglishAssistantBackend.Interfaces.Services;
+﻿using EnglishAssistantBackend.Interfaces.Services;
 using EnglishAssistantBackend.Interfaces.Repositories;
 using EnglishAssistantBackend.Models.Entities;
 using EnglishAssistantBackend.DTOs.Requests;
 using EnglishAssistantBackend.DTOs.Responses;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.EntityFrameworkCore;
-using EnglishAssistantBackend.Repositories;
 
 namespace EnglishAssistantBackend.Services
 {
@@ -22,6 +18,15 @@ namespace EnglishAssistantBackend.Services
         {
             _userJargonsRepository = userJargonsRepository;
             _jargonRepository = jargonRepository;
+        }
+
+        public async Task<IEnumerable<Jargon>> GetUserJargons(int userId)
+        {
+            var userJargonIds = await _userJargonsRepository.GetJargonIdsByUserId(userId);
+
+            var userJargons = await _jargonRepository.GetUserJargons(userJargonIds);
+
+            return userJargons;
         }
 
         public async Task<JargonResponseDto> AddJargon(JargonDto jargonDto)
