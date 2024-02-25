@@ -1,4 +1,5 @@
 ﻿using EnglishAssistantBackend.Context;
+using EnglishAssistantBackend.DTOs.Requests;
 using EnglishAssistantBackend.Interfaces.Repositories;
 using EnglishAssistantBackend.Models.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -60,9 +61,9 @@ namespace EnglishAssistantBackend.Repositories
             );
         }
 
-        public async Task AddUserJargon(UserJargon userJargons)
+        public async Task AddUserJargon(UserJargon userJargon)
         {
-            _dbContext.UserJargons.Add(userJargons);
+            _dbContext.UserJargons.Add(userJargon);
             await _dbContext.SaveChangesAsync();
         }
 

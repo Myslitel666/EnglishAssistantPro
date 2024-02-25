@@ -10,7 +10,7 @@ namespace EnglishAssistantBackend.Interfaces.Repositories
 
         Task<UserJargon> GetUserJargon(int userId, int jargonId);
 
-        Task AddUserJargon(UserJargon uderJargons);
+        Task AddUserJargon(UserJargon uderJargon);
 
         Task DeleteUserJargon(int userId, int jargonId);
     }

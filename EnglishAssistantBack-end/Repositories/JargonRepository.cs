@@ -1,4 +1,5 @@
 ﻿using EnglishAssistantBackend.Context;
+using EnglishAssistantBackend.DTOs.Requests;
 using EnglishAssistantBackend.Interfaces.Repositories;
 using EnglishAssistantBackend.Models.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,12 @@ namespace EnglishAssistantBackend.Repositories
             _dbContext = dbContext;
         }
 
+        public async Task<Jargon> GetJargonById(int jargonId)
+        {
+            return await _dbContext.Jargons
+            .FirstOrDefaultAsync(jargon => jargon.JargonId == jargonId);
+        }
+
         public async Task<int> AddJargon(Jargon jargon)
         {
             _dbContext.Jargons.Add(jargon);
@@ -25,19 +32,31 @@ namespace EnglishAssistantBackend.Repositories
             return jargonId;
         }
 
-        public async Task<Jargon> GetJargonById(int jargonId)
+        public async Task ModifyJargon(JargonDto jargonDto)
         {
-            return await _dbContext.Jargons
-            .FirstOrDefaultAsync(jargon => jargon.JargonId == jargonId);
+            var jargon = await GetJargonById(jargonDto.JargonId);
+
+            if (jargon != null)
+            {
+                jargon.JargonInstance = jargonDto.JargonInstance;
+                jargon.Translate = jargonDto.Translate;
+                jargon.ExampleOfUse = jargonDto.ExampleOfUse;
+
+                _dbContext.Jargons.Update(jargon);
+            }
+
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task DeleteJargon(int jargonId)
         {
             var jargon = await GetJargonById(jargonId);
+
             if (jargon != null)
             {
                 _dbContext.Jargons.Remove(jargon);
             }
+
             await _dbContext.SaveChangesAsync();
         }
     }

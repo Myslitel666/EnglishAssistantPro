@@ -28,9 +28,9 @@ namespace EnglishAssistantBackend.Services
         {
             var userJargonList = await _userJargonsRepository.GetJargonsByUserId(jargonDto.UserId);
 
-            var wordExists = userJargonList.Any(j => j == jargonDto.JargonInstance);
+            var jargonExists = userJargonList.Any(j => j == jargonDto.JargonInstance);
 
-            if (wordExists)
+            if (jargonExists)
             {
                 var response = new JargonResponseDto
                 {
@@ -42,13 +42,15 @@ namespace EnglishAssistantBackend.Services
 
             try
             {
-                var jargon = new Jargon 
+                var jargon = new Jargon
                 {
                     JargonInstance = jargonDto.JargonInstance,
                     Translate = jargonDto.Translate,
                     ExampleOfUse = jargonDto.ExampleOfUse
                 };
+
                 int addedJargonId = await _jargonRepository.AddJargon(jargon);
+
                 var userJargon = new UserJargon()
                 {
                     UserId = jargonDto.UserId,
@@ -74,29 +76,46 @@ namespace EnglishAssistantBackend.Services
             }
         }
 
-        public async Task<JargonResponseDto> DeleteJargon(JargonDto jargonDto)
+        public async Task<JargonResponseDto> ModifyJargon(JargonDto jargonDto)
         {
-            //Извлекаем слово из словаря по id
-            //(в случае отсутствия слова с данным id в словаре получим null)
-            var existingJargon = await _jargonRepository.GetJargonById(jargonDto.JargonId);
+            //Извлекаем словарь пользователя, и проверяем, что в нём есть слово с данным id
+            var userJargonIdList = await _userJargonsRepository.GetJargonIdsByUserId(jargonDto.UserId);
+            var isUserHasJargon = userJargonIdList.Any(j => j == jargonDto.JargonId);
 
-            //Если слова с таким id нет в словаре
-            if (existingJargon == null)
+            if (isUserHasJargon)
             {
-                return (new JargonResponseDto
+                try
+                {
+                    await _jargonRepository.ModifyJargon(jargonDto);
+                    return (new JargonResponseDto
+                    {
+                        IsError = false,
+                        FeedbackMessage = "✓The word has been successfully modified"
+                    });
+                }
+                catch (Exception ex)
+                {
+                    return (new JargonResponseDto
+                    {
+                        IsError = true,
+                        FeedbackMessage = $"✗Failed to modify the word. Error: {ex.Message}"
+                    });
+                }
+            }
+            else
+            {
+                var response = new JargonResponseDto
                 {
                     IsError = true,
                     FeedbackMessage = "✗The word with such an ID do not exist"
-                });
+                };
+                return response;
             }
-            var jargon = new Jargon
-            {
-                JargonId = jargonDto.JargonId,
-                JargonInstance = jargonDto.JargonInstance,
-                Translate = jargonDto.Translate,
-                ExampleOfUse = jargonDto.ExampleOfUse,
-            };
+        }
 
+        public async Task<JargonResponseDto> DeleteJargon(JargonDto jargonDto)
+        {
+            //Извлекаем словарь пользователя, и проверяем, что в нём есть слово с данным id
             var userJargonIdList = await _userJargonsRepository.GetJargonIdsByUserId(jargonDto.UserId);
             var isUserHasJargon = userJargonIdList.Any(j => j == jargonDto.JargonId);
 

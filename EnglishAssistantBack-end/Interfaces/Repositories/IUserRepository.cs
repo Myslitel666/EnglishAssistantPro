@@ -1,4 +1,5 @@
 ﻿using EnglishAssistantBackend.Models.Entities;
+using EnglishAssistantBackend.DTOs.Requests;
 
 namespace EnglishAssistantBackend.Interfaces.Repositories
 {

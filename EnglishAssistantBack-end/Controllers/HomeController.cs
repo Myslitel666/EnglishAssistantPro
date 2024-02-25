@@ -42,49 +42,9 @@ namespace EnglishAssistantBackend.Controllers
         [HttpPost("modifyJargonDictionary")]
         public async Task<IActionResult> ModifyJargon([FromBody] JargonDto jargonDto)
         {
-            //Извлекаем слово из словаря по id
-            //(в случае отсутствия слова с данным id в словаре получим null)
+            var jargonResponseDto = await _jargonDictionaryService.ModifyJargon(jargonDto);
 
-            var existingWord = await _dbContext.JargonDictionaries
-            .FirstOrDefaultAsync(j => j.Id == jargonDto.JargonId);
-
-            //Если слова с таким id нет в словаре
-            if (existingWord == null)
-            {
-                return Ok(new
-                {
-                    IsError = true,
-                    FeedbackMessage = "✗The word with such an ID do not exist"
-                });
-            }
-
-            try
-            {
-                //Get instance by Id
-                int OldId = jargonDto.JargonId;
-                var jargonDictionary = await _dbContext.JargonDictionaries.FindAsync(OldId);
-                //Modify the values of JargonDictionary attributes
-                jargonDictionary.Jargon = jargonDto.JargonInstance;
-                jargonDictionary.Translate = jargonDto.Translate;
-                jargonDictionary.ExampleOfUse = jargonDto.ExampleOfUse;
-                _dbContext.Entry(existingWord).State = EntityState.Detached; //Отменяем отслеживание элемента по id
-                _dbContext.JargonDictionaries.Update(jargonDictionary);
-                await _dbContext.SaveChangesAsync();
-                return Ok(
-                new
-                {
-                    IsError = false,
-                    FeedbackMessage = "✓The word has been successfully modified"
-                });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    IsError = true,
-                    FeedbackMessage = $"✗Failed to modify the word. Error: {ex.Message}"
-                });
-            }
+            return Ok(jargonResponseDto);
         }
 
         [HttpPost("deleteJargonDictionary")]
