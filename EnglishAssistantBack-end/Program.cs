@@ -15,6 +15,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<IUserJargonsRepository, UserJargonsRepository>();
 builder.Services.AddScoped<IJargonRepository, JargonRepository>();
+builder.Services.AddScoped<IContextRepository, ContextRepository>();
 
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IJargonDictionaryService, JargonDictionaryService>();

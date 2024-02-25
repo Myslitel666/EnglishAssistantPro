@@ -6,6 +6,12 @@ namespace EnglishAssistantBackend.Interfaces.Repositories
     {
         Task<IEnumerable<string>> GetJargonsByUserId(int userId);
 
+        Task<IEnumerable<int>> GetJargonIdsByUserId(int userId);
+
+        Task<UserJargon> GetUserJargon(int userId, int jargonId);
+
         Task AddUserJargon(UserJargon uderJargons);
+
+        Task DeleteUserJargon(int userId, int jargonId);
     }
 }

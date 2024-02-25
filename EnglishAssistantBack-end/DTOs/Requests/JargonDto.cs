@@ -2,7 +2,7 @@
 
 public class JargonDto
 {
-    public int Id { get; set; }
+    public int JargonId { get; set; }
 
     public int UserId { get; set; }
 

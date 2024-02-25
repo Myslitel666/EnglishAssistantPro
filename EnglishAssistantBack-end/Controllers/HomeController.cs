@@ -15,14 +15,11 @@ namespace EnglishAssistantBackend.Controllers
     {
         private EnglishAssistantContext _dbContext;
         private readonly IJargonDictionaryService _jargonDictionaryService;
-        private readonly IUserJargonsRepository _userJargonsRepository;
 
-        public HomeController(IJargonDictionaryService jargonDictionaryService, IUserJargonsRepository userJargonsRepository)
+        public HomeController(IJargonDictionaryService jargonDictionaryService)
         {
             _dbContext = new EnglishAssistantContext();
             _jargonDictionaryService = jargonDictionaryService;
-
-            _userJargonsRepository = userJargonsRepository;
         }
 
         [HttpGet("getJargonDictionary")]
@@ -49,7 +46,7 @@ namespace EnglishAssistantBackend.Controllers
             //(в случае отсутствия слова с данным id в словаре получим null)
 
             var existingWord = await _dbContext.JargonDictionaries
-            .FirstOrDefaultAsync(j => j.Id == jargonDto.Id);
+            .FirstOrDefaultAsync(j => j.Id == jargonDto.JargonId);
 
             //Если слова с таким id нет в словаре
             if (existingWord == null)
@@ -64,7 +61,7 @@ namespace EnglishAssistantBackend.Controllers
             try
             {
                 //Get instance by Id
-                int OldId = jargonDto.Id;
+                int OldId = jargonDto.JargonId;
                 var jargonDictionary = await _dbContext.JargonDictionaries.FindAsync(OldId);
                 //Modify the values of JargonDictionary attributes
                 jargonDictionary.Jargon = jargonDto.JargonInstance;
@@ -93,50 +90,9 @@ namespace EnglishAssistantBackend.Controllers
         [HttpPost("deleteJargonDictionary")]
         public async Task<IActionResult> DeleteJargon([FromBody] JargonDto jargonDto)
         {
-            //Извлекаем слово из словаря по id
-            //(в случае отсутствия слова с данным id в словаре получим null)
-            var existingWord = await _dbContext.JargonDictionaries
-            .FirstOrDefaultAsync(j => j.Id == jargonDto.Id);
+            var jargonResponseDto = await _jargonDictionaryService.DeleteJargon(jargonDto);
 
-            //Если слова с таким id нет в словаре
-            if (existingWord == null)
-            {
-                return Ok(new
-                {
-                    IsError = true,
-                    FeedbackMessage = "✗The word with such an ID do not exist"
-                });
-            }
-
-            try
-            {
-                var jargonDictionary = new JargonDictionary
-                {
-                    Id = jargonDto.Id,
-                    Jargon = jargonDto.JargonInstance,
-                    Translate = jargonDto.Translate,
-                    ExampleOfUse = jargonDto.ExampleOfUse,
-                };
-                _dbContext.Entry(existingWord).State = EntityState.Detached; //Отменяем отслеживание элемента по id
-                _dbContext.JargonDictionaries.Remove(jargonDictionary);
-                await _dbContext.SaveChangesAsync();
-                _dbContext.Entry(existingWord).State = EntityState.Detached;
-
-                return Ok(
-                new
-                {
-                    IsError = false,
-                    FeedbackMessage = "✓The word has been successfully deleted"
-                });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    IsError = true,
-                    FeedbackMessage = $"✗Failed to delete the word. Error: {ex.Message}"
-                });
-            }
+            return Ok(jargonResponseDto);
         }
     }
 }

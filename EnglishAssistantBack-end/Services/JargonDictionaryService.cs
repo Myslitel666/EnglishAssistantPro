@@ -5,18 +5,21 @@ using EnglishAssistantBackend.Models.Entities;
 using EnglishAssistantBackend.DTOs.Requests;
 using EnglishAssistantBackend.DTOs.Responses;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
+using EnglishAssistantBackend.Repositories;
 
 namespace EnglishAssistantBackend.Services
 {
     public class JargonDictionaryService : IJargonDictionaryService
     {
-        private readonly IUserRepository _userRepository;
         private readonly IUserJargonsRepository _userJargonsRepository;
         private readonly IJargonRepository _jargonRepository;
 
-        public JargonDictionaryService(IUserRepository userRepository, IUserJargonsRepository userJargonsRepository, IJargonRepository jargonRepository)
+        public JargonDictionaryService(
+            IUserJargonsRepository userJargonsRepository, 
+            IJargonRepository jargonRepository
+        )
         {
-            _userRepository = userRepository;
             _userJargonsRepository = userJargonsRepository;
             _jargonRepository = jargonRepository;
         }
@@ -64,8 +67,66 @@ namespace EnglishAssistantBackend.Services
             {
                 var response = new JargonResponseDto
                 {
-                    IsError = false,
+                    IsError = true,
                     FeedbackMessage = $"✗Failed to add the word. Error: {ex.Message}"
+                };
+                return response;
+            }
+        }
+
+        public async Task<JargonResponseDto> DeleteJargon(JargonDto jargonDto)
+        {
+            //Извлекаем слово из словаря по id
+            //(в случае отсутствия слова с данным id в словаре получим null)
+            var existingJargon = await _jargonRepository.GetJargonById(jargonDto.JargonId);
+
+            //Если слова с таким id нет в словаре
+            if (existingJargon == null)
+            {
+                return (new JargonResponseDto
+                {
+                    IsError = true,
+                    FeedbackMessage = "✗The word with such an ID do not exist"
+                });
+            }
+            var jargon = new Jargon
+            {
+                JargonId = jargonDto.JargonId,
+                JargonInstance = jargonDto.JargonInstance,
+                Translate = jargonDto.Translate,
+                ExampleOfUse = jargonDto.ExampleOfUse,
+            };
+
+            var userJargonIdList = await _userJargonsRepository.GetJargonIdsByUserId(jargonDto.UserId);
+            var isUserHasJargon = userJargonIdList.Any(j => j == jargonDto.JargonId);
+
+            if (isUserHasJargon)
+            {
+                try
+                {
+                    await _userJargonsRepository.DeleteUserJargon(jargonDto.UserId, jargonDto.JargonId);
+                    await _jargonRepository.DeleteJargon(jargonDto.JargonId);
+                    return (new JargonResponseDto
+                    {
+                        IsError = false,
+                        FeedbackMessage = "✓The word has been successfully deleted"
+                    });
+                }
+                catch (Exception ex)
+                {
+                    return (new JargonResponseDto
+                    {
+                        IsError = true,
+                        FeedbackMessage = $"✗Failed to delete the word. Error: {ex.Message}"
+                    });
+                }
+            }
+            else
+            {
+                var response = new JargonResponseDto
+                {
+                    IsError = true,
+                    FeedbackMessage = "✗The word with such an ID do not exist"
                 };
                 return response;
             }
