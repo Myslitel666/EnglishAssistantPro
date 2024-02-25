@@ -4,21 +4,15 @@ using EnglishAssistantBackend.Repositories;
 using EnglishAssistantBackend.Interfaces.Repositories;
 using EnglishAssistantBackend.Interfaces.Services;
 using EnglishAssistantBackend.Services;
+using EnglishAssistantBackend.Properties;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//Add database context
-builder.Services.AddDbContext<EnglishAssistantContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IRoleRepository, RoleRepository>();
-builder.Services.AddScoped<IUserJargonsRepository, UserJargonsRepository>();
-builder.Services.AddScoped<IJargonRepository, JargonRepository>();
-builder.Services.AddScoped<IContextRepository, ContextRepository>();
-
-builder.Services.AddScoped<IAccountService, AccountService>();
-builder.Services.AddScoped<IJargonDictionaryService, JargonDictionaryService>();
+//Dependency Injection
+DependencyInjectionSetup.Configure(
+    builder.Services, 
+    builder.Configuration.GetConnectionString("DefaultConnection")
+);
 
 // Add services to the container.
 builder.Services.AddControllers();
